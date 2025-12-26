@@ -19,6 +19,7 @@ import {
     FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { Link } from "react-router-dom"
 const Login = () => {
 
     const form = useForm<loginType>({
@@ -49,15 +50,15 @@ const Login = () => {
                                 control={form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="form-rhf-demo-title">
-                                            Enail
+                                        <FieldLabel htmlFor="email">
+                                            Email
                                         </FieldLabel>
                                         <Input
                                             {...field}
                                             type="email"
-                                            id="form-rhf-demo-title"
+                                            id="email"
                                             aria-invalid={fieldState.invalid}
-                                            placeholder="Login button not working on mobile"
+                                            placeholder="example@gmail.com"
                                             autoComplete="off"
                                         />
                                         {fieldState.invalid && (
@@ -71,15 +72,15 @@ const Login = () => {
                                 control={form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="form-rhf-demo-title">
+                                        <FieldLabel htmlFor="password">
                                             Password
                                         </FieldLabel>
                                         <Input
                                             {...field}
                                             type="password"
-                                            id="form-rhf-demo-title"
+                                            id="password"
                                             aria-invalid={fieldState.invalid}
-                                            placeholder="Login button not working on mobile"
+                                            placeholder="Enter your password"
                                             autoComplete="off"
                                         />
                                         {fieldState.invalid && (
@@ -94,12 +95,10 @@ const Login = () => {
                 </CardContent>
                 <CardFooter>
                     <Field orientation="horizontal">
-                        <Button type="button" variant="outline" onClick={() => form.reset()}>
-                            Reset
-                        </Button>
                         <Button type="submit" form="form-rhf-demo">
                             Submit
                         </Button>
+                        <Link to={'/'}>Home</Link>
                     </Field>
                 </CardFooter>
             </Card>

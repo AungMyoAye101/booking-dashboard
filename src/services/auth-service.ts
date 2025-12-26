@@ -1,19 +1,22 @@
 import { axiosInstance } from "@/config/axios-config"
+import type { ApiResponse } from "@/types";
+import type { authType } from "@/types/user-types";
 import type { loginType, signupType } from "@/validations/auth-schema";
 
 export const sigupFormService = async (formData: signupType) => {
-    const { data } = await axiosInstance.post('/auth/register', formData)
+    const { data } = await axiosInstance.post<ApiResponse<authType>>('/auth/register', formData)
 
     if (!data.success) {
         throw new Error("Faild to singup.")
     }
-    return data;
+    return data.result;
 }
 export const loginFormService = async (formData: loginType) => {
-    const { data } = await axiosInstance.post('/auth/login', formData)
+
+    const { data } = await axiosInstance.post<ApiResponse<authType>>('/auth/login', formData)
     if (!data.success) {
         throw new Error("Faild to login.")
 
     }
-    return data;
+    return data.result;
 }

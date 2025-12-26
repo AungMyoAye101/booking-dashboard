@@ -5,6 +5,7 @@ import App from './App.tsx'
 import { ThemeProvider } from './components/theme-provider.tsx'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from 'sonner'
+import Auth from './components/Auth.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
     <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
       <QueryClientProvider client={queryClient}>
         <App />
+        <Auth />
         <Toaster />
       </QueryClientProvider>
     </ThemeProvider>

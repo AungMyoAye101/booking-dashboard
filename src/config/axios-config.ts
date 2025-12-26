@@ -1,3 +1,5 @@
+import type { ApiResponse } from "@/types";
+import type { authType } from "@/types/user-types";
 import axios, {
     AxiosError,
     type AxiosInstance,
@@ -14,10 +16,17 @@ export const axiosInstance: AxiosInstance = axios.create({
     withCredentials: true
 });
 
+//access token 
+let accessToken: string | null = localStorage.getItem("accessToken");
+
+export const setAccessToken = (token: string) => {
+    accessToken = token;
+}
+
+console.log(accessToken, "acc");
 axiosInstance.interceptors.request.use(
     (config) => {
-        const accessToken = localStorage.getItem("accessToken");
-        console.log(accessToken, "In request");
+
         if (accessToken && config.headers) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
@@ -74,8 +83,8 @@ axiosInstance.interceptors.response.use(
 
             try {
 
-                const { data } = await axiosInstance.post("/auth/refresh")
-                const newToken = data.token;
+                const { data } = await axiosInstance.post<ApiResponse<authType>>("/auth/refresh");
+                const newToken = data.result.token!;
                 console.log(newToken, "After refresh")
                 localStorage.setItem("accessToken", newToken);
 
@@ -93,7 +102,7 @@ axiosInstance.interceptors.response.use(
 
                 localStorage.removeItem("accessToken");
 
-                window.location.href = "/login";
+                // window.location.href = "/login";
                 return Promise.reject(refreshError)
 
             } finally {
