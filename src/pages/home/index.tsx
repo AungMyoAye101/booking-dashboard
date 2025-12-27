@@ -1,12 +1,16 @@
 import { useUserById } from "@/hooks/use-user"
+import { useAuthStore } from "@/store/auth-store"
 
 const Home = () => {
-    const data = useUserById("694d689095219355fad63357")
-    console.log(data)
+
+    const id = useAuthStore(s => s.user?._id)
+    console.log(useUserById(id!));
+
     return (
         <div>Home
             adadada
             <div>
+
             </div> </div>
     )
 }

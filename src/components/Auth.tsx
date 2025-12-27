@@ -1,18 +1,26 @@
-import { useFetchMe } from '@/hooks/use-auth'
+
+import { useRefresh } from '@/hooks/use-auth';
 import { useAuthStore } from '@/store/auth-store'
+import { useEffect } from 'react';
 
 const Auth = () => {
     const setAuth = useAuthStore(s => s.setAuth)
+    const setAccessToken = useAuthStore(s => s.setAccessToken)
     const clearAuth = useAuthStore(s => s.clearAuth)
-    const { data, isSuccess, isError } = useFetchMe();
+    const { data, isSuccess, isError } = useRefresh();
 
-    if (isSuccess) {
-        setAuth(data)
-    }
-    if (isError) {
-        clearAuth()
-    }
-    console.log(data, "auth")
-    return null;
+    useEffect(() => {
+        if (isSuccess) {
+            setAuth(data.user);
+            setAccessToken(data.token);
+            return;
+        }
+        if (isError) {
+            clearAuth()
+            return;
+        }
+    }, [data, isSuccess, isError])
+
+
 }
 export default Auth

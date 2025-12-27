@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/store/auth-store";
 import type { ApiResponse } from "@/types";
 import type { authType } from "@/types/user-types";
 import axios, {
@@ -8,7 +9,7 @@ import axios, {
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const axiosInstance: AxiosInstance = axios.create({
+export const api: AxiosInstance = axios.create({
     baseURL: BASE_URL,
     headers: {
         "Content-Type": "application/json"
@@ -16,17 +17,10 @@ export const axiosInstance: AxiosInstance = axios.create({
     withCredentials: true
 });
 
-//access token 
-let accessToken: string | null = localStorage.getItem("accessToken");
 
-export const setAccessToken = (token: string) => {
-    accessToken = token;
-}
-
-console.log(accessToken, "acc");
-axiosInstance.interceptors.request.use(
+api.interceptors.request.use(
     (config) => {
-
+        const accessToken: string | null = useAuthStore.getState().token;
         if (accessToken && config.headers) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
@@ -59,11 +53,11 @@ const processQueue = (error: AxiosError | null, token?: string) => {
     failedQueue = [];
 }
 
-
-axiosInstance.interceptors.response.use(
+api.interceptors.response.use(
     (response: AxiosResponse) => response,
     async (error) => {
-
+        const setAccessToken = useAuthStore.getState().setAccessToken;
+        const clearAuth = useAuthStore.getState().clearAuth;
         const originalRequest = error.config;
 
         if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
@@ -74,7 +68,7 @@ axiosInstance.interceptors.response.use(
                     failedQueue.push({ resolve, reject });
                 }).then((token) => {
                     originalRequest.headers.Authorization = `Bearer ${token}`;
-                    return axiosInstance(originalRequest);
+                    return api(originalRequest);
                 })
             }
             isRefreshing = true;
@@ -83,23 +77,24 @@ axiosInstance.interceptors.response.use(
 
             try {
 
-                const { data } = await axiosInstance.post<ApiResponse<authType>>("/auth/refresh");
+                const { data } = await api.post<ApiResponse<authType>>("/auth/refresh");
                 const newToken = data.result.token!;
-                console.log(newToken, "After refresh")
+                console.log(newToken, "After refresh");
+                setAccessToken(newToken);
                 localStorage.setItem("accessToken", newToken);
 
                 //update default headers
 
-                axiosInstance.defaults.headers.Authorization = `Bearer ${newToken}`;
+                api.defaults.headers.Authorization = `Bearer ${newToken}`;
 
                 processQueue(null, newToken);
 
                 originalRequest.headers.Authorization = `Bearer ${newToken}`;
-                return axiosInstance(originalRequest);
+                return api(originalRequest);
 
             } catch (refreshError) {
                 processQueue(refreshError as AxiosError);
-
+                clearAuth();
                 localStorage.removeItem("accessToken");
 
                 // window.location.href = "/login";

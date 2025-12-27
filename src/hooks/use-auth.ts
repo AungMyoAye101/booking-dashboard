@@ -1,9 +1,11 @@
-import { setAccessToken } from "@/config/axios-config"
+import { api } from "@/config/axios-config"
 import { loginFormService, sigupFormService } from "@/services/auth-service"
-import { getUserById } from "@/services/user-service"
 import { useAuthStore } from "@/store/auth-store"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { toast } from "sonner"
+
+
+const setAccessToken = useAuthStore.getState().setAccessToken;
 
 export const useSignUpForm = () => {
     const setAuth = useAuthStore(s => s.setAuth)
@@ -36,14 +38,15 @@ export const useLoginForm = () => {
     })
 }
 
-export const useFetchMe = () => {
-    const user = useAuthStore(s => s.user)
-
+export const useRefresh = () => {
     return useQuery({
-        queryKey: ["me", user?._id],
-        queryFn: () => getUserById(user!._id),
+        queryKey: ["refresh"],
+        queryFn: async () => {
+            const { data } = await api.post("/auth/refresh");
+            setAccessToken(data.result.token);
+            return data.result;
+        },
         retry: false,
-        enabled: !!user?._id,
 
     });
 
