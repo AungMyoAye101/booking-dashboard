@@ -1,17 +1,22 @@
-import { useUserById } from "@/hooks/use-user"
-import { useAuthStore } from "@/store/auth-store"
+import { useGetAllUsers } from "@/hooks/use-user"
+
 
 const Home = () => {
 
-    const id = useAuthStore(s => s.user?._id)
-    console.log(useUserById(id!));
+    const { data: users } = useGetAllUsers();
 
+    console.log(users, "Home page,")
     return (
-        <div>Home
-            adadada
-            <div>
-
-            </div> </div>
+        <div>
+            {
+                users?.map((user) => (
+                    <div key={user._id} >
+                        <h1>{user.name}</h1>
+                        <p>{user.email}</p>
+                    </div>
+                ))
+            }
+        </div>
     )
 }
 

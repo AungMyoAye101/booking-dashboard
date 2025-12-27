@@ -7,6 +7,14 @@ export const getUserById = async (userId: string) => {
     if (!data.success) {
         throw new Error("Failed to get user by Id")
     }
-    console.log(data)
+    return data.result;
+}
+
+export const getAllusers = async () => {
+    const { data } = await api.get<ApiResponse<userType[]>>("/users");
+    if (!data.success) {
+        throw new Error("Failed to get all users");
+    };
+    console.log(data, "service")
     return data.result;
 }
