@@ -10,7 +10,7 @@ const Home = () => {
         return <p>Loading...</p>;
     }
     return (
-        <div>
+        <div className="h-screen">
             {
                 data?.users.map((user) => (
                     <Card key={user._id}>

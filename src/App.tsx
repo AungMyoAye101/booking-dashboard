@@ -1,16 +1,23 @@
 import {
-  RouterProvider,
+  Route,
+  Routes,
 } from "react-router-dom";
-import { router } from "./config/router-dom";
+import Login from "./pages/login";
+import PageLayout from "./layout";
+import Home from "./pages/home";
+
 
 
 
 
 const App = () => {
   return (
-
-
-    <RouterProvider router={router} />
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route element={<PageLayout />} >
+        <Route path="/" element={<Home />} />
+      </Route>
+    </Routes>
 
 
   )

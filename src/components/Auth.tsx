@@ -21,6 +21,6 @@ const Auth = () => {
         }
     }, [data, isSuccess, isError])
 
-
+    return null;
 }
 export default Auth
