@@ -9,35 +9,9 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { routes } from "@/hooks/use-route"
 
 // Menu items.
-const items = [
-    {
-        title: "Dashboard",
-        url: "/",
-        icon: Home,
-    },
-    {
-        title: "Hotel",
-        url: "/hotels",
-        icon: Hotel,
-    },
-    {
-        title: "Users",
-        url: "/users",
-        icon: User,
-    },
-    {
-        title: "Booking",
-        url: "/booking",
-        icon: ReceiptPoundSterlingIcon,
-    },
-    {
-        title: "Settings",
-        url: "#",
-        icon: Settings,
-    },
-]
 
 export function AppSidebar() {
     return (
@@ -45,12 +19,12 @@ export function AppSidebar() {
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarMenu>
-                        {items.map((item) => (
-                            <SidebarMenuItem key={item.title}>
+                        {routes.map(({ name, path }, i) => (
+                            <SidebarMenuItem key={i}>
                                 <SidebarMenuButton asChild>
-                                    <a href={item.url}>
-                                        <item.icon />
-                                        <span>{item.title}</span>
+                                    <a href={path}>
+
+                                        <span>{name}</span>
                                     </a>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>

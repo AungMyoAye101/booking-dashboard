@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import Login from "./pages/login";
 import PageLayout from "./layout";
-import Home from "./pages/home";
+import { routes } from "./hooks/use-route";
 
 
 
@@ -15,7 +15,11 @@ const App = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route element={<PageLayout />} >
-        <Route path="/" element={<Home />} />
+        {
+          routes.map(({ path, element }, i) => (
+            <Route path={path} element={element} key={i} />
+          ))
+        }
       </Route>
     </Routes>
 
