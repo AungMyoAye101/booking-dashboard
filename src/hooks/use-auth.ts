@@ -1,11 +1,13 @@
 import { api } from "@/config/axios-config"
 import { loginFormService, sigupFormService } from "@/services/auth-service"
 import { useAuthStore } from "@/store/auth-store"
+import type { ApiResponse } from "@/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { toast } from "sonner"
 
 
 const setAccessToken = useAuthStore.getState().setAccessToken;
+
 
 export const useSignUpForm = () => {
     const setAuth = useAuthStore(s => s.setAuth)
@@ -51,4 +53,24 @@ export const useRefresh = () => {
     });
 
 
+}
+
+export const useLogout = () => {
+    const clearAuth = useAuthStore.getState().clearAuth;
+    return useMutation({
+        mutationFn: async () => {
+            const { data } = await api.post<ApiResponse<any>>('/auth/logout');
+            if (!data.success) {
+                throw new Error("Failed to logout")
+            }
+            return data.result;
+        },
+        onSuccess: () => {
+            clearAuth();
+            toast.success("Logout successful.")
+        },
+        onError: () => {
+            toast.error("Logout failed.")
+        }
+    })
 }

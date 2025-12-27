@@ -1,21 +1,27 @@
+import { Card, CardContent } from "@/components/ui/card";
 import { useGetAllUsers } from "@/hooks/use-user"
 
 
 const Home = () => {
 
-    const { data: users } = useGetAllUsers();
+    const { data, isLoading } = useGetAllUsers();
 
-    console.log(users, "Home page,")
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
     return (
         <div>
             {
-                users?.map((user) => (
-                    <div key={user._id} >
-                        <h1>{user.name}</h1>
-                        <p>{user.email}</p>
-                    </div>
+                data?.users.map((user) => (
+                    <Card key={user._id}>
+                        <CardContent>
+                            <h1>{user.name}</h1>
+                            <p>{user.email}</p>
+                        </CardContent>
+                    </Card>
                 ))
             }
+
         </div>
     )
 }

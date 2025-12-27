@@ -4,3 +4,12 @@ export interface ApiResponse<T> {
     message: string,
     result: T
 }
+
+export type meta = {
+    page: number,
+    total: number,
+    limit: number,
+    currentPage: number,
+    hasNext: boolean,
+    hasPrev: boolean
+}

@@ -1,6 +1,11 @@
 import { api } from "@/config/axios-config"
-import type { ApiResponse } from "@/types";
+import type { ApiResponse, meta } from "@/types";
 import type { userType } from "@/types/user-types";
+
+type allUsersTypes = {
+    users: userType[],
+    meta: meta
+}
 
 export const getUserById = async (userId: string) => {
     const { data } = await api.get<ApiResponse<userType>>(`/users/${userId}`);
@@ -11,10 +16,9 @@ export const getUserById = async (userId: string) => {
 }
 
 export const getAllusers = async () => {
-    const { data } = await api.get<ApiResponse<userType[]>>("/users");
+    const { data } = await api.get<ApiResponse<allUsersTypes>>("/users");
     if (!data.success) {
         throw new Error("Failed to get all users");
     };
-    console.log(data, "service")
     return data.result;
 }
