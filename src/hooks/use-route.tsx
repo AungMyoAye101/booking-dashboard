@@ -17,41 +17,40 @@ const BookingPage = lazy(() => import("@/pages/booking"))
 
 //payment
 const PaymentPage = lazy(() => import("@/pages/payment"))
-
 export const routes = [
 
     {
-        name: "Dashboard",
+        breadCrumb: "Dashboard",
         path: "/",
         element: <Dashboard />
     },
     {
-        name: "Hotel",
+        breadCrumb: "Hotel",
         path: "/hotel",
         element: <HotelPage />
     },
     {
-        name: "Hotel Details ",
         path: "/hotel/:hotelId",
+        breadCrumb: () => "Details",
         element: <HotelDetailsPage />
     },
     {
-        name: "User",
+        breadCrumb: "User",
         path: "/user",
         element: <UserPage />
     },
     {
-        name: "Profile",
+        breadCrumb: () => "Profile",
         path: "/user/:userId",
         element: <Profile />
     },
     {
-        name: "Booking",
+        breadCrumb: "Booking",
         path: "/booking",
         element: <BookingPage />
     },
     {
-        name: "Payment",
+        breadCrumb: "Payment",
         path: "/paymnet",
         element: <PaymentPage />
     },

@@ -1,41 +1,52 @@
-
 import {
     Breadcrumb,
-    BreadcrumbEllipsis,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
-    BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Link, useLocation } from "react-router-dom"
+import { routes } from "@/hooks/use-route";
+import { Link, matchRoutes, useLocation } from "react-router-dom"
 
 export function BreadCrumb() {
-    const path = useLocation().pathname;
-    const pathName = path.split('/');
-    console.log(pathName)
+    const location = useLocation();
+
+    const match = matchRoutes(
+        routes.map(r => ({
+            path: r.path,
+            breadCrumb: r.breadCrumb
+        }))
+        ,
+        location
+    )
+
+    if (!match) [];
+
+    const items = match?.map(r => {
+        const item = typeof r.route.breadCrumb === 'function' ?
+            r.route.breadCrumb()
+            : r.route.breadCrumb;
+        return {
+            label: item,
+            path: r.route.path
+        }
+    })
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 {
-                    pathName.map((u, i) => (
-                        <div key={i} className="flex items-center">
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link to={path}>{u}</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            {
-                                i > 0 && <BreadcrumbSeparator />
-                            }
+                    items?.map((u, i) => (
 
-                        </div>
+                        <BreadcrumbItem key={i}>
+                            <BreadcrumbLink asChild>
+                                <Link to={u.path}>{u.label}</Link>
+                            </BreadcrumbLink>
+                            {
+                                i < items.length - 1 && <BreadcrumbSeparator />
+                            }
+                        </BreadcrumbItem>
+
+
                     ))
                 }
                 {/* <BreadcrumbItem>
