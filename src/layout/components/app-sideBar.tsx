@@ -1,20 +1,23 @@
 import reactIcon from "@/assets/react.svg";
-
 import { AvatarFallback } from "@/components/ui/avatar";
 import {
     Sidebar,
     SidebarContent,
     SidebarFooter,
     SidebarGroup,
-    SidebarGroupContent,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-import { routes } from "@/hooks/use-route"
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
+import { BookDashedIcon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom"
+import type { LucideIcon } from "lucide-react";
+import { sideBarData } from "./sidebar-items";
 
 // Menu items.
 
@@ -34,20 +37,29 @@ export function AppSidebar() {
 
             {/* Sider bar links */}
             <SidebarContent>
-                {/* <SidebarGroup>
+
+                <SidebarGroup>
                     <SidebarMenu>
-                        {routes.map(({ name, path }, i) => (
-                            <SidebarMenuItem key={i}>
-                                <SidebarMenuButton asChild>
-                                    <Link to={path} className={`${pathname === path ? "bg-blue-500 text-white" : ''}   hover:bg-blue-300`}>
-                                        <span className="text-lg ">{name}</span>
-                                    </Link>
-                                </SidebarMenuButton>
-                            </SidebarMenuItem>
-                        ))}
+                        <SidebarMenuItem >
+                            <SidebarMenuButton asChild>
+                                <Link
+                                    to={'/'}
+                                    className={`${pathname === '' ?
+                                        "bg-blue-500 text-white" : ''}  
+                                  hover:bg-blue-300`}>
+                                    <BookDashedIcon />
+                                    <span>Dashboard</span>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
                     </SidebarMenu>
-                </SidebarGroup> */}
+                    <GroupNavLink data={sideBarData.group} />
+
+                    {/* sigle side bar links  */}
+                    <NavLink data={sideBarData.signle} />
+                </SidebarGroup>
             </SidebarContent>
+
             {/* 
             Side Bar footer */}
             <SidebarFooter>
@@ -62,4 +74,86 @@ export function AppSidebar() {
         </Sidebar>
     )
 }
+
+type sideBarLinksType = {
+    pathname?: string,
+    title: string,
+    url: string,
+    icon: LucideIcon,
+    items?: {
+        title: string,
+        url: string,
+    }[]
+}
+
+const NavLink = ({ data }: { data: sideBarLinksType[] }) => {
+
+    return (
+
+        <SidebarMenu>
+            {
+                data.map((item, i) => (
+                    <SidebarMenuItem key={i}>
+                        <SidebarMenuButton asChild>
+                            <Link
+                                to={item.url}
+                                className={`${item.pathname === '' ?
+                                    "bg-blue-500 text-white" : ''}  
+                                  hover:bg-blue-300`}>
+                                <item.icon />
+                                <span>{item.title}</span>
+                            </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                ))
+            }
+        </SidebarMenu>
+
+    )
+}
+const GroupNavLink = ({ data }: { data: sideBarLinksType[] }) => {
+
+    return (
+
+        <SidebarMenu>
+            {
+                data.map((link, i) => (
+                    <SidebarMenuItem key={i}>
+                        <SidebarMenuButton asChild>
+                            <Link
+                                to={link.url}
+                                className={`${link.pathname === '' ?
+                                    "bg-blue-500 text-white" : ''}  
+                                  hover:bg-blue-300`}>
+                                <link.icon />
+                                <span>{link.title}</span>
+                            </Link>
+                        </SidebarMenuButton>
+                        {/* Sub link */}
+                        <SidebarMenuSub>
+                            {
+                                link?.items?.map((l, index) => (
+                                    <SidebarMenuSubItem key={index}>
+                                        <SidebarMenuSubButton asChild>
+                                            <Link
+                                                to={l.url}
+                                                className={`${link.pathname === '' ?
+                                                    "bg-blue-500 text-white" : ''}  
+                                  hover:bg-blue-300`}>
+
+                                                <span>{l.title}</span>
+                                            </Link>
+                                        </SidebarMenuSubButton>
+                                    </SidebarMenuSubItem>
+                                ))
+                            }
+                        </SidebarMenuSub>
+                    </SidebarMenuItem>
+                ))
+            }
+        </SidebarMenu>
+
+    )
+}
+
 

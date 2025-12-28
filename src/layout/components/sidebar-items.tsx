@@ -1,7 +1,29 @@
-import { BedDoubleIcon, DollarSignIcon, Hotel, SignalIcon, User } from "lucide-react";
+import { BedDoubleIcon, BookDashedIcon, DollarSignIcon, Hotel, SignalIcon, User } from "lucide-react";
 
-const items = [
-    {
+export const sideBarData = {
+    signle: [
+
+        {
+            title: "User",
+            url: '/user',
+            icon: User,
+
+        },
+        {
+            title: "Booking",
+            url: '/booking',
+            icon: SignalIcon,
+
+        },
+        {
+            title: "Payment",
+            url: '/payment',
+            icon: DollarSignIcon,
+
+        },
+    ],
+
+    group: [{
         title: "Hotel",
         url: '/hotel',
         icon: Hotel,
@@ -12,12 +34,7 @@ const items = [
             }
         ]
     },
-    {
-        title: "User",
-        url: '/user',
-        icon: User,
 
-    },
     {
         title: "Room",
         url: '/room',
@@ -29,17 +46,6 @@ const items = [
             }
         ]
     },
-    {
-        title: "Booking",
-        url: '/booking',
-        icon: SignalIcon,
+    ]
 
-    },
-    {
-        title: "Payment",
-        url: '/payment',
-        icon: DollarSignIcon,
-
-    },
-
-]
+}
