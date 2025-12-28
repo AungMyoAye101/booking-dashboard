@@ -14,10 +14,12 @@ import {
     SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
-import { BookDashedIcon } from "lucide-react";
+import { BookDashedIcon, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom"
 import type { LucideIcon } from "lucide-react";
 import { sideBarData } from "./sidebar-items";
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
+import { CollapsibleTrigger } from "@radix-ui/react-collapsible";
 
 // Menu items.
 
@@ -25,15 +27,27 @@ export function AppSidebar() {
     const { pathname } = useLocation();
     return (
         <Sidebar collapsible="icon" >
-            <SidebarHeader>
-                <Avatar>
-                    <AvatarImage
-                        src={reactIcon}
-                        alt="logo "
-                    />
-                    <AvatarFallback>Booking</AvatarFallback>
-                </Avatar>
-            </SidebarHeader>
+            <SidebarMenu>
+                <SidebarMenuItem >
+                    <SidebarMenuButton asChild>
+                        <Link to={'/'}>
+                            <Avatar>
+                                <AvatarImage
+                                    src={reactIcon}
+                                    alt="logo "
+                                />
+                                <AvatarFallback>Booking</AvatarFallback>
+                            </Avatar>
+                            <div className="flex flex-col">
+                                <h1>Booking</h1>
+                                <p>mangemnet</p>
+                            </div>
+                        </Link>
+
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+
+            </SidebarMenu>
 
             {/* Sider bar links */}
             <SidebarContent>
@@ -63,13 +77,21 @@ export function AppSidebar() {
             {/* 
             Side Bar footer */}
             <SidebarFooter>
-                <Avatar>
-                    <AvatarImage
-                        src="vite.svg"
-                        alt="logo "
-                    />
-                    <AvatarFallback>Booking</AvatarFallback>
-                </Avatar>
+                <SidebarMenu>
+                    <SidebarMenuItem className="flex gap-2">
+                        <Avatar>
+                            <AvatarImage
+                                src="vite.svg"
+                                alt="logo "
+                            />
+                            <AvatarFallback>Booking</AvatarFallback>
+                        </Avatar>
+                        <div className="flex flex-col">
+                            <h1>Jhon doe</h1>
+                            <p>example.com</p>
+                        </div>
+                    </SidebarMenuItem>
+                </SidebarMenu>
             </SidebarFooter>
         </Sidebar>
     )
@@ -118,37 +140,55 @@ const GroupNavLink = ({ data }: { data: sideBarLinksType[] }) => {
         <SidebarMenu>
             {
                 data.map((link, i) => (
-                    <SidebarMenuItem key={i}>
-                        <SidebarMenuButton asChild>
-                            <Link
-                                to={link.url}
-                                className={`${link.pathname === '' ?
-                                    "bg-blue-500 text-white" : ''}  
+                    <Collapsible
+                        key={i}
+                        defaultOpen={false}
+                        className="group/collapsible"
+                        asChild
+                    >
+
+                        <SidebarMenuItem >
+                            <CollapsibleTrigger asChild>
+
+
+                                <SidebarMenuButton asChild>
+                                    <Link
+                                        to={link.url}
+                                        className={`${link.pathname === '' ?
+                                            "bg-blue-500 text-white" : ''}  
                                   hover:bg-blue-300`}>
-                                <link.icon />
-                                <span>{link.title}</span>
-                            </Link>
-                        </SidebarMenuButton>
-                        {/* Sub link */}
-                        <SidebarMenuSub>
-                            {
-                                link?.items?.map((l, index) => (
-                                    <SidebarMenuSubItem key={index}>
-                                        <SidebarMenuSubButton asChild>
-                                            <Link
-                                                to={l.url}
-                                                className={`${link.pathname === '' ?
-                                                    "bg-blue-500 text-white" : ''}  
+                                        <link.icon />
+                                        <span>{link.title}</span>
+                                        <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                    </Link>
+                                </SidebarMenuButton>
+                            </CollapsibleTrigger>
+                            {/* Sub link */}
+                            <CollapsibleContent>
+
+                                <SidebarMenuSub>
+                                    {
+                                        link?.items?.map((l, index) => (
+                                            <SidebarMenuSubItem key={index}>
+                                                <SidebarMenuSubButton asChild>
+                                                    <Link
+                                                        to={l.url}
+                                                        className={`${link.pathname === '' ?
+                                                            "bg-blue-500 text-white" : ''}  
                                   hover:bg-blue-300`}>
 
-                                                <span>{l.title}</span>
-                                            </Link>
-                                        </SidebarMenuSubButton>
-                                    </SidebarMenuSubItem>
-                                ))
-                            }
-                        </SidebarMenuSub>
-                    </SidebarMenuItem>
+                                                        <span>{l.title}</span>
+                                                    </Link>
+                                                </SidebarMenuSubButton>
+                                            </SidebarMenuSubItem>
+                                        ))
+                                    }
+
+                                </SidebarMenuSub>
+                            </CollapsibleContent>
+                        </SidebarMenuItem>
+
+                    </Collapsible>
                 ))
             }
         </SidebarMenu>

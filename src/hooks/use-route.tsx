@@ -12,6 +12,8 @@ const Profile = lazy(() => import("@/pages/user/user-profile"))
 const HotelPage = lazy(() => import("@/pages/hotel"))
 const HotelDetailsPage = lazy(() => import("@/pages/hotel/hotel-details"))
 
+//rooms
+const RoomPage = lazy(() => import("@/pages/room"))
 //Bookings
 const BookingPage = lazy(() => import("@/pages/booking"))
 
@@ -34,6 +36,12 @@ export const routes = [
         breadCrumb: () => "Details",
         element: <HotelDetailsPage />
     },
+    {
+        breadCrumb: "Room",
+        path: "/room",
+        element: <RoomPage />
+    },
+
     {
         breadCrumb: "User",
         path: "/user",
