@@ -1,8 +1,6 @@
 
 import { Outlet } from "react-router-dom"
 import { AppSidebar } from "./components/app-sideBar"
-import { Suspense } from "react"
-import { LoaderCircleIcon } from "lucide-react"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import Header from "./components/Header"
 
@@ -13,10 +11,13 @@ const PageLayout = () => {
         <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-                <div>
-                    <Header />
+
+                <Header />
+                <div className="p-4">
                     <Outlet />
                 </div>
+
+
 
             </SidebarInset>
 
