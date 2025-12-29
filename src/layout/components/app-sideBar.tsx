@@ -1,47 +1,20 @@
-
 import {
     Sidebar,
     SidebarContent,
-    SidebarFooter,
     SidebarGroup,
-    SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarMenuSub,
     SidebarMenuSubButton,
     SidebarMenuSubItem,
-    useSidebar,
 } from "@/components/ui/sidebar"
-import {
-    BadgeCheck,
-    Bell,
-    ChevronsUpDown,
-    CreditCard,
-    LogOut,
-    Sparkles,
-} from "lucide-react"
-
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-} from "@/components/ui/avatar"
 import { ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom"
 import type { LucideIcon } from "lucide-react";
 import { sideBarData } from "./sidebar-items";
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import { CollapsibleTrigger } from "@radix-ui/react-collapsible";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import SideBarHeader from "./sidebar-header";
 import User from "./user";
 
