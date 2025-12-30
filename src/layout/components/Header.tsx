@@ -5,7 +5,7 @@ import { BreadCrumb } from "@/components/BreadCrumb"
 const Header = () => {
   return (
     <header
-      className="flex items-center justify-between px-4 py-2 mx-4 mt-2 bg-accent  rounded-lg">
+      className="flex items-center justify-between px-4 py-2 mx-4 mt-4 bg-accent  rounded-lg">
       <div
         className="flex items-center gap-4">
         <SidebarTrigger />

@@ -6,7 +6,7 @@ export type User = {
     phone: string,
     city: string,
     country: string,
-    joinedAt: Date,
+    createdAt: Date,
 }
 
 export const column: ColumnDef<User>[] = [
@@ -31,8 +31,12 @@ export const column: ColumnDef<User>[] = [
         header: "Country"
     },
     {
-        accessorKey: "joinedAt",
-        header: "Joined At"
+        accessorKey: "createdAt",
+        header: "Joined At",
+        cell: ({ row }) => {
+            const date = new Date(row.getValue("createdAt")).toDateString();
+            return <div>{date}</div>
+        }
     },
 ]
 
