@@ -59,7 +59,7 @@ export const routes = [
     },
     {
         breadCrumb: "Payment",
-        path: "/paymnet",
+        path: "/payment",
         element: <PaymentPage />
     },
 

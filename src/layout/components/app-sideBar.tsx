@@ -98,7 +98,7 @@ const GroupNavLink = ({ data, path }: { data: sideBarLinksType[], path: string }
                                     <Link
                                         to={link.url}
                                         className={`${link.url === path ?
-                                            "bg-primary-violet text-white" : ''}  
+                                            "bg-primary-violet text-primary-foreground-violet" : ''}  
                                   `}>
                                         <link.icon />
                                         <span>{link.title}</span>
@@ -116,11 +116,13 @@ const GroupNavLink = ({ data, path }: { data: sideBarLinksType[], path: string }
                                                 <SidebarMenuSubButton asChild>
                                                     <Link
                                                         to={l.url}
-                                                        className={`${link.url === path ?
+                                                        className={`${l.url === path ?
                                                             "bg-primary-violet text-white" : ""}`}>
-                                                        <l.icon />
+                                                        <l.icon className="text-white" />
                                                         <span>{l.title}</span>
+
                                                     </Link>
+
                                                 </SidebarMenuSubButton>
                                             </SidebarMenuSubItem>
                                         ))

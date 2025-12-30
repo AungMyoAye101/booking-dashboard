@@ -1,5 +1,5 @@
 
-import { BedDoubleIcon, BookMarked, CircleDollarSign, Home, Hotel, SquarePen, User } from "lucide-react";
+import { BedDoubleIcon, BookMarked, CircleDollarSign, Home, Hotel, Pen, SquarePen, User } from "lucide-react";
 
 export const sideBarData = {
     signle: [

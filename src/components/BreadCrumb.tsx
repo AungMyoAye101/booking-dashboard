@@ -14,10 +14,8 @@ const breadcrumbMap: Record<string, string> = {
 }
 export function BreadCrumb() {
     const { pathname } = useLocation();
-    console.log(pathname, "p");
-
     const segments = pathname.split('/').filter(Boolean);
-    console.log(segments, "s");
+
     const crumbs = segments.map((s, i) => {
         const url = "/" + segments.slice(0, i + 1).join('/');
         return {
@@ -25,13 +23,11 @@ export function BreadCrumb() {
             url
         }
     })
-
-    console.log(crumbs, "crumb")
     return (
         <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem >
-                    <BreadcrumbLink href="/">
+                    <BreadcrumbLink href="/" className="text-accent-foreground">
                         Home
                     </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -42,12 +38,12 @@ export function BreadCrumb() {
                     crumbs.map((item, i) => (
                         <div key={i} className="flex items-center">
                             <BreadcrumbItem >
-                                <BreadcrumbLink href={item.url}>
+                                <BreadcrumbLink href={item.url} className="text-accent-foreground">
                                     {item.label}
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
                             {
-                                i > 0 ? i !== crumbs.length : <BreadcrumbSeparator />
+                                crumbs.length > 0 && i !== crumbs.length - 1 && <BreadcrumbSeparator className="ml-2" />
                             }
                         </div >
                     ))

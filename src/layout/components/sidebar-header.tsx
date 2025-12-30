@@ -1,19 +1,18 @@
 import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-
+import logo from "@/assets/booking-logo.svg";
 export function SideBarHeader() {
 
     return (
         <SidebarHeader>
             <SidebarMenu>
                 <SidebarMenuItem>
-
                     <SidebarMenuButton
                         size="lg"
                         className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                     >
                         <Avatar className="h-10 w-10 rounded-full bg-white">
-                            <AvatarImage src={"booking-logo.png"} alt="Booking logo" />
+                            <AvatarImage src={logo} alt="Booking logo" />
                             <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                         </Avatar>
                         <div>
@@ -22,10 +21,6 @@ export function SideBarHeader() {
                             </h1>
                             <p className="text-xs -mt-1">magement</p>
                         </div>
-
-
-
-
                     </SidebarMenuButton>
                 </SidebarMenuItem>
             </SidebarMenu>

@@ -6,7 +6,7 @@ const ThemeToggle = () => {
         < >
             {
                 theme === "light" ?
-                    <MoonIcon onClick={() => setTheme("dark")} /> :
+                    <MoonIcon onClick={() => setTheme("dark")} className='text-primary-violet' /> :
                     <SunIcon onClick={() => setTheme("light")} />
             }
         </>

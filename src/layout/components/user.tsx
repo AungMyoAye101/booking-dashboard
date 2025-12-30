@@ -5,8 +5,6 @@ import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react"
 
 
 const User = () => {
-
-
     const { isMobile } = useSidebar()
     const user = {
         name: 'Admin001',
@@ -20,10 +18,12 @@ const User = () => {
                         <DropdownMenuTrigger asChild>
                             <SidebarMenuButton
                                 size="lg"
-                                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground "
                             >
                                 <Avatar className="h-10 w-10 rounded-lg">
-                                    <AvatarImage src={"https://ui.shadcn.com/avatars/shadcn.jpg"} alt={user.name} />
+                                    <AvatarImage
+                                        src={"https://ui.shadcn.com/avatars/shadcn.jpg"}
+                                        alt={user.name} />
                                 </Avatar>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-semibold">{user.name}</span>
@@ -33,7 +33,7 @@ const User = () => {
                             </SidebarMenuButton>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent
-                            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg p-4 bg-secondary"
+                            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg p-4 bg-secondary border border-gray-400"
                             side={isMobile ? "bottom" : "right"}
                             align="end"
                             sideOffset={4}
