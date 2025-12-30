@@ -1,5 +1,5 @@
 import { api } from "@/config/axios-config"
-import type { ApiResponse, meta } from "@/types";
+import type { ApiResponse, meta, ParamsType } from "@/types";
 import type { userType } from "@/types/user-types";
 
 type allUsersTypes = {
@@ -15,8 +15,9 @@ export const getUserById = async (userId: string) => {
     return data.result;
 }
 
-export const getAllusers = async () => {
-    const { data } = await api.get<ApiResponse<allUsersTypes>>("/users");
+export const getAllusers = async ({ page = 1 }: ParamsType = {}) => {
+
+    const { data } = await api.get<ApiResponse<allUsersTypes>>(`/users?page=${page}`);
     if (!data.success) {
         throw new Error("Failed to get all users");
     };

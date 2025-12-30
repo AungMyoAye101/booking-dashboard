@@ -13,3 +13,10 @@ export type meta = {
     hasNext: boolean,
     hasPrev: boolean
 }
+
+export type ParamsType = {
+    page?: number,
+    limit?: number,
+    search?: string,
+    sort?: "asc" | "dsc"
+}

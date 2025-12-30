@@ -1,33 +1,48 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { flexRender, getCoreRowModel, getPaginationRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
+import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
 import {
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
     PaginationItem,
     PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
+
 } from "@/components/ui/pagination"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 
+
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
-    data: TData[]
+    data: TData[],
+    meta: {
+        page: number,
+        limit: number,
+        currentPage: number,
+        total: number,
+        hasNext: boolean,
+        hasPrev: boolean
+    }
+    onPageChange: (page: number) => void
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>(
+    {
+        columns,
+        data,
+        meta,
+        onPageChange,
+
+    }: DataTableProps<TData, TValue>) {
 
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel()
+        manualPagination: true,
     })
 
-
+    console.log(meta)
     return (
         <div className="space-y-6">
             <div className="flex  items-center gap-2 ">
@@ -96,21 +111,28 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             <Pagination className=" flex justify-end">
                 <PaginationContent >
                     <PaginationItem>
-                        <PaginationPrevious href="#" className="bg-accent" />
+
+                        <Button
+                            variant={"ghost"}
+                            disabled={!meta.hasPrev}
+                            onClick={() => onPageChange(meta.page - 1)}
+                        >Prev</Button>
                     </PaginationItem>
+                    {
+                        Array(meta.page).fill(null).map((_, num) => (
+                            <PaginationItem key={num}>
+                                <PaginationLink href="#" isActive={num + 1 === meta.currentPage}>{num + 1}</PaginationLink>
+                            </PaginationItem>
+                        ))
+                    }
+
                     <PaginationItem>
-                        <PaginationLink href="#">1</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#" isActive>
-                            2
-                        </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">3</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationNext href="#" className="bg-accent" />
+                        <Button
+                            variant={"ghost"}
+                            disabled={!meta.hasNext}
+                            onClick={() => onPageChange(meta.page + 1)}
+
+                        >Next</Button>
                     </PaginationItem>
                 </PaginationContent>
             </Pagination>
