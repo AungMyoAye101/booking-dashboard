@@ -1,6 +1,10 @@
+
 import type { ColumnDef } from "@tanstack/react-table"
+import { Eye } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export type User = {
+    _id: string,
     name: string,
     email: string,
     phone: string,
@@ -38,5 +42,13 @@ export const column: ColumnDef<User>[] = [
             return <div>{date}</div>
         }
     },
+    {
+        id: 'actions',
+        header: "Action",
+        cell: ({ row }) => {
+
+            return <Link to={`/user/${row.original._id}`} ><Eye className="text-accent-foreground" /></Link>
+        }
+    }
 ]
 

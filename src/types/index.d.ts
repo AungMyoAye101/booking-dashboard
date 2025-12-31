@@ -18,5 +18,5 @@ export type ParamsType = {
     page?: number,
     limit?: number,
     search?: string,
-    sort?: "asc" | "dsc"
+    sort?: "asc" | "desc"
 }

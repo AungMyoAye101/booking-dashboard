@@ -4,7 +4,7 @@ import type { authType } from "@/types/user-types";
 import type { loginType, signupType } from "@/validations/auth-schema";
 
 export const sigupFormService = async (formData: signupType) => {
-    const { data } = await api.post<ApiResponse<authType>>('/auth/register', formData)
+    const { data } = await api.post<ApiResponse<authType>>('/admin/register', formData)
 
     if (!data.success) {
         throw new Error("Faild to singup.")
@@ -13,7 +13,7 @@ export const sigupFormService = async (formData: signupType) => {
 }
 export const loginFormService = async (formData: loginType) => {
 
-    const { data } = await api.post<ApiResponse<authType>>('/auth/login', formData)
+    const { data } = await api.post<ApiResponse<authType>>('/admin/login', formData)
     if (!data.success) {
         throw new Error("Faild to login.")
 

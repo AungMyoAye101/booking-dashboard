@@ -11,10 +11,9 @@ export const useUserById = (userId: string) => {
     })
 }
 
-export const useGetAllUsers = ({ page }: ParamsType = {}) => {
-    console.log(page);
+export const useGetAllUsers = ({ page, limit, sort, search }: ParamsType = {}) => {
     return useQuery({
-        queryKey: ['all_user', page],
-        queryFn: () => getAllusers({ page })
+        queryKey: ['all_user', page, search, limit, sort],
+        queryFn: () => getAllusers({ page, search, limit, sort })
     })
 }

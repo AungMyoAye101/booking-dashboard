@@ -16,6 +16,13 @@ export const api: AxiosInstance = axios.create({
     },
     withCredentials: true
 });
+const apiRefresh: AxiosInstance = axios.create({
+    baseURL: BASE_URL,
+    headers: {
+        "Content-Type": "application/json"
+    },
+    withCredentials: true
+});
 
 
 api.interceptors.request.use(
@@ -61,6 +68,13 @@ api.interceptors.response.use(
         const originalRequest = error.config;
 
         if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
+            if (
+                originalRequest.url.includes("admin/refresh") ||
+                originalRequest.url.includes("admin/login") ||
+                originalRequest.url.includes("admin/logout")
+            ) {
+                return Promise.reject(error);
+            }
             originalRequest._retry = true;
 
             if (isRefreshing) {
@@ -77,11 +91,11 @@ api.interceptors.response.use(
 
             try {
 
-                const { data } = await api.post<ApiResponse<authType>>("/auth/refresh");
+                const { data } = await apiRefresh.post<ApiResponse<authType>>("/admin/refresh");
+                console.log(data)
                 const newToken = data.result.token!;
                 console.log(newToken, "After refresh");
                 setAccessToken(newToken);
-                localStorage.setItem("accessToken", newToken);
 
                 //update default headers
 
@@ -95,9 +109,9 @@ api.interceptors.response.use(
             } catch (refreshError) {
                 processQueue(refreshError as AxiosError);
                 clearAuth();
-                localStorage.removeItem("accessToken");
-
-                // window.location.href = "/login";
+                failedQueue = [];
+                isRefreshing = false;
+                window.location.replace("/login");
                 return Promise.reject(refreshError)
 
             } finally {

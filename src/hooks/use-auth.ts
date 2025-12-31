@@ -44,7 +44,7 @@ export const useRefresh = () => {
     return useQuery({
         queryKey: ["refresh"],
         queryFn: async () => {
-            const { data } = await api.post("/auth/refresh");
+            const { data } = await api.post("/admin/refresh");
             setAccessToken(data.result.token);
             return data.result;
         },

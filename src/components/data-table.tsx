@@ -1,17 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-
-} from "@/components/ui/pagination"
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-
 
 
 interface DataTableProps<TData, TValue> {
@@ -35,7 +23,7 @@ export function DataTable<TData, TValue>(
     return (
 
 
-        <div className="overflow-hidden border-2 border-gray-400 bg-white dark:bg-black rounded-md shadow-lg ">
+        <div className="overflow-hidden border-2 bg-white dark:bg-black rounded-md shadow-lg ">
             <Table>
                 <TableHeader className="bg-primary-violet ">
                     {
