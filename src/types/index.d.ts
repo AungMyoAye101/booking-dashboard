@@ -7,9 +7,9 @@ export interface ApiResponse<T> {
 
 export type meta = {
     page: number,
-    total: number,
     limit: number,
-    currentPage: number,
+    total: number,
+    totalPages: number,
     hasNext: boolean,
     hasPrev: boolean
 }
