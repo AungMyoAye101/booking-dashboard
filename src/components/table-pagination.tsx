@@ -18,22 +18,30 @@ const TablePagination: FC<PaginationType> = ({ meta, onPageChange }) => {
 
     const totalPages = [...Array(meta.totalPages).keys()].map(n => n + 1);
 
-    console.log(meta.page + 1, "llll", meta.page)
+
     return (
-        <Pagination>
+        <Pagination className="flex justify-end">
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious
                         aria-disabled={!meta.hasPrev}
                         onClick={() => onPageChange(meta.page - 1)}
-                        isActive={meta.hasPrev} />
+                        isActive={meta.hasPrev}
+                        className={`${meta.hasPrev && "bg-primary-violet text-slate-100"}`}
+                    />
+
                 </PaginationItem>
                 {
                     totalPages.map(p => (
                         <PaginationItem key={p}>
                             <PaginationLink
                                 onClick={() => onPageChange(p)}
-                                isActive={p === meta.page}>{p}</PaginationLink>
+                                isActive={p === meta.page}
+                                className={`${p === meta.page && "bg-primary-violet text-slate-100"}`}
+                            >
+                                {p}
+                            </PaginationLink>
+
                         </PaginationItem>
                     ))
                 }
@@ -41,7 +49,9 @@ const TablePagination: FC<PaginationType> = ({ meta, onPageChange }) => {
                     <PaginationNext
                         aria-disabled={!meta.hasNext}
                         onClick={() => onPageChange(meta.page + 1)}
-                        isActive={meta.hasNext} />
+                        isActive={meta.hasNext}
+                        className={`${meta.hasNext && "bg-primary-violet text-slate-100"}`}
+                    />
                 </PaginationItem>
             </PaginationContent>
         </Pagination>

@@ -35,7 +35,7 @@ export function DataTable<TData, TValue>(
     return (
 
 
-        <div className="overflow-hidden border-2 border-primary-violet bg-white dark:bg-black rounded-md shadow-lg ">
+        <div className="overflow-hidden border-2 border-gray-400 bg-white dark:bg-black rounded-md shadow-lg ">
             <Table>
                 <TableHeader className="bg-primary-violet ">
                     {
@@ -43,7 +43,7 @@ export function DataTable<TData, TValue>(
                             <TableRow key={headerGp.id}>
                                 {
                                     headerGp.headers.map((head) => (
-                                        <TableHead key={head.id} className="text-primary-foreground-violet ">
+                                        <TableHead key={head.id} className="text-white/90 ">
                                             {
                                                 flexRender(
                                                     head.column.columnDef.header,
@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>(
                     }
                 </TableHeader>
 
-                <TableBody className="rounded-md">
+                <TableBody className="rounded-md px-2">
                     {
                         table.getRowModel().rows?.length ? (
 
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>(
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className={`${i % 2 === 0 && "bg-accent"}`}
+                                    className={`${i % 2 !== 0 && "bg-violet-2"}`}
                                 >
                                     {
                                         row.getVisibleCells().map(cell => (

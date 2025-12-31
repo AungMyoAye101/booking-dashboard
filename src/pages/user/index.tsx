@@ -21,9 +21,8 @@ const User = () => {
     if (isLoading) {
         return <p className="">Loading....</p>
     }
-    console.log(data);
     return (
-        <div className=" mx-auto ">
+        <div className=" mx-auto  space-y-6">
             <DataTable
                 columns={column}
                 data={data?.users ?? []}
