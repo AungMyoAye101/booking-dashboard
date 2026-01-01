@@ -35,17 +35,21 @@ export const useLoginForm = () => {
         },
         onError: (error) => {
             console.warn(error);
-            toast.error("Something went wrong.")
+            if (error instanceof Error) {
+                toast.error(error.message || "Something went wrong.")
+            }
+
         }
     })
 }
 
-export const useRefresh = () => {
+export const useFetchMe = () => {
     return useQuery({
-        queryKey: ["refresh"],
+        queryKey: ["me"],
         queryFn: async () => {
-            const { data } = await api.post("/admin/refresh");
-            setAccessToken(data.result.token);
+            const { data } = await api.get("/admin/me");
+            console.log(data);
+            // setAccessToken(data.result.token);
             return data.result;
         },
         retry: false,

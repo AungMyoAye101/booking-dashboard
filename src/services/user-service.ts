@@ -17,7 +17,6 @@ export const getUserById = async (userId: string) => {
 
 export const getAllusers = async ({ search, page, limit, sort }: ParamsType) => {
 
-
     const { data } = await api.get<ApiResponse<allUsersTypes>>(
         `/users?
         ${search && `search=${search}`}

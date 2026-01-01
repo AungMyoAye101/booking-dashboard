@@ -1,6 +1,8 @@
 import { useAuthStore } from "@/store/auth-store";
 import type { ApiResponse } from "@/types";
 import type { authType } from "@/types/user-types";
+
+
 import axios, {
     AxiosError,
     type AxiosInstance,
@@ -69,6 +71,7 @@ api.interceptors.response.use(
 
         if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
             if (
+                originalRequest.url.includes("admin/me") ||
                 originalRequest.url.includes("admin/refresh") ||
                 originalRequest.url.includes("admin/login") ||
                 originalRequest.url.includes("admin/logout")
@@ -99,7 +102,7 @@ api.interceptors.response.use(
 
                 //update default headers
 
-                api.defaults.headers.Authorization = `Bearer ${newToken}`;
+                // api.defaults.headers.Authorization = `Bearer ${newToken}`;
 
                 processQueue(null, newToken);
 
