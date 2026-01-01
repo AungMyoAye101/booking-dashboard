@@ -1,7 +1,8 @@
-import { api } from "@/config/axios-config"
+import { api, apiRefresh } from "@/config/axios-config"
 import { loginFormService, sigupFormService } from "@/services/auth-service"
 import { useAuthStore } from "@/store/auth-store"
 import type { ApiResponse } from "@/types"
+import type { authType } from "@/types/user-types"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
@@ -79,5 +80,19 @@ export const useLogout = () => {
         onError: () => {
             toast.error("Logout failed.")
         }
+    })
+}
+
+export const useRefresh = () => {
+    return useQuery({
+        queryKey: ['refresh'],
+        queryFn: async () => {
+            const { data } = await apiRefresh.post<ApiResponse<authType>>('/admin/refresh')
+            if (data.success) {
+                setAccessToken(data.result.token!)
+            }
+            return data.result;
+        },
+        retry: false,
     })
 }

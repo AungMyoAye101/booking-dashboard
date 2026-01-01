@@ -18,7 +18,7 @@ export const api: AxiosInstance = axios.create({
     },
     withCredentials: true
 });
-const apiRefresh: AxiosInstance = axios.create({
+export const apiRefresh: AxiosInstance = axios.create({
     baseURL: BASE_URL,
     headers: {
         "Content-Type": "application/json"
