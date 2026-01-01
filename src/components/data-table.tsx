@@ -23,7 +23,7 @@ export function DataTable<TData, TValue>(
     return (
 
 
-        <div className="overflow-hidden border-2 bg-white dark:bg-black rounded-md shadow-lg ">
+        <div className="overflow-hidden border-2 bg-white dark:bg-black rounded-md shadow-lg min-h-90">
             <Table>
                 <TableHeader className="bg-primary-violet ">
                     {
@@ -45,7 +45,7 @@ export function DataTable<TData, TValue>(
                     }
                 </TableHeader>
 
-                <TableBody className="rounded-md px-2">
+                <TableBody className="rounded-md px-2 ">
                     {
                         table.getRowModel().rows?.length ? (
 
@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>(
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className={`${i % 2 !== 0 && "bg-violet-2"}`}
+                                    className={`${i % 2 !== 0 && "bg-violet-2"}  border-b-2 border-b-accent`}
                                 >
                                     {
                                         row.getVisibleCells().map(cell => (

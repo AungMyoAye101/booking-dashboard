@@ -87,10 +87,7 @@ export const useRefresh = () => {
     return useQuery({
         queryKey: ['refresh'],
         queryFn: async () => {
-            const { data } = await apiRefresh.post<ApiResponse<authType>>('/admin/refresh')
-            if (data.success) {
-                setAccessToken(data.result.token!)
-            }
+            const { data } = await apiRefresh.post<ApiResponse<authType>>('/admin/refresh');
             return data.result;
         },
         retry: false,

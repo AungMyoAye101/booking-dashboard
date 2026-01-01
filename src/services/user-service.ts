@@ -15,15 +15,9 @@ export const getUserById = async (userId: string) => {
     return data.result;
 }
 
-export const getAllusers = async ({ search, page, limit, sort }: ParamsType) => {
-
+export const getAllusers = async (meta: ParamsType) => {
     const { data } = await api.get<ApiResponse<allUsersTypes>>(
-        `/users?
-        ${search && `search=${search}`}
-        page=${page}&
-        limit=${limit}&
-        sort=${sort}
-        `);
+        `/users`, { params: meta })
     if (!data.success) {
         throw new Error("Failed to get all users");
     };

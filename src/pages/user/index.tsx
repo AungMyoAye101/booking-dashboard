@@ -1,7 +1,7 @@
 import { useGetAllUsers } from "@/hooks/use-user";
 import { column } from "./components/column"
 import { DataTable } from "../../components/data-table"
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import TablePagination from "@/components/table-pagination";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import {
     DropdownMenuRadioItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { ArrowDownUp } from "lucide-react";
 
 
 
@@ -21,9 +22,9 @@ const User = () => {
     const [page, setPage] = useState(1)
     const [search, setSearch] = useState('')
     const [sort, setSort] = useState<'asc' | 'desc'>('desc')
-    const debounce = useDebounce(search);
+
     const { data, isLoading } = useGetAllUsers({
-        search: debounce,
+        search,
         page,
         limit: 10,
         sort,
@@ -35,28 +36,40 @@ const User = () => {
         }
         setPage(page)
     }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const value = form.get("search");
+        if (typeof value === "string" && value.trim()) {
+            setSearch(value)
+            setPage(1)
+        }
+    }
     return (
         <div className=" mx-auto  space-y-6">
-            <div className="flex gap-4 ">
+
+            <form onSubmit={handleSubmit} className="flex gap-4">
                 <Input
                     type="text"
                     placeholder="Search user by name."
                     className="bg-accent  focus:ring-violet-2"
-                    value={search}
-                    onChange={(e) => {
-                        setPage(1);
-                        setSearch(e.target.value)
-                    }}
+                    name="search"
                 />
                 <Button
+                    type="submit"
                     className="bg-primary-violet text-white hover:bg-violet"
-                >Search</Button>
+                >
+                    Search
+                </Button>
+
+
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant={'outline'}>Sortby</Button>
+                        <Button variant={'outline'} className="border-primary-violet">Sortby <ArrowDownUp /></Button>
 
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="">
+                    <DropdownMenuContent >
                         <DropdownMenuRadioGroup value={sort} onValueChange={(value: string) => setSort(value as 'asc' | 'desc')}>
                             <DropdownMenuRadioItem value="asc">
                                 Ascending
@@ -68,7 +81,7 @@ const User = () => {
 
                     </DropdownMenuContent>
                 </DropdownMenu>
-            </div>
+            </form>
             {
                 isLoading ?
                     <TableLoading /> :
