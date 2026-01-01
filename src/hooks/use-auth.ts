@@ -3,6 +3,7 @@ import { loginFormService, sigupFormService } from "@/services/auth-service"
 import { useAuthStore } from "@/store/auth-store"
 import type { ApiResponse } from "@/types"
 import { useMutation, useQuery } from "@tanstack/react-query"
+import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 
@@ -26,12 +27,14 @@ export const useSignUpForm = () => {
 }
 export const useLoginForm = () => {
     const setAuth = useAuthStore(s => s.setAuth)
+    const navigate = useNavigate();
     return useMutation({
         mutationFn: loginFormService,
         onSuccess: (data) => {
             setAuth(data.user);
             setAccessToken(data.token!)
-            toast.success("Login successfull.")
+            toast.success("Login successfull.");
+            navigate('/');
         },
         onError: (error) => {
             console.warn(error);

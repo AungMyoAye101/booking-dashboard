@@ -2,7 +2,7 @@ import { useLoginForm } from "@/hooks/use-auth"
 import { loginSchema, type loginType } from "@/validations/auth-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
-
+import hotelBG from "@/assets/hotel-hero.png"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -19,31 +19,37 @@ import {
     FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router-dom"
+import { Spinner } from "@/components/ui/spinner";
+
+
 const Login = () => {
 
     const form = useForm<loginType>({
         resolver: zodResolver(loginSchema)
     })
 
-    const mutation = useLoginForm()
+    const mutation = useLoginForm();
+
 
     const onSubmit = async (data: loginType) => {
-        console.log(data);
         mutation.mutate(data)
+        if (mutation.isSuccess) {
+            form.reset();
+        }
     }
 
     return (
-        <div>
-            <Card className="w-full sm:max-w-md mx-auto mt-20">
+        <div className="flex justify-end items-center h-screen px-4 sm:px-12">
+            <img src={hotelBG} alt="Background photo" className="aspect-video absolute -z-10 inset-0  h-screen w-screen" />
+            <Card className="w-full sm:max-w-md bg-card-bg/95 border-primary-violet">
                 <CardHeader>
-                    <CardTitle>Signup</CardTitle>
+                    <CardTitle>Login</CardTitle>
                     <CardDescription>
-                        Please register a new account
+                        Please Login your account
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} id="login-form">
                         <FieldGroup>
                             <Controller
                                 name="email"
@@ -60,6 +66,7 @@ const Login = () => {
                                             aria-invalid={fieldState.invalid}
                                             placeholder="example@gmail.com"
                                             autoComplete="off"
+                                            className="bg-input border-primary-violet"
                                         />
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
@@ -82,6 +89,7 @@ const Login = () => {
                                             aria-invalid={fieldState.invalid}
                                             placeholder="Enter your password"
                                             autoComplete="off"
+                                            className="bg-input border-primary-violet"
                                         />
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
@@ -91,16 +99,20 @@ const Login = () => {
                             />
 
                         </FieldGroup>
+
                     </form>
                 </CardContent>
-                <CardFooter>
-                    <Field orientation="horizontal">
-                        <Button type="submit" form="form-rhf-demo">
-                            Submit
-                        </Button>
-                        <Link to={'/'}>Home</Link>
-                    </Field>
+                <CardFooter >
+                    <Button
+                        form="login-form"
+                        type="submit"
+                        disabled={mutation.isPending}
+                        className="bg-primary-violet w-full"
+                    >
+                        {mutation.isPending ? <><Spinner />  Loging...</> : "Login"}
+                    </Button>
                 </CardFooter>
+
             </Card>
         </div>
     )
