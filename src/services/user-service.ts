@@ -6,13 +6,16 @@ type allUsersTypes = {
     users: userType[],
     meta: meta
 }
+type user = {
+    user: userType
+}
 
 export const getUserById = async (userId: string) => {
-    const { data } = await api.get<ApiResponse<userType>>(`/users/${userId}`);
+    const { data } = await api.get<ApiResponse<user>>(`/users/${userId}`);
     if (!data.success) {
         throw new Error("Failed to get user by Id")
     }
-    return data.result;
+    return data.result.user;
 }
 
 export const getAllusers = async (meta: ParamsType) => {
