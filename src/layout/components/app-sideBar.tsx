@@ -63,7 +63,7 @@ const NavLink = ({ data, path }: { data: sideBarLinksType[], path: string }) => 
                             <Link
                                 to={item.url}
                                 className={`${path === item.url ?
-                                    " bg-primary-violet text-primary-foreground-violet " : ''}  
+                                    " bg-accent text-accent-foreground " : ''}  
                                 `}>
                                 <item.icon className="text-xl" />
                                 <span>{item.title}</span>

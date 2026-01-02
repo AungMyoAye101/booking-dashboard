@@ -23,15 +23,15 @@ export function DataTable<TData, TValue>(
     return (
 
 
-        <div className="overflow-hidden border-2 bg-white dark:bg-black rounded-md shadow-lg min-h-90">
+        <div className="overflow-hidden border-2   rounded-md shadow-lg min-h-90">
             <Table>
-                <TableHeader className="bg-primary-violet ">
+                <TableHeader className="bg-secondary">
                     {
                         table.getHeaderGroups().map(headerGp => (
                             <TableRow key={headerGp.id}>
                                 {
                                     headerGp.headers.map((head) => (
-                                        <TableHead key={head.id} className="text-white/90 ">
+                                        <TableHead key={head.id} className="text-secondary-foreground ">
                                             {
                                                 flexRender(
                                                     head.column.columnDef.header,
@@ -53,7 +53,7 @@ export function DataTable<TData, TValue>(
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className={`${i % 2 !== 0 && "bg-violet-2"}  border-b-2 border-b-accent`}
+                                    className={`${i % 2 === 0 ? "bg-background text-foreground" : "bg-muted text-muted-foreground"}  border-b-2 `}
                                 >
                                     {
                                         row.getVisibleCells().map(cell => (

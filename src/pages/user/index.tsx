@@ -66,7 +66,7 @@ const User = () => {
 
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant={'outline'} className="border-primary-violet">Sortby <ArrowDownUp /></Button>
+                        <Button variant='secondary' className="bg-secondary text-secondary-foreground border">Sortby <ArrowDownUp /></Button>
 
                     </DropdownMenuTrigger>
                     <DropdownMenuContent >

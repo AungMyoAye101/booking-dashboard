@@ -23,6 +23,7 @@ export function BreadCrumb() {
             url
         }
     })
+    console.log(crumbs)
     return (
         <Breadcrumb>
             <BreadcrumbList>

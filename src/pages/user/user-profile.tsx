@@ -1,16 +1,10 @@
 import { AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUserById } from "@/hooks/use-user";
 import { Avatar } from "@radix-ui/react-avatar";
 import { Separator } from "@radix-ui/react-separator";
-import { EyeIcon } from "lucide-react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 const Profile = () => {
@@ -34,10 +28,7 @@ const Profile = () => {
             </div>
         </div>
     }
-
-
     return (
-
         <Card className="bg-card">
             <CardHeader className="flex gap-4 items-center">
                 <Avatar>
@@ -49,13 +40,10 @@ const Profile = () => {
                     <h1 className="text-lg font-semibold">{data?.name}</h1>
                     <p className="text-sm">{data?.email}</p>
                 </div>
-
-
             </CardHeader>
             <Separator className="bg-card-foreground" />
             <CardContent className="text-sm grid grid-cols-2 gap-4 w-fit">
                 <div>
-
                     <span>Phone</span>{':'}<span>{data?.phone}</span>
                 </div>
                 <div>
@@ -67,8 +55,6 @@ const Profile = () => {
                 </div>
                 {
                     data?.createdAt && <div>
-
-
                         <span>Joined At</span> {':'}<span>{new Date(data?.createdAt).toDateString()}</span>
                     </div>
                 }

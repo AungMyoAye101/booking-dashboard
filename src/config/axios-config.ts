@@ -95,9 +95,7 @@ api.interceptors.response.use(
             try {
 
                 const { data } = await apiRefresh.post<ApiResponse<authType>>("/admin/refresh");
-                console.log(data)
                 const newToken = data.result.token!;
-                console.log(newToken, "After refresh");
                 setAccessToken(newToken);
 
                 //update default headers
