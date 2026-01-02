@@ -45,7 +45,7 @@ export function DataTable<TData, TValue>(
                     }
                 </TableHeader>
 
-                <TableBody className="rounded-md px-2 ">
+                <TableBody className="rounded-md px-2 scroll-none">
                     {
                         table.getRowModel().rows?.length ? (
 

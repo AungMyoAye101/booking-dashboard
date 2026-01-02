@@ -1,9 +1,9 @@
 import { createHotel, getAllHotels, getHotelById, getHotelTypeCount, updateHotel } from "@/services/hotel-service";
-import type { ParamsType } from "@/types";
+import type { hotelParamsTypes } from "@/types/hotel-type";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const useGetALlHotel = (query: ParamsType) => {
+export const useGetALlHotel = (query: hotelParamsTypes) => {
     return useQuery({
         queryKey: ['hotel', { query }],
         queryFn: () => getAllHotels(query),

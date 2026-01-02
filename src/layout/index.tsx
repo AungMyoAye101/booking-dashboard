@@ -9,7 +9,7 @@ const PageLayout = () => {
             <AppSidebar />
             <SidebarInset>
                 <Header />
-                <div className="px-4 py-6">
+                <div className="px-4 py-6 ">
                     <Outlet />
                 </div>
             </SidebarInset>

@@ -1,6 +1,6 @@
 import type { hotelTypes } from "@/types/hotel-type"
 import type { ColumnDef } from "@tanstack/react-table"
-import { Star, StarIcon } from "lucide-react"
+import { Star } from "lucide-react"
 type hotel = {
     "name": string,
     "title": string,
@@ -10,7 +10,6 @@ type hotel = {
     "type": hotelTypes,
     "address": string,
     "price": number,
-    "amenities": string,
     "distance": string,
     "city": string,
     "createdAt": Date
@@ -35,7 +34,7 @@ export const hotelColumn: ColumnDef<hotel>[] = [
         header: "Price",
         cell: ({ row }) => {
 
-            return <p className="text-primary">{row.original.price} $ </p>
+            return <p className="font-semibold">{row.original.price} $ </p>
         }
     },
 
@@ -48,7 +47,7 @@ export const hotelColumn: ColumnDef<hotel>[] = [
                 <div className="flex items-center">
                     {
                         stars.map((_, i) => (
-                            <StarIcon key={i} className="text-yellow-400 text-[6px]" />
+                            <Star key={i} className="h-4 w-4 text-amber-600" />
                         ))
                     }
                 </div>
@@ -63,9 +62,6 @@ export const hotelColumn: ColumnDef<hotel>[] = [
         accessorKey: 'city',
         header: "City"
     },
-    {
-        accessorKey: 'amenities',
-        header: "Amenities"
-    },
+
 
 ]

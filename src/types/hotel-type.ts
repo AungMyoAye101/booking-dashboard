@@ -17,6 +17,15 @@ export type hotelType = {
 }
 
 export type hotelCountByTypes = {
-    "type": hotelTypes,
-    "count": number
+    type: hotelTypes,
+    count: number
+}
+
+export type hotelParamsTypes = {
+    search?: string,
+    type?: hotelTypes,
+    page?: number,
+    limit?: number,
+    sort?: "asc" | "desc"
+
 }
