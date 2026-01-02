@@ -3,8 +3,9 @@ import type { ApiResponse, ParamsType } from "@/types";
 import type { hotelCountByTypes, hotelType } from "@/types/hotel-type";
 import type { meta } from "@/types";
 import type { hotelCreateType, hotelUpdateType } from "@/validations/hotel-schmea";
+
 type hotelWithPagination = {
-    hotel: hotelType[],
+    hotels: hotelType[],
     meta: meta
 }
 

@@ -2,7 +2,7 @@ import { createHotel, getAllHotels, getHotelById, getHotelTypeCount, updateHotel
 import type { ParamsType } from "@/types";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-const queryClient = useQueryClient();
+
 export const useGetALlHotel = (query: ParamsType) => {
     return useQuery({
         queryKey: ['hotel', { query }],
@@ -28,6 +28,7 @@ export const useGetHotelCountByTypes = () => {
 //create hotel
 
 export const useCreateHotel = () => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationKey: ['create_hotel'],
         mutationFn: createHotel,
@@ -44,6 +45,7 @@ export const useCreateHotel = () => {
 
 //update hotel
 export const useUpdateHotel = () => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationKey: ['update_hotel'],
         mutationFn: updateHotel,
@@ -59,10 +61,12 @@ export const useUpdateHotel = () => {
 };
 
 export const useDeleteHotel = () => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationKey: ['update_hotel'],
         mutationFn: updateHotel,
         onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['hotel'] })
             toast.success("Hotel deleted successful.")
         },
         onError: () => {
