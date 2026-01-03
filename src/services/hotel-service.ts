@@ -11,7 +11,7 @@ type hotelWithPagination = {
 
 export const createHotel = async (hotel: hotelCreateType) => {
     const { data } = await
-        api.post<ApiResponse<hotelType>>('/hotel/create', { hotel });
+        api.post<ApiResponse<hotelType>>('/hotel/create', hotel);
     if (!data.success) {
         throw new Error("Failed to create hotel.")
     };
