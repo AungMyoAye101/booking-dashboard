@@ -1,5 +1,5 @@
-import { useGetHotelById } from "@/hooks/use-hotel"
-import { useParams } from "react-router-dom"
+import { useDeleteHotel, useGetHotelById } from "@/hooks/use-hotel"
+import { useNavigate, useParams } from "react-router-dom"
 import hotelImage from "@/assets/hotel-bg.png"
 import { Archive, Delete, Edit, Trash, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,17 @@ import {
     ChartTooltipContent,
     type ChartConfig,
 } from "@/components/ui/chart"
-
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 export const description = "A donut chart"
 
@@ -39,19 +49,52 @@ const HotelDetails = () => {
 
     const { data, isLoading, isError } = useGetHotelById(hotelId!)
 
+
+
+    const mutation = useDeleteHotel()
+    const handleDelete = (id: string) => {
+        mutation.mutate(id)
+    }
+
     return (
         <section className="space-y-6">
 
             <ButtonGroup>
-                <Button variant={'outline'}>
+                <Button disabled={mutation.isPending} variant={'outline'}>
                     <Edit />
                     update hotel </Button>
-                <Button variant={'outline'}>
+                <Button disabled={mutation.isPending} variant={'outline'}>
                     <Upload />
                     upload new image </Button>
-                <Button variant='outline' className="text-destructive">
-                    <Trash />
-                    delete hotel </Button>
+
+                <AlertDialog>
+                    <AlertDialogTrigger >
+                        <Button disabled={mutation.isPending} variant='outline' className="text-destructive">
+                            <Trash /> delete hotel
+
+                        </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete your hotel
+                                and remove hotel data from our servers.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>
+                                Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDelete(hotelId!)}>
+                                Delete
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+
+                    </AlertDialogContent>
+                </AlertDialog>
+
             </ButtonGroup>
             <div className="flex gap-4 ">
                 <img src={hotelImage} alt="Hotel image" className="w-[50%] object-cover aspect-video  rounded-md" />

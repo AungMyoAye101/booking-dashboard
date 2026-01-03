@@ -58,7 +58,7 @@ export const getHotelTypeCount = async () => {
 }
 export const deleteHotel = async (id: string) => {
     const { data } = await
-        api.delete<ApiResponse<hotelType>>(`/hotel/${id}`);
+        api.delete<ApiResponse<hotelType>>(`/hotel/delete/${id}`);
     if (!data.success) {
         throw new Error("Failed to delete hotel.")
     }
