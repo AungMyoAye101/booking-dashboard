@@ -8,7 +8,7 @@ type hotelWithPagination = {
     hotels: hotelType[],
     meta: meta
 }
-
+type hotel = { hotel: hotelType }
 export const createHotel = async (hotel: hotelCreateType) => {
     const { data } = await
         api.post<ApiResponse<hotelType>>('/hotel/create', hotel);
@@ -40,12 +40,12 @@ export const getAllHotels = async (query: ParamsType) => {
 
 export const getHotelById = async (id: string) => {
     const { data } = await
-        api.get<ApiResponse<hotelType>>(`/hotel/${id}`);
+        api.get<ApiResponse<hotel>>(`/hotel/${id}`);
     if (!data.success) {
         throw new Error("Failed to fetch hotel by id.")
     }
 
-    return data.result;
+    return data.result.hotel;
 }
 
 export const getHotelTypeCount = async () => {

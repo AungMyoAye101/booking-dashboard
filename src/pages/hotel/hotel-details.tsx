@@ -36,11 +36,11 @@ const chartData = [
 
 const HotelDetails = () => {
     const { hotelId } = useParams();
-    console.log(hotelId);
+
     const { data, isLoading, isError } = useGetHotelById(hotelId!)
-    console.log(data)
+
     return (
-        <section className="space-y-4">
+        <section className="space-y-6">
 
             <ButtonGroup>
                 <Button variant={'outline'}>
@@ -49,7 +49,7 @@ const HotelDetails = () => {
                 <Button variant={'outline'}>
                     <Upload />
                     upload new image </Button>
-                <Button variant='destructive'>
+                <Button variant='outline' className="text-destructive">
                     <Trash />
                     delete hotel </Button>
             </ButtonGroup>
@@ -57,10 +57,31 @@ const HotelDetails = () => {
                 <img src={hotelImage} alt="Hotel image" className="w-[50%] object-cover aspect-video  rounded-md" />
                 <ChartPieDonut />
             </div>
-            <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 " >
                 <div>
-                    <h2>Hotel Information</h2>
-                    <ul></ul>
+                    <h2 className="font-semibold">Hotel Information</h2>
+                    <p>Name : <span className="font-semibold text-base">
+                        {data?.name}</span></p>
+                    <p>Price : <span className="font-semibold text-base">{data?.price}</span></p>
+                    <p>Type : <span className="font-semibold text-base">{data?.type}</span></p>
+                </div>
+                <div>
+                    <h2 className="font-semibold">Hotel Location</h2>
+                    <p>Address : <span className="font-semibold text-base">{data?.address}</span></p>
+                    <p>City : <span className="font-semibold text-base">{data?.city}</span> </p>
+                    <p>Country : <span className="font-semibold text-base">{data?.country}</span></p>
+                </div>
+                <div className="">
+                    <h2 className="font-semibold">Avaiable amenities</h2>
+                    <div className="flex gap-1 flex-wrap">
+
+
+                        {
+                            data?.amenities.map((item) => (
+                                <span key={item}>{item}</span>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </section>

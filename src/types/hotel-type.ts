@@ -9,7 +9,7 @@ export type hotelType = {
     type: hotelTypes,
     address: string,
     price: number,
-    amenities: string,
+    amenities: string[],
     city: string,
     country: string,
     createdAt: Date
