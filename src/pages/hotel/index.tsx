@@ -6,8 +6,7 @@ import { hotelColumn } from "./components/column";
 import TablePagination from "@/components/table-pagination";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { ArrowDownUp } from "lucide-react";
+
 import {
     Select,
     SelectContent,
@@ -21,14 +20,13 @@ const Hotel = () => {
 
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('')
-    const [sort, setSort] = useState<'asc' | 'desc'>("desc")
+    // const [sort, setSort] = useState<'asc' | 'desc'>("desc")
     const [type, setType] = useState<hotelTypes | undefined>(undefined)
 
     const { data, isLoading } = useGetALlHotel({ page, search, type })
     if (isLoading) {
         return <TableLoading />
     }
-    console.log(type)
     const onPageChange = (page: number) => {
         if (page < 1) return;
         setPage(page)
