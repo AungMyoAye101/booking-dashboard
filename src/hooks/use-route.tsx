@@ -13,7 +13,7 @@ const Profile = lazy(() => import("@/pages/user/user-profile"))
 const HotelPage = lazy(() => import("@/pages/hotel"))
 const HotelDetailsPage = lazy(() => import("@/pages/hotel/hotel-details"))
 const HotelCreatePage = lazy(() => import("@/pages/hotel/create-hotel"))
-
+const HotelUpdatePage = lazy(() => import("@/pages/hotel/update-hotel"))
 //rooms
 const RoomPage = lazy(() => import("@/pages/room"))
 //Bookings
@@ -43,6 +43,11 @@ export const routes = [
         path: "/hotel/:hotelId",
         breadCrumb: () => "Details",
         element: <HotelDetailsPage />
+    },
+    {
+        path: "/hotel/update/:hotelId",
+        breadCrumb: () => "Details",
+        element: <HotelUpdatePage />
     },
     {
         breadCrumb: "Room",

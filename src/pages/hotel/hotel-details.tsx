@@ -1,5 +1,5 @@
 import { useDeleteHotel, useGetHotelById } from "@/hooks/use-hotel"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import hotelImage from "@/assets/hotel-bg.png"
 import { Archive, Delete, Edit, Trash, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -61,8 +61,11 @@ const HotelDetails = () => {
 
             <ButtonGroup>
                 <Button disabled={mutation.isPending} variant={'outline'}>
-                    <Edit />
-                    update hotel </Button>
+                    <Link to={`/hotel/update/${hotelId}`} className="flex gap-1.5 items-center">
+                        <Edit />
+                        update hotel
+                    </Link>
+                </Button>
                 <Button disabled={mutation.isPending} variant={'outline'}>
                     <Upload />
                     upload new image </Button>
