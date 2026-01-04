@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/button'
 import { Upload } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useImageUpload } from '@/hooks/use-image'
+import { Spinner } from '@/components/ui/spinner'
 
 const ImageUpload = ({ hotelId }: { hotelId: string }) => {
 
@@ -23,12 +25,18 @@ const ImageUpload = ({ hotelId }: { hotelId: string }) => {
         setPreview(url)
     }
 
+    //image upload mutation 
+
+    const { mutate, isPending } = useImageUpload();
+
 
     const handleUpload = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-        const image = form.get('image');
-        console.log(image)
+        const image = form.get('image') as File | null;
+        if (!image) return;
+
+        mutate({ id: hotelId, image })
 
     }
 
@@ -78,10 +86,15 @@ const ImageUpload = ({ hotelId }: { hotelId: string }) => {
 
                 </form>
                 <DialogFooter>
-                    <Button variant={'outline'} onClick={() => setPreview(null)}>
+                    <Button disabled={isPending} variant={'outline'} onClick={() => setPreview(null)}>
                         cancel
                     </Button>
-                    <Button type='submit' form='image-form'>Upload</Button>
+                    <Button disabled={isPending} type='submit' form='image-form'>
+                        {
+                            isPending ? <><Spinner /> Uploading... </> : "   Upload"
+                        }
+
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

@@ -12,9 +12,15 @@ export type hotelType = {
     amenities: string[],
     city: string,
     country: string,
-    createdAt: Date
+    createdAt: Date,
+    photo?: photoType
 }
+export type photoType = {
+    _id: string,
+    secure_url: string,
+    public_id: string,
 
+}
 export type hotelCountByTypes = {
     type: hotelTypes,
     count: number

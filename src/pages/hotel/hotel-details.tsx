@@ -1,84 +1,35 @@
-import { useDeleteHotel, useGetHotelById } from "@/hooks/use-hotel"
-import { Link, useParams } from "react-router-dom"
-import hotelImage from "@/assets/hotel-bg.png"
-import { Edit, Trash, Upload } from "lucide-react";
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Pie, PieChart } from "recharts"
-import {
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-    type ChartConfig,
-} from "@/components/ui/chart"
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-
-
-export const description = "A donut chart"
-
-const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 90, fill: "var(--color-other)" },
-]
-
-
-import { Button } from "@/components/ui/button"
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import type { FormEvent } from "react";
+import { useGetHotelById } from "@/hooks/use-hotel"
+import { useParams } from "react-router-dom"
+import hotelImage from "@/assets/booking-logo.svg"
 import HotelAction from "./components/hotel-actions";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+import { Image } from "lucide-react";
 
 
 
 
 const HotelDetails = () => {
     const { hotelId } = useParams();
-
     const { data, isLoading, isError } = useGetHotelById(hotelId!)
-
-
-
-    const mutation = useDeleteHotel()
-    const handleDelete = (id: string) => {
-        mutation.mutate(id)
-    }
-
-    const imageUploadHandle = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const image = form.get("image");
-
-        console.log(image)
-    }
 
     return (
         <section className="space-y-6">
             <HotelAction hotelId={hotelId!} />
-            <div className="flex gap-4 ">
-                <img src={hotelImage} alt="Hotel image" className="w-[50%] h-7x10 object-cover aspect-video  rounded-md" />
-                <ChartPieDonut />
+            <div className="min-w-80 sm:max-w-lg ">
+                <AspectRatio ratio={16 / 9} className=" rounded-lg">
+                    {
+                        data?.photo?.secure_url ?
+                            <img src={data?.photo?.secure_url || hotelImage} alt="Hotel image" className="w-full h-full object-cover rounded-md" />
+                            :
+                            <div className="w-full h-full rounded-md bg-muted ">
+                                <Image />
+                                No Image Upload Yet
+                            </div>
+                    }
+                </AspectRatio>
+
+
+                {/* <ChartPieDonut /> */}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 " >
                 <div>
@@ -115,55 +66,7 @@ const HotelDetails = () => {
 
 
 
-const chartConfig = {
-    visitors: {
-        label: "Visitors",
-    },
-    chrome: {
-        label: "Chrome",
-        color: "var(--chart-1)",
-    },
-    safari: {
-        label: "Safari",
-        color: "var(--chart-2)",
-    },
-    firefox: {
-        label: "Firefox",
-        color: "var(--chart-3)",
-    },
-    edge: {
-        label: "Edge",
-        color: "var(--chart-4)",
-    },
-    other: {
-        label: "Other",
-        color: "var(--chart-5)",
-    },
-} satisfies ChartConfig
 
-function ChartPieDonut() {
-    return (
-
-        <ChartContainer
-            config={chartConfig}
-            className="mx-auto aspect-square h-60"
-        >
-            <PieChart>
-                <ChartTooltip
-                    cursor={false}
-                    content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie
-                    data={chartData}
-                    dataKey="visitors"
-                    nameKey="browser"
-                    innerRadius={60}
-                />
-            </PieChart>
-        </ChartContainer>
-
-    )
-}
 
 
 export default HotelDetails

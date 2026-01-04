@@ -9,7 +9,7 @@ type hotelWithPagination = {
     meta: meta
 }
 type hotel = { hotel: hotelType }
-interface hotelUpdate { hotel: Partial<hotelType>, id: string }
+interface hotelUpdate { hotel: Partial<hotelType>, id: string };
 
 export const createHotel = async (hotel: hotelCreateType) => {
     const { data } = await
@@ -71,3 +71,7 @@ export const deleteHotel = async (id: string) => {
 
     return data.result;
 }
+
+
+
+
