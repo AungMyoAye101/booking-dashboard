@@ -18,7 +18,7 @@ import { toast } from "sonner";
 
 export const useGetALlHotel = (query: hotelParamsTypes) => {
     return useQuery({
-        queryKey: ['hotel'],
+        queryKey: ['hotel', query],
         queryFn: () => getAllHotels(query),
         placeholderData: keepPreviousData
     })
