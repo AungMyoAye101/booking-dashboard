@@ -1,17 +1,28 @@
 import { FormInput } from "@/components/custom-form"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
+import { Spinner } from "@/components/ui/spinner"
+import { useCreateRoom } from "@/hooks/use-room"
 import { createRoomSchema, type createRoomType } from "@/validations/room-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useNavigate, useParams } from "react-router-dom"
 
 const createRoom = () => {
+    const { hotelId } = useParams()
     const form = useForm<createRoomType>({
         resolver: zodResolver(createRoomSchema)
     })
+    const navigate = useNavigate()
+    const { mutate, isPending } = useCreateRoom()
+    const onSubmit = (room: createRoomType) => {
+        mutate({ hotelId: hotelId!, room }, {
+            onSuccess: () => {
+                form.reset()
+                navigate('/hotel/' + hotelId)
+            }
+        })
 
-
-    const onSubmit = (data: createRoomType) => {
 
     }
     return (
@@ -49,7 +60,14 @@ const createRoom = () => {
                         type="number"
                         placeholder="total rooms"
                     />
-                    <Button type="submit">Create</Button>
+                    <Button
+                        type="submit"
+                        disabled={isPending}
+                    >
+                        {
+                            isPending ? <><Spinner />Createing</> : "Create"
+                        }
+                    </Button>
                 </form>
 
             </Form>

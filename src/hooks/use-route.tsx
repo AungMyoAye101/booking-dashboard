@@ -58,7 +58,7 @@ export const routes = [
     },
     {
         breadCrumb: "Room",
-        path: "/room/create",
+        path: "/room/:hotelId/create",
         element: <CreateRoomPage />
     },
 

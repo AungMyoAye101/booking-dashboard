@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
-import { Edit } from "lucide-react";
+import { Edit, PlusCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import ImageUpload from "./image-upload";
 import HotelDelete from "./hotel-delete";
@@ -25,6 +25,17 @@ const HotelAction = ({ hotelId }: { hotelId: string }) => {
           className="flex gap-1.5 items-center"
         >
           <Edit /> Update hotel
+        </Link>
+
+      </Button>
+      <Button
+        variant="outline"
+      >
+        <Link
+          to={`/room/${hotelId}/create`}
+          className="flex gap-1.5 items-center"
+        >
+          <PlusCircle /> Add rooms
         </Link>
 
       </Button>
