@@ -1,7 +1,6 @@
 import { Input } from '@/components/ui/input'
 import {
     Dialog,
-    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -12,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Upload } from 'lucide-react'
 import { Label } from '@/components/ui/label'
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 import { useImageUpload } from '@/hooks/use-image'
 import { Spinner } from '@/components/ui/spinner'
 

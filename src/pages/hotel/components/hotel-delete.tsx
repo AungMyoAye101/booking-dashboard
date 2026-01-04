@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Spinner } from "@/components/ui/spinner"
-import { useDeleteHotel } from "@/hooks/use-hotel"
 import { LucideTrash } from "lucide-react"
 
 type hotelDeleteProps = {
