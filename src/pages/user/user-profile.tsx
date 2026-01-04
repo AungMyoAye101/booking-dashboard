@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom";
 
 const Profile = () => {
     const { userId } = useParams();
-    console.log(userId);
     const { data, isLoading } = useUserById(userId!);
     if (isLoading) {
         return <div className="p-4 rounded-md bg-card">

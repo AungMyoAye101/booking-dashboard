@@ -1,20 +1,9 @@
 import { useDeleteHotel, useGetHotelById } from "@/hooks/use-hotel"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import hotelImage from "@/assets/hotel-bg.png"
-import { Archive, Delete, Edit, Trash, Upload } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Edit, Trash, Upload } from "lucide-react";
 import { ButtonGroup } from "@/components/ui/button-group";
-import { TrendingUp } from "lucide-react"
 import { Pie, PieChart } from "recharts"
-
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
 import {
     ChartContainer,
     ChartTooltip,
@@ -33,6 +22,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
+
 export const description = "A donut chart"
 
 const chartData = [
@@ -42,6 +32,25 @@ const chartData = [
     { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
     { browser: "other", visitors: 90, fill: "var(--color-other)" },
 ]
+
+
+import { Button } from "@/components/ui/button"
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import type { FormEvent } from "react";
+import HotelAction from "./components/hotel-actions";
+
+
 
 
 const HotelDetails = () => {
@@ -56,51 +65,19 @@ const HotelDetails = () => {
         mutation.mutate(id)
     }
 
+    const imageUploadHandle = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const image = form.get("image");
+
+        console.log(image)
+    }
+
     return (
         <section className="space-y-6">
-
-            <ButtonGroup>
-                <Button disabled={mutation.isPending} variant={'outline'}>
-                    <Link to={`/hotel/update/${hotelId}`} className="flex gap-1.5 items-center">
-                        <Edit />
-                        update hotel
-                    </Link>
-                </Button>
-                <Button disabled={mutation.isPending} variant={'outline'}>
-                    <Upload />
-                    upload new image </Button>
-
-                <AlertDialog>
-                    <AlertDialogTrigger >
-                        <Button disabled={mutation.isPending} variant='outline' className="text-destructive">
-                            <Trash /> delete hotel
-
-                        </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-
-                        <AlertDialogHeader>
-                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                                This action cannot be undone. This will permanently delete your hotel
-                                and remove hotel data from our servers.
-                            </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                            <AlertDialogCancel>
-                                Cancel
-                            </AlertDialogCancel>
-                            <AlertDialogAction onClick={() => handleDelete(hotelId!)}>
-                                Delete
-                            </AlertDialogAction>
-                        </AlertDialogFooter>
-
-                    </AlertDialogContent>
-                </AlertDialog>
-
-            </ButtonGroup>
+            <HotelAction hotelId={hotelId!} />
             <div className="flex gap-4 ">
-                <img src={hotelImage} alt="Hotel image" className="w-[50%] object-cover aspect-video  rounded-md" />
+                <img src={hotelImage} alt="Hotel image" className="w-[50%] h-7x10 object-cover aspect-video  rounded-md" />
                 <ChartPieDonut />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 " >
@@ -166,39 +143,25 @@ const chartConfig = {
 
 function ChartPieDonut() {
     return (
-        <Card className="flex flex-col">
-            <CardHeader className="items-center pb-0">
-                <CardTitle>Pie Chart - Donut</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
-            </CardHeader>
-            <CardContent className="flex-1 pb-0">
-                <ChartContainer
-                    config={chartConfig}
-                    className="mx-auto aspect-square max-h-[250px]"
-                >
-                    <PieChart>
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent hideLabel />}
-                        />
-                        <Pie
-                            data={chartData}
-                            dataKey="visitors"
-                            nameKey="browser"
-                            innerRadius={60}
-                        />
-                    </PieChart>
-                </ChartContainer>
-            </CardContent>
-            <CardFooter className="flex-col gap-2 text-sm">
-                <div className="flex items-center gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="text-muted-foreground leading-none">
-                    Showing total visitors for the last 6 months
-                </div>
-            </CardFooter>
-        </Card>
+
+        <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square h-60"
+        >
+            <PieChart>
+                <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent hideLabel />}
+                />
+                <Pie
+                    data={chartData}
+                    dataKey="visitors"
+                    nameKey="browser"
+                    innerRadius={60}
+                />
+            </PieChart>
+        </ChartContainer>
+
     )
 }
 
