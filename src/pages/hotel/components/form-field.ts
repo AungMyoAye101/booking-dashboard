@@ -84,4 +84,5 @@ export const AMENITIES = [
     { label: "Parking", value: "parking" },
     { label: "Air Conditioning", value: "ac" },
     { label: "Gym", value: "gym" },
+    { label: "Breakfast", value: "breakfast" },
 ];

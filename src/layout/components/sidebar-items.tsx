@@ -1,5 +1,5 @@
 
-import { BedDoubleIcon, BookMarked, CircleDollarSign, Home, Hotel, Pen, SquarePen, User } from "lucide-react";
+import { BedDoubleIcon, BookMarked, CircleDollarSign, Edit, Home, Hotel, User } from "lucide-react";
 
 export const sideBarData = {
     signle: [
@@ -36,7 +36,7 @@ export const sideBarData = {
             {
                 title: "Create",
                 url: "/hotel/create",
-                icon: SquarePen
+                icon: Edit
             }
         ]
     },
@@ -49,7 +49,7 @@ export const sideBarData = {
             {
                 title: "Create",
                 url: "/room/create",
-                icon: SquarePen,
+                icon: Edit,
             }
         ]
     },

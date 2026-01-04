@@ -1,14 +1,26 @@
-import { createHotel, deleteHotel, getAllHotels, getHotelById, getHotelTypeCount, updateHotel } from "@/services/hotel-service";
+import {
+    createHotel,
+    deleteHotel,
+    getAllHotels,
+    getHotelById,
+    getHotelTypeCount,
+    updateHotel
+} from "@/services/hotel-service";
 import type { hotelParamsTypes } from "@/types/hotel-type";
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+    keepPreviousData,
+    useMutation,
+    useQuery,
+    useQueryClient
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export const useGetALlHotel = (query: hotelParamsTypes) => {
     return useQuery({
-        queryKey: ['hotel', { query }],
+        queryKey: ['hotel'],
         queryFn: () => getAllHotels(query),
-        placeholderData: keepPreviousData,
+        placeholderData: keepPreviousData
     })
 }
 
@@ -34,8 +46,11 @@ export const useCreateHotel = () => {
         mutationKey: ['create_hotel'],
         mutationFn: createHotel,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['hotel'] })
-            toast.success("Hotel created successfull.")
+            queryClient.invalidateQueries({
+                queryKey: ['hotel'],
+                exact: false
+            })
+            toast.success("Hotel created successful.")
         },
         onError: (error) => {
             console.warn(error)
@@ -48,11 +63,13 @@ export const useCreateHotel = () => {
 export const useUpdateHotel = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationKey: ['update_hotel'],
         mutationFn: updateHotel,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['hotel'] })
-            toast.success("Hote  updated successfull.")
+            queryClient.invalidateQueries({
+                queryKey: ['hotel', 'hotel_by_id'],
+                exact: false
+            })
+            toast.success("Hote  updated successful.")
         },
         onError: (error) => {
             console.warn(error)
@@ -68,7 +85,10 @@ export const useDeleteHotel = () => {
         mutationKey: ['delete_hotel'],
         mutationFn: deleteHotel,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['hotel'] })
+            queryClient.invalidateQueries({
+                queryKey: ['hotel'],
+                exact: false
+            })
             navigate('/hotel')
             toast.success("Hotel deleted successful.")
         },

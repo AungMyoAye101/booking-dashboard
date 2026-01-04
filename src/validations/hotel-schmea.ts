@@ -3,7 +3,7 @@ import * as z from "zod";
 export const hotelCreateSchema = z.object({
     "name": z
         .string()
-        .min(3, "Name must contain 3 characters."),
+        .min(2, "Name must contain 2 characters."),
     "description": z
         .string()
         .min(3, " Description must contain 3 characters."),
@@ -34,43 +34,9 @@ export const hotelCreateSchema = z.object({
         .min(3, " City must contain 3 characters."),
     "country": z
         .string()
-        .min(3, "Country must contain 3 characters."),
-})
-export const hotelUpdateSchema = z.object({
-    "name": z
-        .string()
-        .min(3, "Name must contain 3 characters.").optional(),
-    "title": z
-        .string()
-        .min(3, "Title must contain 3 characters.").optional(),
-    "description": z
-        .string()
-        .min(3, " Description must contain 3 characters.").optional(),
-    "rating": z
-        .number().min(1, "Rating connot be less than 1.")
-        .max(10, "Rating cannot be greater than 10").optional(),
-    "star": z
-        .number()
-        .min(1, "Star connot be less than 1.")
-        .max(5, "Star cannot be greater than 10").optional(),
-    "type": z.
-        enum(['hotel', 'motel', 'guest-house'],
-            "Type must be one of hotel, motel or guest house.").optional(),
-    "address": z.
-        string()
-        .min(3, "Address must contain 3 characters.").optional(),
-    "price": z.number().positive("Price must be greater").optional(),
-    "amenities": z
-        .array(z.string()
-            .min(1, "Amenites must contain 1 character"),
-            "Amenities are required.").optional(),
-    "distance": z
-        .string()
-        .min(3, "Distance must contain 3 characters.").optional(),
-    "city": z
-        .string()
-        .min(3, " City must contain 3 characters.").optional(),
+        .min(2, "Country must contain 2 characters."),
 })
 
+
+
 export type hotelCreateType = z.infer<typeof hotelCreateSchema>;
-export type hotelUpdateType = z.infer<typeof hotelUpdateSchema>;

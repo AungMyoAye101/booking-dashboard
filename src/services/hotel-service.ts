@@ -2,13 +2,15 @@ import { api } from "@/config/axios-config"
 import type { ApiResponse, ParamsType } from "@/types";
 import type { hotelCountByTypes, hotelType } from "@/types/hotel-type";
 import type { meta } from "@/types";
-import type { hotelCreateType, hotelUpdateType } from "@/validations/hotel-schmea";
+import type { hotelCreateType } from "@/validations/hotel-schmea";
 
 type hotelWithPagination = {
     hotels: hotelType[],
     meta: meta
 }
 type hotel = { hotel: hotelType }
+interface hotelUpdate { hotel: Partial<hotelType>, id: string }
+
 export const createHotel = async (hotel: hotelCreateType) => {
     const { data } = await
         api.post<ApiResponse<hotelType>>('/hotel/create', hotel);
@@ -18,9 +20,13 @@ export const createHotel = async (hotel: hotelCreateType) => {
     return data.result;
 }
 
-export const updateHotel = async (hotel: hotelUpdateType) => {
+export const updateHotel = async ({
+    id,
+    hotel
+}: hotelUpdate): Promise<hotelType> => {
+
     const { data } = await
-        api.put<ApiResponse<hotelType>>('/hotel/update', { hotel });
+        api.put<ApiResponse<hotelType>>(`/hotel/update/${id}`, hotel);
     if (!data.success) {
         throw new Error("Failed to update hotel.")
     };

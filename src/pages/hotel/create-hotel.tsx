@@ -4,6 +4,7 @@ import { useCreateHotel } from "@/hooks/use-hotel"
 import { hotelCreateSchema, type hotelCreateType } from "@/validations/hotel-schmea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { AMENITIES } from "./components/form-field"
 import { Spinner } from "@/components/ui/spinner"
@@ -18,18 +19,21 @@ const CreateHotel = () => {
         }
     })
 
+    const navigate = useNavigate()
     const mutation = useCreateHotel();
     const onSubmit = (data: hotelCreateType) => {
-        console.log(data)
-        mutation.mutate(data);
-        if (mutation.isSuccess) {
-            form.reset();
-        }
+        mutation.mutate(data, {
+            onSuccess: () => {
+                form.reset();
+                navigate('/');
+            }
+        })
     }
 
     console.log(form.formState.errors)
     return (
-        <div>
+        <div className="space-y-4 border border-rorder rounded-md p-4 bg-card-bg">
+            <h1 className="text-lg font-semibold">Create new hotel</h1>
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}
@@ -111,14 +115,15 @@ const CreateHotel = () => {
 
                         />
 
-
-                        <Button type="submit" className="w-full" >
-                            {
-                                mutation.isPaused ? <><Spinner />Creating</> : "Create"
-                            }
-
-                        </Button>
                     </div>
+                    <Button type="submit" className=" col-span-2 w-fit justify-self-end text-primary-foreground" >
+                        {
+                            mutation.isPaused ? <><Spinner />Creating</> : "Create"
+                        }
+
+                    </Button>
+
+
                 </form>
             </Form>
         </div>

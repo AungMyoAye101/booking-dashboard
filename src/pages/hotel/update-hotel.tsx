@@ -1,36 +1,54 @@
 
 import { FormCheckBox, FormInput, FormTextArea, FromSelectBox, } from "@/components/custom-form"
 import { Form } from "@/components/ui/form"
-import { useCreateHotel } from "@/hooks/use-hotel"
-import { hotelCreateSchema, type hotelCreateType } from "@/validations/hotel-schmea"
+import { useGetHotelById, useUpdateHotel } from "@/hooks/use-hotel"
+import { hotelCreateSchema, type hotelCreateType, } from "@/validations/hotel-schmea"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { AMENITIES } from "./components/form-field"
 import { Spinner } from "@/components/ui/spinner"
+import { useNavigate, useParams } from "react-router-dom"
+
 
 
 const UpdateHotel = () => {
+    const { hotelId } = useParams();
+
+    const { data: hotel, isSuccess } = useGetHotelById(hotelId!);
+
 
     const form = useForm<hotelCreateType>({
         resolver: zodResolver(hotelCreateSchema),
-        defaultValues: {
-            amenities: []
-        }
     })
 
-    const mutation = useCreateHotel();
-    const onSubmit = (data: hotelCreateType) => {
-        console.log(data)
-        mutation.mutate(data);
-        if (mutation.isSuccess) {
-            form.reset();
+    useEffect(() => {
+        if (isSuccess && hotel) {
+            // Reset the form with fetched data. Provide safe defaults where needed.
+            form.reset({
+                ...hotel,
+                amenities: hotel?.amenities ?? []
+            })
         }
+    }, [isSuccess, hotel, form])
+
+    const navigate = useNavigate()
+
+    const { mutate, isPending } = useUpdateHotel();
+
+    const onSubmit = (data: hotelCreateType) => {
+        mutate({ id: hotel?._id!, hotel: data }, {
+            onSuccess: () => {
+                navigate(`/hotel/${hotel?._id}`);
+                form.reset();
+            }
+        })
     }
 
-    console.log(form.formState.errors)
     return (
-        <div>
+        <div className="space-y-4 p-4 rounded-md border-2 border-border">
+            <h1 className="text-lg font-semibold ">Update hotel form</h1>
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}
@@ -113,13 +131,13 @@ const UpdateHotel = () => {
                         />
 
 
-                        <Button type="submit" className="w-full" >
-                            {
-                                mutation.isPaused ? <><Spinner />Creating</> : "Create"
-                            }
-
-                        </Button>
                     </div>
+                    <Button type="submit" className="col-span-2 justify-self-end w-fit" >
+                        {
+                            isPending ? <><Spinner />Updating...</> : "Update"
+                        }
+
+                    </Button>
                 </form>
             </Form>
         </div>
