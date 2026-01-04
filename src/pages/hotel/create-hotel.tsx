@@ -30,7 +30,6 @@ const CreateHotel = () => {
         })
     }
 
-    console.log(form.formState.errors)
     return (
         <div className="space-y-4 border border-rorder rounded-md p-4 bg-card-bg">
             <h1 className="text-lg font-semibold">Create new hotel</h1>

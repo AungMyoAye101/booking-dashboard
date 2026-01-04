@@ -1,8 +1,9 @@
 import { FormInput } from "@/components/custom-form"
 import { Button } from "@/components/ui/button"
+import { Form } from "@/components/ui/form"
 import { createRoomSchema, type createRoomType } from "@/validations/room-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 
 const createRoom = () => {
     const form = useForm<createRoomType>({
@@ -16,6 +17,8 @@ const createRoom = () => {
     return (
         <div>
             <Form {...form}>
+
+
                 <form onSubmit={form.handleSubmit(onSubmit)}
                     className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                 >
@@ -48,7 +51,9 @@ const createRoom = () => {
                     />
                     <Button type="submit">Create</Button>
                 </form>
+
             </Form>
+
         </div>
     )
 }

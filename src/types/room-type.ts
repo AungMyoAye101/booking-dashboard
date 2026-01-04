@@ -6,7 +6,7 @@ export type RoomType = {
     maxPeople: number,
     price: number,
     totalRooms: number,
-    hotelId: string,
+    hotelId: string | { name?: string, _id?: string },
     photo?: photoType
     createdAt: Date,
     updatedAt: Date,
