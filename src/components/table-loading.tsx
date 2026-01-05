@@ -1,8 +1,11 @@
 import { Skeleton } from "./ui/skeleton"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 
+type Props = {
+    column: number
+}
 
-const TableLoading = () => {
+const TableLoading = ({ column }: Props) => {
     return (
         <div className="border-2 rounded-md overflow-hidden">
 
@@ -10,7 +13,7 @@ const TableLoading = () => {
                 <TableHeader>
                     <TableRow className="border">
                         {
-                            Array(5).fill(null).map((_, i) => (
+                            Array(column).fill(null).map((_, i) => (
                                 <TableHead key={i} className="border">
                                     <Skeleton className="h-6 w-30" />
                                 </TableHead>
@@ -26,7 +29,7 @@ const TableLoading = () => {
                             <TableRow key={idx}>
 
                                 {
-                                    Array(5).fill(null).map((_, i) => (
+                                    Array(column).fill(null).map((_, i) => (
                                         <TableCell key={(i)} className="border">
                                             <Skeleton className="h-6 w-30" />
                                         </TableCell>

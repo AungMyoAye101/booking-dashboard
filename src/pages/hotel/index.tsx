@@ -24,9 +24,7 @@ const Hotel = () => {
     const [type, setType] = useState<hotelTypes | undefined>(undefined)
 
     const { data, isLoading } = useGetALlHotel({ page, search, type })
-    if (isLoading) {
-        return <TableLoading />
-    }
+
     const onPageChange = (page: number) => {
         if (page < 1) return;
         setPage(page)
@@ -77,8 +75,13 @@ const Hotel = () => {
                     Search
                 </Button>
             </form>
-            <DataTable columns={hotelColumn} data={data?.hotels!} />
-            <TablePagination meta={data?.meta!} onPageChange={onPageChange} />
+            {
+                isLoading ? <TableLoading column={8} /> : <>
+                    <DataTable columns={hotelColumn} data={data?.hotels!} />
+                    <TablePagination meta={data?.meta!} onPageChange={onPageChange} />
+                </>
+            }
+
         </div>
     )
 }

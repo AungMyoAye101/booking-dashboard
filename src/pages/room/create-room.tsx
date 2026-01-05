@@ -1,4 +1,4 @@
-import { FormCheckBox, FormInput, FormRadiosGroup } from "@/components/custom-form"
+import { FormInput, FormRadiosGroup } from "@/components/custom-form"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { Spinner } from "@/components/ui/spinner"

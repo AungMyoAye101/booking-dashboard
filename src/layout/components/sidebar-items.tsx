@@ -1,34 +1,48 @@
 
-import { BedDoubleIcon, BookMarked, CircleDollarSign, Edit, Home, Hotel, User } from "lucide-react";
+import { BedDoubleIcon, BookMarked, CircleDollarSign, Edit, Home, Hotel, User, type LucideIcon } from "lucide-react";
 
-export const sideBarData = {
-    signle: [
-        {
-            title: "Dashboard",
-            url: "/",
-            icon: Home,
-        },
-        {
-            title: "User",
-            url: '/user',
-            icon: User,
+export type SideBarsLinkTypes = {
+    type: "single" | "group",
+    title: string,
+    url: string,
+    icon: LucideIcon,
+    items?: {
+        title: string,
+        url: string,
+        icon: LucideIcon,
+    }[]
+}
 
-        },
-        {
-            title: "Booking",
-            url: '/booking',
-            icon: BookMarked,
+export const sidebarsItems: SideBarsLinkTypes[] = [
+    {
+        type: "single",
+        title: "Dashboard",
+        url: "/",
+        icon: Home,
+    },
+    {
+        type: "single",
+        title: "User",
+        url: '/user',
+        icon: User,
 
-        },
-        {
-            title: "Payment",
-            url: '/payment',
-            icon: CircleDollarSign,
+    },
+    {
+        type: "single",
+        title: "Booking",
+        url: '/booking',
+        icon: BookMarked,
 
-        },
-    ],
+    },
+    {
+        type: "single",
+        title: "Payment",
+        url: '/payment',
+        icon: CircleDollarSign,
 
-    group: [{
+    },
+    {
+        type: "group",
         title: "Hotel",
         url: '/hotel',
         icon: Hotel,
@@ -40,19 +54,12 @@ export const sideBarData = {
             }
         ]
     },
-
     {
+        type: "single",
         title: "Room",
         url: '/room',
         icon: BedDoubleIcon,
-        items: [
-            {
-                title: "Create",
-                url: "/room/create",
-                icon: Edit,
-            }
-        ]
-    },
-    ]
+    }
 
-}
+]
+

@@ -4,9 +4,10 @@ import { toast } from "sonner"
 
 export const useGetALlRoom = (query: any) => {
     return useQuery({
-        queryKey: ['room', query],
+        queryKey: ['room', { query }],
         queryFn: () => getAllRooms(query),
-        placeholderData: keepPreviousData
+        placeholderData: keepPreviousData,
+        staleTime: 30_000,
     })
 }
 

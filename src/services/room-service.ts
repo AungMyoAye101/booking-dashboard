@@ -13,6 +13,7 @@ type createRoom = {
 }
 
 export const getAllRooms = async (query: ParamsType) => {
+    console.log(query)
     const { data } = await
         api.get<ApiResponse<RoomWithMeta>>('/room',
             { params: query });

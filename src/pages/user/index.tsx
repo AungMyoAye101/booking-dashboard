@@ -84,7 +84,7 @@ const User = () => {
             </form>
             {
                 isLoading ?
-                    <TableLoading /> :
+                    <TableLoading column={7} /> :
                     <>
                         <DataTable
                             columns={column}
