@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/auth-store';
 const Auth = () => {
 
     const setAccessToken = useAuthStore(s => s.setAccessToken)
+    const setUser = useAuthStore(s => s.setAuth)
     const clearAuth = useAuthStore(s => s.clearAuth)
     const { data, isSuccess, isError, isLoading } = useRefresh();
 
@@ -14,6 +15,7 @@ const Auth = () => {
     }
     if (isSuccess) {
         setAccessToken(data.token!)
+        setUser(data.user)
     }
     if (isError) {
         clearAuth();

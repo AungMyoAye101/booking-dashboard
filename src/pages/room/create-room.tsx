@@ -1,4 +1,4 @@
-import { FormInput } from "@/components/custom-form"
+import { FormCheckBox, FormInput, FormRadiosGroup } from "@/components/custom-form"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { Spinner } from "@/components/ui/spinner"
@@ -7,6 +7,31 @@ import { createRoomSchema, type createRoomType } from "@/validations/room-schema
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
+
+
+const BED_TYPES = [
+    {
+        value: "king",
+        label: "King Size Bed"
+    },
+    {
+        value: "queen",
+        label: "Queen Size Bed"
+    },
+    {
+        value: "full",
+        label: "Full Size Bed",
+    },
+    {
+        value: "twin",
+        label: "Twin Bed",
+    },
+    {
+        value: "single",
+        label: "Single Bed"
+    },
+
+]
 
 const createRoom = () => {
     const { hotelId } = useParams()
@@ -25,13 +50,16 @@ const createRoom = () => {
 
 
     }
+
     return (
-        <div>
+        <div className="px-4 py-6 rounded-lg bg-card border-2 border-border space-y-4">
+
+            <h1 className="text-lg font-semibold" >Create rooms </h1>
             <Form {...form}>
 
 
                 <form onSubmit={form.handleSubmit(onSubmit)}
-                    className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                    className="grid grid-cols-1 sm:grid-cols-2  gap-4"
                 >
                     <FormInput
                         control={form.control}
@@ -60,14 +88,31 @@ const createRoom = () => {
                         type="number"
                         placeholder="total rooms"
                     />
-                    <Button
-                        type="submit"
-                        disabled={isPending}
-                    >
-                        {
-                            isPending ? <><Spinner />Createing</> : "Create"
-                        }
-                    </Button>
+
+                    <div className="sm:col-span-2 space-y-4 ">
+                        <FormRadiosGroup
+                            control={form.control}
+                            name="bedTypes"
+                            label="Choose room bed type"
+                            options={BED_TYPES}
+                        />
+                        <div className="flex justify-end">
+
+
+                            <Button
+                                type="submit"
+                                disabled={isPending}
+                                className=" "
+                            >
+                                {
+                                    isPending ? <><Spinner />Createing</> : "Create"
+                                }
+                            </Button>
+                        </div>
+                    </div>
+
+
+
                 </form>
 
             </Form>

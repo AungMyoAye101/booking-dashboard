@@ -5,6 +5,9 @@ import { Textarea } from "../ui/textarea"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "../ui/label"
 import { Checkbox } from "../ui/checkbox"
+import { RadioGroup } from "../ui/radio-group"
+import { RadioGroupItem } from "../ui/radio-group"
+
 
 
 
@@ -217,5 +220,55 @@ export function FormCheckBox<T extends FieldValues>({
         />
 
 
+    )
+}
+
+interface FormRadiosProps<T extends FieldValues> {
+    control: Control<T>,
+    name: Path<T>,
+    label?: string,
+    options: Options[]
+}
+
+export function FormRadiosGroup<T extends FieldValues>({
+    control,
+    name,
+    label,
+    options
+}: FormRadiosProps<T>) {
+    return (
+
+        <FormField
+            control={control}
+            name={name}
+            render={({ field }) => (
+                <FormItem>
+                    <FormLabel>
+                        {label}
+                    </FormLabel>
+                    <FormControl>
+                        <RadioGroup
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            className="flex gap-4 items-center flex-wrap"
+
+                        >
+                            {options.map((bed) => (
+                                <FormItem
+                                    key={bed.value}
+                                    className="flex items-center bg-input p-2 rounded-md "
+                                >
+                                    <FormControl>
+                                        <RadioGroupItem value={bed.value} className="border-border" />
+                                    </FormControl>
+                                    <FormLabel className="font-normal cursor-pointer">{bed.label}</FormLabel>
+                                </FormItem>
+                            ))}
+                        </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+            )}
+        />
     )
 }
