@@ -1,5 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
+import { flexRender, getCoreRowModel, getPaginationRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
 
 
 interface DataTableProps<TData, TValue> {
@@ -16,8 +16,11 @@ export function DataTable<TData, TValue>(
     const table = useReactTable({
         data,
         columns,
+        state: {
+
+        },
         getCoreRowModel: getCoreRowModel(),
-        manualPagination: true,
+        getPaginationRowModel: getPaginationRowModel()
     })
 
     return (

@@ -1,4 +1,3 @@
-import type { hotelTypes } from "@/types/hotel-type"
 import type { RoomType } from "@/types/room-type"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Edit, Eye } from "lucide-react"
@@ -7,6 +6,15 @@ import { Link } from "react-router-dom"
 
 
 export const RoomColumn: ColumnDef<RoomType>[] = [
+    {
+        id: 'no',
+        header: "No.",
+        cell: ({ row, table }) => {
+
+            const { pageIndex, pageSize } = table.getState().pagination;
+            return pageIndex * pageSize + row.index + 1
+        }
+    },
     {
         accessorKey: 'name',
         header: "Name"

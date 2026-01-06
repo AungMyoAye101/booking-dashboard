@@ -2,44 +2,23 @@ import { FormInput, FormRadiosGroup } from "@/components/custom-form"
 import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { Spinner } from "@/components/ui/spinner"
-import { useCreateRoom } from "@/hooks/use-room"
+import { useCreateRoom, useUpdateRoom } from "@/hooks/use-room"
 import { createRoomSchema, type createRoomType } from "@/validations/room-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { useNavigate, useParams } from "react-router-dom"
+import { BED_TYPES } from "./create-room"
 
 
-export const BED_TYPES = [
-    {
-        value: "king",
-        label: "King Size Bed"
-    },
-    {
-        value: "queen",
-        label: "Queen Size Bed"
-    },
-    {
-        value: "full",
-        label: "Full Size Bed",
-    },
-    {
-        value: "twin",
-        label: "Twin Bed",
-    },
-    {
-        value: "single",
-        label: "Single Bed"
-    },
 
-]
 
-const createRoom = () => {
+const UpdateRoom = () => {
     const { hotelId } = useParams()
     const form = useForm<createRoomType>({
         resolver: zodResolver(createRoomSchema)
     })
     const navigate = useNavigate()
-    const { mutate, isPending } = useCreateRoom()
+    const { mutate, isPending } = useUpdateRoom()
     const onSubmit = (room: createRoomType) => {
         mutate({ hotelId: hotelId!, room }, {
             onSuccess: () => {
@@ -121,4 +100,6 @@ const createRoom = () => {
     )
 }
 
-export default createRoom
+
+
+export default UpdateRoom

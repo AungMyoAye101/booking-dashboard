@@ -32,7 +32,7 @@ const HotelAction = ({ hotelId }: { hotelId: string }) => {
         variant="outline"
       >
         <Link
-          to={`/room/${hotelId}/create`}
+          to={`/room/create/${hotelId}`}
           className="flex gap-1.5 items-center"
         >
           <PlusCircle /> Add rooms

@@ -5,8 +5,6 @@ import { useState, type FormEvent } from "react"
 import TablePagination from "@/components/table-pagination"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import type { RoomType } from "@/types/room-type"
-
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ArrowDownUp } from "lucide-react"
 import TableLoading from "@/components/table-loading"
