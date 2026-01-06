@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from 'sonner'
 import Auth from './components/Auth.tsx'
 import { BrowserRouter } from 'react-router-dom'
+import { ErrorBoundary } from './components/error-boundary.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,15 +27,17 @@ declare global {
 window.__TANSTACK_QUERY_CLIENT__ = queryClient;
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
+          <ErrorBoundary>
+            <App />
+            <Auth />
+            <Toaster />
+          </ErrorBoundary>
+        </ThemeProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
 
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <App />
-          <Auth />
-          <Toaster />
-        </BrowserRouter>
-      </QueryClientProvider>
-    </ThemeProvider>
-  </StrictMode>,
+  </StrictMode >,
 )
