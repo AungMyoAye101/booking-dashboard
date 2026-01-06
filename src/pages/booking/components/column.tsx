@@ -1,6 +1,7 @@
+import { priceFormater } from "@/lib/helper";
 import type { BookingType } from "@/types/booking-type"
 import type { ColumnDef } from "@tanstack/react-table"
-import { Edit, View } from "lucide-react"
+import { Edit, Eye } from "lucide-react"
 import { Link } from "react-router-dom";
 
 
@@ -32,11 +33,24 @@ export const bookingColumn: ColumnDef<BookingType>[] = [
     },
     {
         accessorKey: 'totalPrice',
-        header: "Price"
+        header: "Price",
+        cell: ({ row }) => priceFormater(row.original.totalPrice)
     },
     {
         accessorKey: 'status',
-        header: "Status"
+        header: "Status",
+        cell: ({ row }) => {
+            const status = row.original.status;
+            const statusClass: Record<string, string> = {
+                PENDING: "bg-blue-500  dark:bg-blue-700",
+                CONFIRMED: "bg-green-500  dark:bg-green-700",
+                CANCELLED: "bg-destructive",
+                COMPLETED: "bg-mute",
+            };
+            const color = statusClass[status] ?? "text-mute";
+            return <span className={`${color} text-xs px-2 py-1 rounded-md text-white `}>{status}</span>
+        }
+
     },
     {
         accessorKey: 'checkIn',
@@ -58,14 +72,15 @@ export const bookingColumn: ColumnDef<BookingType>[] = [
         header: "Actions",
         cell: ({ row }) => {
             const bookingId = row.original._id;
-            return <div className="flex items-center gap-1">
+            return <div className="flex items-center gap-1 text-sm text-accent-foreground/70">
+                <Link to={`/booking/update/${bookingId}`}>
+
+                    <Eye />
+                </Link>
                 <Link to={`/booking/update/${bookingId}`}>
                     <Edit />
                 </Link>
-                <Link to={`/booking/update/${bookingId}`}>
 
-                    <View />
-                </Link>
 
             </div>
         }
