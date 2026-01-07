@@ -1,11 +1,18 @@
+import type { status } from "@/pages/booking";
 import { getAllBookings } from "@/services/booking-service";
-import type { ParamsType } from "@/types";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+export type bookingQuerytype = {
+    sort?: "asc" | 'desc',
+    status?: status | null,
+    page?: number,
+    limit?: number
 
-export const useGetAllBooking = (query: ParamsType) => {
+}
+export const useGetAllBooking = (query: bookingQuerytype) => {
     return useQuery({
         queryKey: ['bookings', query],
         queryFn: () => getAllBookings(query),
-        placeholderData: keepPreviousData
+        placeholderData: keepPreviousData,
+        staleTime: 3000
     })
 }

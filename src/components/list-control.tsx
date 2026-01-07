@@ -3,7 +3,7 @@ import { Input } from "./ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Button } from "./ui/button";
 
-type sortDirection = 'asc' | 'desc';
+export type sortDirection = 'asc' | 'desc';
 type filterOptions = {
     search: string,
     sort: sortDirection
@@ -56,7 +56,7 @@ export const ListToolBar = ({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search..."
-                className="w-64"
+
             />
 
             <Select value={sort} onValueChange={(v) => setSort(v as sortDirection)}>

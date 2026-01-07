@@ -25,7 +25,7 @@ const TablePagination: FC<PaginationType> = ({ meta, onPageChange }) => {
                 <PaginationItem>
                     <PaginationPrevious
                         aria-disabled={!meta.hasPrev}
-                        onClick={() => onPageChange(meta.page - 1)}
+                        onClick={() => meta.hasPrev && onPageChange(meta.page - 1)}
                         isActive={meta.hasPrev}
                         className={`${meta.hasPrev && "bg-primary-violet text-slate-100"}`}
                     />
@@ -48,7 +48,7 @@ const TablePagination: FC<PaginationType> = ({ meta, onPageChange }) => {
                 <PaginationItem>
                     <PaginationNext
                         aria-disabled={!meta.hasNext}
-                        onClick={() => onPageChange(meta.page + 1)}
+                        onClick={() => meta.hasNext && onPageChange(meta.page + 1)}
                         isActive={meta.hasNext}
                         className={`${meta.hasNext && "bg-primary-violet text-slate-100"}`}
                     />
