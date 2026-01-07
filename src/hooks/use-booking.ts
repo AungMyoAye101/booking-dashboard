@@ -5,7 +5,9 @@ export type bookingQuerytype = {
     sort?: "asc" | 'desc',
     status?: status | null,
     page?: number,
-    limit?: number
+    limit?: number,
+    checkIn?: Date | undefined,
+    checkOut?: Date | undefined,
 
 }
 export const useGetAllBooking = (query: bookingQuerytype) => {

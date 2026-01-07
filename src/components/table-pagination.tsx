@@ -16,7 +16,7 @@ type PaginationType = {
 
 const TablePagination: FC<PaginationType> = ({ meta, onPageChange }) => {
 
-    const totalPages = [...Array(meta.totalPages).keys()].map(n => n + 1);
+    const totalPages = [...Array(meta.totalPages).keys()].map(n => n + 1) || [];
 
 
     return (
