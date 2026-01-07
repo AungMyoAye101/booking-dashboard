@@ -3,14 +3,21 @@ import { Spinner } from "@/components/ui/spinner"
 import { bookingColumn } from "./components/column"
 import { useGetAllBooking } from "@/hooks/use-booking"
 import TablePagination from "@/components/table-pagination"
+import { ListToolBar, useListMeta } from "@/components/list-control"
 
 
 const Booking = () => {
     const { data, isLoading } = useGetAllBooking({ page: 1 })
     const onPageChange = () => { }
-    console.log(data)
+    const { search, sort, pageIndex, setPageIndex, applyFilters } = useListMeta()
     return (
         <div>
+            <ListToolBar
+                defaultSearch={search}
+                defaultSort={sort}
+                onSubmit={applyFilters}
+
+            />
             {
                 isLoading ? <Spinner /> : <>
                     <DataTable
