@@ -1,5 +1,7 @@
 import React, { type ErrorInfo, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import ErrorPage from "./error-page";
+
 
 interface ErrorBoundaryProps {
     children: ReactNode;
@@ -20,16 +22,14 @@ export class ErrorBoundary extends React.Component<
         this.state = { hasError: false };
     }
 
-    // 🔥 Catch render errors
     static getDerivedStateFromError(error: Error): ErrorBoundaryState {
         return { hasError: true, error };
     }
 
-    // 🔥 Side effects (logging)
+
     componentDidCatch(error: Error, info: ErrorInfo) {
         console.error("ErrorBoundary caught:", error, info);
 
-        // Send to Sentry / backend here
     }
 
     reset = () => {
@@ -45,16 +45,7 @@ export class ErrorBoundary extends React.Component<
             }
 
             return (
-                <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
-                    <h2 className="text-lg font-semibold">
-                        Something went wrong
-                    </h2>
-                    <p className="text-sm text-muted-foreground">
-                        {error?.message}
-                    </p>
-
-                    <Button onClick={this.reset}>Try again</Button>
-                </div>
+                <ErrorPage message={error?.message} reset={() => this.reset} />
             );
         }
 
