@@ -56,7 +56,9 @@ export function DataTable<TData, TValue>(
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
-                                    className={`${i % 2 === 0 ? "bg-background text-foreground" : "bg-muted text-muted-foreground"}  border-b-2 `}
+                                    className={`${i % 2 === 0 ?
+                                        "bg-background text-foreground" :
+                                        "bg-muted text-muted-foreground"}  border-b-2 `}
                                 >
                                     {
                                         row.getVisibleCells().map(cell => (
