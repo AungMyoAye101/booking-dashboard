@@ -2,7 +2,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { priceFormater } from "@/lib/helper";
 import type { PaymentType } from "@/types/payment-type";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Edit, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import userImage from '@/assets/man.png';
 
@@ -63,17 +63,11 @@ export const paymentColumn: ColumnDef<PaymentType>[] = [
         header: "Actions",
         cell: ({ row }) => {
             const paymentId = row.original._id;
-            return <div className="flex items-center gap-1 text-sm text-accent-foreground/70">
-                <Link to={`/booking/update/${paymentId}`}>
+            return <Link to={`/payment/${paymentId}`} className=" text-sm text-accent-foreground/70">
 
-                    <Eye />
-                </Link>
-                <Link to={`/booking/update/${paymentId}`}>
-                    <Edit />
-                </Link>
+                <Eye />
+            </Link>
 
-
-            </div>
         }
     }
 

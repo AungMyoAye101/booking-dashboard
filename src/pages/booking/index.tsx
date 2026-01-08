@@ -38,7 +38,7 @@ const statusItems = [
 
 ]
 
-const sortingValues = [
+export const sortingValues = [
     {
 
         value: "asc",
