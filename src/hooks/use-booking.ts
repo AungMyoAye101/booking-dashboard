@@ -15,6 +15,6 @@ export const useGetAllBooking = (query: bookingQuerytype) => {
         queryKey: ['bookings', query],
         queryFn: () => getAllBookings(query),
         placeholderData: keepPreviousData,
-        staleTime: 3000
+
     })
 }

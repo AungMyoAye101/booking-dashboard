@@ -10,13 +10,15 @@ import {
 } from "@/components/ui/pagination"
 
 type PaginationType = {
-    meta: meta,
+    meta?: meta,
     onPageChange: (page: number) => void
 }
 
 const TablePagination: FC<PaginationType> = ({ meta, onPageChange }) => {
 
-    const totalPages = [...Array(meta.totalPages).keys()].map(n => n + 1) || [];
+    if (!meta) return null;
+
+    const totalPages = meta.totalPages > 0 ? [...Array(meta.totalPages).keys()].map(n => n + 1) : [];
 
 
     return (

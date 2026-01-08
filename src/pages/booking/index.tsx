@@ -14,9 +14,10 @@ import type { DateRange } from "react-day-picker"
 
 const statusItems = [
     {
-        value: "all",
-        label: "All",
+        value: "All",
+        label: "All"
     },
+
     {
         value: "PENDING",
         label: "Pending",
@@ -49,12 +50,12 @@ const sortingValues = [
     },
 ]
 
-export type status = "PENDING" | "CONFIRMED" | "CANCELLED" | "EXPIRED";
+export type status = "PENDING" | "CONFIRMED" | "CANCELLED" | "EXPIRED" | "All";
 
 const Booking = () => {
     const [page, setPage] = useState(1);
     const [sort, setSort] = useState<sortDirection>('asc');
-    const [status, setStatus] = useState<status | null>(null)
+    const [status, setStatus] = useState<status | undefined>(undefined)
     const [date, setDate] = useState<DateRange | undefined>({
         from: undefined,
         to: undefined
@@ -63,7 +64,13 @@ const Booking = () => {
         from: undefined,
         to: undefined
     })
-    const { data, isLoading } = useGetAllBooking({ page, status, sort, checkIn: appliedDate.from, checkOut: appliedDate.to })
+    const { data, isLoading } = useGetAllBooking({
+        page,
+        status,
+        sort,
+        checkIn: appliedDate.from && new Date(appliedDate.from),
+        checkOut: appliedDate.to && new Date(appliedDate.to)
+    })
     const onPageChange = (page: number) => {
         setPage(page)
     }
@@ -73,15 +80,21 @@ const Booking = () => {
         const form = new FormData(e.currentTarget);
         const currStatus = form.get('status') as status;
         const sorting = form.get('sort') as sortDirection;
-        setSort(sorting);
-        setStatus(currStatus)
+
+        if (currStatus) {
+            setStatus(currStatus === "All" ? undefined : currStatus)
+        }
+        console.log(sorting)
+        if (sorting) {
+            setSort(sorting)
+        }
         if (date) {
             setAppliedDate(date)
         }
 
         setPage(1)
     }
-    console.log(date)
+
     return (
         <div className="space-y-6">
             <form onSubmit={onSubmit} className="flex items-center gap-4">

@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 type SelectBoxFormProps = {
     name: string,
     placeholder: string,
+    defaultValue?: any
     items: {
         label: string,
         value: string
@@ -13,9 +14,10 @@ type SelectBoxFormProps = {
 
 const SelectBoxForm = (props: SelectBoxFormProps) => {
     return (
-        <Select name={props.name}>
+        <Select name={props.name} defaultValue={props.defaultValue}>
             <SelectTrigger className={cn("w-45 bg-secondary text-secondary-foreground border border-border", props.className)}>
                 <SelectValue placeholder={props.placeholder} />
+
             </SelectTrigger>
             <SelectContent>
                 {
