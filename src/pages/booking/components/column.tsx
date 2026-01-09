@@ -3,6 +3,7 @@ import type { BookingType } from "@/types/booking-type"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Edit, Eye } from "lucide-react"
 import { Link } from "react-router-dom";
+import UpdateBooking from "./update-booking";
 
 
 
@@ -44,6 +45,7 @@ export const bookingColumn: ColumnDef<BookingType>[] = [
             const statusClass: Record<string, string> = {
                 PENDING: "bg-blue-500  dark:bg-blue-700",
                 CONFIRMED: "bg-green-500  dark:bg-green-700",
+                SATYED: "bg-primary ",
                 CANCELLED: "bg-destructive",
                 COMPLETED: "bg-mute",
             };
@@ -73,14 +75,11 @@ export const bookingColumn: ColumnDef<BookingType>[] = [
         cell: ({ row }) => {
             const bookingId = row.original._id;
             return <div className="flex items-center gap-1 text-sm text-accent-foreground/70">
-                <Link to={`/booking/update/${bookingId}`}>
+                <Link to={`/booking/${bookingId}`}>
 
                     <Eye />
                 </Link>
-                <Link to={`/booking/update/${bookingId}`}>
-                    <Edit />
-                </Link>
-
+                <UpdateBooking id={bookingId} selected={row.original.status!} />
 
             </div>
         }

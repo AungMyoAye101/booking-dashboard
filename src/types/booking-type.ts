@@ -5,7 +5,7 @@ export type BookingType = {
     hotelId: string,
     checkIn: Date,
     checkOut: Date,
-    status: "PENDING" | "CONFIRMED" | "CANCELLED" | "EXPIRED",
+    status: "PENDING" | "CONFIRMED" | "STAYED" | "CANCELLED" | "EXPIRED",
     quantity: number,
     totalPrice: number
 }

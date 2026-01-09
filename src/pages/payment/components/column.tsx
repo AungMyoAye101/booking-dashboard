@@ -2,14 +2,18 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { priceFormater } from "@/lib/helper";
 import type { PaymentType } from "@/types/payment-type";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Eye } from "lucide-react";
-import { Link } from "react-router-dom";
 import userImage from '@/assets/man.png';
+import PaymentDetail from "./payment-detail";
 
 export const paymentColumn: ColumnDef<PaymentType>[] = [
     {
-        header: "Booking Id",
-        accessorKey: 'bookingId'
+        id: 'no',
+        header: "No.",
+        cell: ({ row, table }) => {
+
+            const { pageIndex, pageSize } = table.getState().pagination;
+            return pageIndex * pageSize + row.index + 1
+        }
     },
     {
         header: "User",
@@ -20,7 +24,7 @@ export const paymentColumn: ColumnDef<PaymentType>[] = [
 
             return <div className="flex gap-1 items-center">
                 <Avatar>
-                    <AvatarImage src={userImage} alt="user icon" className=" bg-primary" />
+                    <AvatarImage src={userImage} alt="user icon" className=" bg-primary p-0.5" sizes="sm" />
                 </Avatar>
                 {name}
             </div>
@@ -63,10 +67,7 @@ export const paymentColumn: ColumnDef<PaymentType>[] = [
         header: "Actions",
         cell: ({ row }) => {
             const paymentId = row.original._id;
-            return <Link to={`/payment/${paymentId}`} className=" text-sm text-accent-foreground/70">
-
-                <Eye />
-            </Link>
+            return <PaymentDetail id={paymentId} />
 
         }
     }

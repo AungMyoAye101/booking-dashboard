@@ -27,6 +27,10 @@ const statusItems = [
         label: "Confirmed",
     },
     {
+        value: "STAYED",
+        label: "Stayed"
+    },
+    {
         value: "CANCELLED",
         label: "Cancelled",
     },
@@ -50,7 +54,7 @@ export const sortingValues = [
     },
 ]
 
-export type status = "PENDING" | "CONFIRMED" | "CANCELLED" | "EXPIRED" | "All";
+export type status = "PENDING" | "CONFIRMED" | "STAYED" | "CANCELLED" | "EXPIRED" | "All";
 
 const Booking = () => {
     const [page, setPage] = useState(1);

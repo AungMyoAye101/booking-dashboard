@@ -1,4 +1,5 @@
 import { api } from "@/config/axios-config";
+import type { status } from "@/pages/booking";
 import type { ApiResponse, meta, ParamsType } from "@/types";
 import type { BookingType } from "@/types/booking-type";
 
@@ -13,7 +14,19 @@ export const getAllBookings = async (query: ParamsType) => {
     if (!data.success) {
         throw new Error("Failed to fetch bookings.")
     }
-    console.log(data)
+    return data.result;
+
+}
+
+type updateBookingType = {
+    id: string,
+    status: status
+}
+export const updateBooking = async ({ id, status }: updateBookingType) => {
+    const { data } = await api.put<ApiResponse<BookingType>>(`/booking/update/${id}`, { status })
+    if (!data.success) {
+        throw new Error("Failed to update booking.")
+    }
     return data.result;
 
 }

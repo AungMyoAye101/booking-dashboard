@@ -24,7 +24,7 @@ const BookingPage = lazy(() => import("@/pages/booking"))
 
 //payment
 const PaymentPage = lazy(() => import("@/pages/payment"));
-const PaymentDetails = lazy(() => import("@/pages/payment/payment-detail"))
+
 
 export const routes = [
 
@@ -99,7 +99,6 @@ export const routes = [
     {
         breadCrumb: "/payment/detail",
         path: "/payment/:paymentId",
-        element: <PaymentDetails />
     },
 
 ]
