@@ -8,7 +8,8 @@ import SelectBoxForm from "@/components/select-box-form";
 import { sortingValues } from "../booking";
 import { Button } from "@/components/ui/button";
 import type { sortDirection } from "@/components/list-control";
-import type { PaymentType } from "@/types/payment-type";
+import type { paymentStatus } from "@/types/payment-type";
+import type { paymentQueryType } from "@/services/payment-service";
 
 const statusBox = [
     {
@@ -20,24 +21,21 @@ const statusBox = [
         value: "PENDING"
     },
     {
-        label: "Confirmed",
-        value: "CONFIRMED",
+        label: "Paid",
+        value: "PAID",
     },
     {
-        label: "Cancelled",
-        value: "CANCELLED",
+        label: "Failed",
+        value: "FAILED",
     },
-    {
-        label: "Expired",
-        value: "EXPIRED"
-    },
+
 
 ]
 
 const Payment = () => {
-    const [query, setQuery] = useState({
+    const [query, setQuery] = useState<paymentQueryType>({
         page: 1,
-        sort: undefined,
+        sort: 'asc',
         status: undefined,
         limit: 10
     })
@@ -51,15 +49,19 @@ const Payment = () => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
 
-        const sort = form.get("sort") as sortDirection;
-        const status = form.get("status") as Partial<PaymentType>;
-        if (sort) {
-            setQuery({ ...query, sort })
+        const sorting = form.get("sort") as sortDirection;
+        const status = form.get("status") as paymentStatus;
+        if (sorting) {
+            setQuery(pre => ({ ...pre, sort: sorting, page: 1 }))
+
         }
         if (status) {
-            setQuery({ ...query, status })
+            setQuery(pre => ({ ...pre, status, page: 1 }))
         }
+
     }
+
+
     return (
         <div className="space-y-4">
             <form onSubmit={onSubmit} className="flex items-center gap-4 flex-wrap">

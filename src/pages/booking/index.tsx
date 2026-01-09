@@ -84,7 +84,6 @@ const Booking = () => {
         if (currStatus) {
             setStatus(currStatus === "All" ? undefined : currStatus)
         }
-        console.log(sorting)
         if (sorting) {
             setSort(sorting)
         }

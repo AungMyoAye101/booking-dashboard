@@ -8,3 +8,5 @@ export type PaymentType = {
     paidAt: Date
 }
 
+export type paymentStatus = "PENDING" | "PAID" | "FAILED";
+
