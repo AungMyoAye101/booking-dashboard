@@ -26,3 +26,12 @@ export const getALlPayment = async (query: paymentQueryType) => {
     return data.result;
 
 }
+
+export const getPaymentById = async (id: string) => {
+    const { data } = await api.get<ApiResponse<PaymentType>>(`/payment/${id}`);
+    if (!data.success) {
+        throw new Error("Failed to get payment")
+    }
+
+    return data.result;
+}
