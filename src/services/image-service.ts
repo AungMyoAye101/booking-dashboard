@@ -7,7 +7,7 @@ type imageReturnType = {
     hotel: hotelType
 }
 
-type imageUploadType = {
+export type imageUploadType = {
     id: string,
     image: File
 }

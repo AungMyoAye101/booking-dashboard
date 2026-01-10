@@ -9,9 +9,30 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Eye } from "lucide-react"
+import { Eye, Image, Upload } from "lucide-react"
+import type { RoomType } from "@/types/room-type"
+import img from "@/assets/hotel-hero.png"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { priceFormater } from "@/lib/helper"
+import { useState, type FormEvent } from "react"
+import { useRoomImageUpload } from "@/hooks/use-image"
+import { Spinner } from "@/components/ui/spinner"
 
-const RoomDetails = () => {
+
+const RoomDetails = ({ room }: { room: RoomType }) => {
+    const [preview, setPreview] = useState('')
+    const onFileChange = (file: File) => {
+        const url = URL.createObjectURL(file);
+        setPreview(url)
+    }
+    const { mutate, isPending } = useRoomImageUpload()
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+        const image = form.get('image') as File;
+        mutate({ id: room._id, image })
+
+    }
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -21,26 +42,97 @@ const RoomDetails = () => {
                 ><Eye /></Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle>
-                    RoomTiatle
-                </DialogTitle>
+                <DialogHeader>
+
+                    <DialogTitle>
+                        Room Detail
+                    </DialogTitle>
+                    <DialogDescription>
+                        <div className="grid grid-cols-2 gap-4 mt-4">
+                            <AspectRatio ratio={16 / 9} className="rounded-lg overflow-hidden border-2 " >
+                                {
+                                    img ? <form
+                                        onSubmit={handleSubmit}
+                                        id="image-form"
+                                        className="w-full  h-full flex justify-center items-center bg-input text-foreground/50 cursor-pointer">
+                                        <label
+                                            htmlFor="room-image"
+                                        >
+                                            {
+                                                preview ? <img src={preview} alt="Room image" /> :
+
+                                                    <div className="flex flex-col items-center gap-1">
+                                                        <Image />
+                                                        <span className="text-sm">
+                                                            Upload a image
+                                                        </span>
+
+                                                    </div>
+
+                                            }
+
+                                        </label>
+
+                                        <input
+                                            name="image"
+                                            id="room-image"
+                                            className="hidden"
+                                            type="file"
+                                            accept="image/*"
+
+                                            onChange={(e) => {
+                                                const file = e.target?.files?.[0];
+                                                if (file) onFileChange(file)
+                                            }}
+                                        />
+                                    </form> :
+                                        <img src={img} alt="Room image" />
+                                }
+
+                            </AspectRatio>
+
+                            <div className="space-y-2">
+                                <h1>name : <strong>
+                                    {room.name}
+                                </strong>
+
+
+                                </h1>
+                                <p>price : <strong>
+                                    {priceFormater(room.price)}
+                                </strong></p>
+                                <p>max people :<strong>
+                                    {room.maxPeople}
+                                </strong> </p>
+                                <p> total room :<strong>
+                                    {room.totalRooms}
+                                </strong> </p>
+                                <p>bed type : <strong>
+                                    {room.bedTypes}
+                                </strong></p>
+                            </div>
+                        </div>
+                    </DialogDescription>
+
+                </DialogHeader>
 
                 <DialogFooter>
-                    <DialogClose>
-                        <Button variant={'secondary'}>Cancel</Button>
+                    <DialogClose asChild>
+                        <Button variant='outline' size={'sm'}  >Cancel</Button>
                     </DialogClose>
-                    <Button
-                    // disabled={isPending}
-                    // onClick={onSubmit}
-                    // form="booking-update">
-                    // {
-                    //     isPending && <Spinner />
-                    // }
+                    <Button size={'sm'}
+                        disabled={isPending}
+                        type="submit"
+                        form="image-form"
                     >
-                        Save changes</Button>
+                        {
+                            isPending ? <> <Spinner />Uploading..</> : <><Upload />Upload image </>
+                        }
+
+                    </Button>
                 </DialogFooter>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     )
 }
 

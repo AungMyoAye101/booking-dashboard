@@ -5,7 +5,7 @@ import { toast } from "sonner"
 
 export const useGetALlRoom = (query: any) => {
     return useQuery({
-        queryKey: ['room', { query }],
+        queryKey: ['rooms', { query }],
         queryFn: () => getAllRooms(query),
         placeholderData: keepPreviousData,
         staleTime: 30_000,
@@ -44,13 +44,13 @@ export const useUpdateRoom = () => {
         onSuccess: () => {
             toast.success("Room updated successful.")
             queryClinet.invalidateQueries({
-                queryKey: ['room'],
+                queryKey: ['rooms'],
                 exact: false
             })
         },
         onError: (err) => {
             console.warn(err)
-            toast.error("Failed to updat room.")
+            toast.error("Failed to update room.")
         }
     })
 }

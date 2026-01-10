@@ -17,8 +17,6 @@ const HotelUpdatePage = lazy(() => import("@/pages/hotel/update-hotel"))
 //rooms
 const RoomPage = lazy(() => import("@/pages/room"))
 const CreateRoomPage = lazy(() => import("@/pages/room/create-room"))
-const UpdateRoomPage = lazy(() => import("@/pages/room/update-room"))
-const RoomDeatilsPage = lazy(() => import("@/pages/room/compnents/room-details"))
 //Bookings
 const BookingPage = lazy(() => import("@/pages/booking"))
 
@@ -65,17 +63,6 @@ export const routes = [
         path: "/room/create/:hotelId",
         element: <CreateRoomPage />
     },
-    {
-        breadCrumb: "/room/update",
-        path: "/room/create/:roomId",
-        element: <UpdateRoomPage />
-    },
-    {
-        breadCrumb: "/room/details",
-        path: "/room/:roomId",
-        element: <RoomDeatilsPage />
-    },
-
     {
         breadCrumb: "User",
         path: "/user",

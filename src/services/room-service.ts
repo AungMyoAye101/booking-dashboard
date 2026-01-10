@@ -2,6 +2,7 @@ import { api } from "@/config/axios-config";
 import type { ApiResponse, meta, ParamsType } from "@/types";
 import type { RoomType } from "@/types/room-type";
 import type { createRoomType } from "@/validations/room-schema";
+import type { imageUploadType } from "./image-service";
 
 type RoomWithMeta = {
     rooms: RoomType[],
@@ -51,7 +52,8 @@ export const createRoom = async ({ hotelId, room }: createRoom) => {
 
 export const updateRoom = async ({ roomId, room }: updateRoom) => {
     const { data } = await
-        api.post<ApiResponse<RoomType>>(`/room/update/${roomId}`, room)
+        api.put<ApiResponse<RoomType>>(`/room/update/${roomId}`, room)
+    console.log(room)
     if (!data.success) {
         throw new Error("Failed to update room")
     }
@@ -65,6 +67,23 @@ export const deleteRoom = async (roomId: string) => {
     const { data } = await api.delete<ApiResponse<RoomType>>(`/room/delete/${roomId}`);
     if (!data.success) {
         throw new Error("Failed to delete room")
+    }
+    return data.result;
+}
+
+export const uploadRoomImage = async ({ id, image }: imageUploadType) => {
+    console.log(image)
+    const formData = new FormData();
+    formData.append("image", image);
+    console.log(formData)
+
+    const { data } = await api.post<ApiResponse<RoomType>>(`/upload/room/${id}`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+    if (!data.success) {
+        throw new Error("Failed to upload room image")
     }
     return data.result;
 }
