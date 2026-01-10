@@ -37,8 +37,11 @@ const PaymentDetail: FC<paymentIdProp> = ({ id }) => {
     </div>
     return (
         <Dialog>
-            <DialogTrigger >
-                <Eye />
+            <DialogTrigger asChild>
+                <Button variant={'outline'} size={'icon-sm'}>
+                    <Eye />
+                </Button>
+
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader >

@@ -74,14 +74,9 @@ export const bookingColumn: ColumnDef<BookingType>[] = [
         header: "Actions",
         cell: ({ row }) => {
             const bookingId = row.original._id;
-            return <div className="flex items-center gap-1 text-sm text-accent-foreground/70">
-                <Link to={`/booking/${bookingId}`}>
+            return <UpdateBooking id={bookingId} selected={row.original.status!} />
 
-                    <Eye />
-                </Link>
-                <UpdateBooking id={bookingId} selected={row.original.status!} />
 
-            </div>
         }
     }
 ]

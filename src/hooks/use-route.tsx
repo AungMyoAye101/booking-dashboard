@@ -6,7 +6,6 @@ const Dashboard = lazy(() => import("@/pages/home"))
 
 //users
 const UserPage = lazy(() => import("@/pages/user"))
-const Profile = lazy(() => import("@/pages/user/user-profile"))
 
 
 //hotels
@@ -67,11 +66,6 @@ export const routes = [
         breadCrumb: "User",
         path: "/user",
         element: <UserPage />
-    },
-    {
-        breadCrumb: "/user/deatils",
-        path: "/user/:userId",
-        element: <Profile />
     },
     {
         breadCrumb: "Booking",

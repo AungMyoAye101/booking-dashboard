@@ -1,7 +1,5 @@
 import type { RoomType } from "@/types/room-type"
 import type { ColumnDef } from "@tanstack/react-table"
-import { Edit, Eye } from "lucide-react"
-import { Link } from "react-router-dom"
 import UpdateRoom from "./update-room"
 import RoomDetails from "./room-details"
 import DeleteRoom from "./delete-room"

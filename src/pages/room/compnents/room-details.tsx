@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/dialog"
 import { Eye, Image, Upload } from "lucide-react"
 import type { RoomType } from "@/types/room-type"
-import img from "@/assets/hotel-hero.png"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { priceFormater } from "@/lib/helper"
 import { useState, type FormEvent } from "react"
 import { useRoomImageUpload } from "@/hooks/use-image"
@@ -33,6 +31,10 @@ const RoomDetails = ({ room }: { room: RoomType }) => {
         mutate({ id: room._id, image })
 
     }
+
+    //image 
+
+    const img = typeof room.photo === 'string' ? room.photo : room.photo?.secure_url ?? ""
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -49,47 +51,48 @@ const RoomDetails = ({ room }: { room: RoomType }) => {
                     </DialogTitle>
                     <DialogDescription>
                         <div className="grid grid-cols-2 gap-4 mt-4">
-                            <AspectRatio ratio={16 / 9} className="rounded-lg overflow-hidden border-2 " >
+                            <div className="rounded-lg overflow-hidden border-2 aspect-video" >
                                 {
-                                    img ? <form
-                                        onSubmit={handleSubmit}
-                                        id="image-form"
-                                        className="w-full  h-full flex justify-center items-center bg-input text-foreground/50 cursor-pointer">
-                                        <label
-                                            htmlFor="room-image"
-                                        >
-                                            {
-                                                preview ? <img src={preview} alt="Room image" /> :
-
-                                                    <div className="flex flex-col items-center gap-1">
-                                                        <Image />
-                                                        <span className="text-sm">
-                                                            Upload a image
-                                                        </span>
-
-                                                    </div>
-
-                                            }
-
-                                        </label>
-
-                                        <input
-                                            name="image"
-                                            id="room-image"
-                                            className="hidden"
-                                            type="file"
-                                            accept="image/*"
-
-                                            onChange={(e) => {
-                                                const file = e.target?.files?.[0];
-                                                if (file) onFileChange(file)
-                                            }}
-                                        />
-                                    </form> :
+                                    img ?
                                         <img src={img} alt="Room image" />
+                                        : <form
+                                            onSubmit={handleSubmit}
+                                            id="image-form"
+                                            className="w-full  h-full flex justify-center items-center bg-input text-foreground/50 cursor-pointer">
+                                            <label
+                                                htmlFor="room-image"
+                                            >
+                                                {
+                                                    preview ? <img src={preview} alt="Room image" /> :
+
+                                                        <div className="flex flex-col items-center gap-1">
+                                                            <Image />
+                                                            <span className="text-sm">
+                                                                Upload a image
+                                                            </span>
+
+                                                        </div>
+
+                                                }
+
+                                            </label>
+
+                                            <input
+                                                name="image"
+                                                id="room-image"
+                                                className="hidden"
+                                                type="file"
+                                                accept="image/*"
+
+                                                onChange={(e) => {
+                                                    const file = e.target?.files?.[0];
+                                                    if (file) onFileChange(file)
+                                                }}
+                                            />
+                                        </form>
                                 }
 
-                            </AspectRatio>
+                            </div>
 
                             <div className="space-y-2">
                                 <h1>name : <strong>

@@ -57,7 +57,7 @@ const UpdateBooking = ({ id, selected }: defaultValueProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size={'icon-sm'}>
+        <Button variant={'outline'} size={'icon-sm'}>
           <Edit />
         </Button>
       </DialogTrigger>

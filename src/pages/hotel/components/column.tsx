@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button"
 import type { hotelTypes } from "@/types/hotel-type"
 import { type ColumnDef } from "@tanstack/react-table"
 import { Edit, Eye, Star } from "lucide-react"
@@ -79,13 +80,17 @@ export const hotelColumn: ColumnDef<hotel>[] = [
 
             return <div className="flex gap-1">
                 <Link to={`/hotel/update/${id}`}>
-                    <Edit className="w-5 cursor-pointer hover:text-active" />
+                    <Button variant={'outline'} size={'icon-sm'}>
+                        <Edit className="w-5 cursor-pointer hover:text-active" />
+                    </Button>
                 </Link>
                 <Link to={`/hotel/${id}`}>
-                    <Eye className="w-5 cursor-pointer hover:text-active" />
+                    <Button variant={'outline'} size={'icon-sm'}>
+                        <Eye className="w-5 cursor-pointer hover:text-active" />
+                    </Button>
                 </Link>
 
-            </div>
+            </div >
         }
     }
 

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Spinner } from "@/components/ui/spinner"
 import { useDeleteRoom } from "@/hooks/use-room"
-import { Eye, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import type { FC } from "react"
 export type RoomIdProps = {
     roomId: string
