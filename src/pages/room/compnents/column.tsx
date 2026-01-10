@@ -2,6 +2,9 @@ import type { RoomType } from "@/types/room-type"
 import type { ColumnDef } from "@tanstack/react-table"
 import { Edit, Eye } from "lucide-react"
 import { Link } from "react-router-dom"
+import UpdateRoom from "./update-room"
+import RoomDetails from "./room-details"
+import DeleteRoom from "./delete-room"
 
 
 
@@ -54,14 +57,9 @@ export const RoomColumn: ColumnDef<RoomType>[] = [
             const id = row.original._id
 
             return <div className="flex gap-1" >
-                <Link to={`/room/update/${id}`}>
-                    <Edit className="w-5 cursor-pointer hover:text-active" />
-                </Link>
-                < Link to={`/room/${id}`
-                }>
-                    <Eye className="w-5 cursor-pointer hover:text-active" />
-                </Link>
-
+                <UpdateRoom hotelId={id} />
+                <RoomDetails hotelId={id} />
+                <DeleteRoom hotelId={id} />
             </div>
         }
     }

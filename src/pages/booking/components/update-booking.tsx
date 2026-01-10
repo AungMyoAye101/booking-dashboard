@@ -51,7 +51,6 @@ type defaultValueProps = {
 const UpdateBooking = ({ id, selected }: defaultValueProps) => {
   const [status, setStatus] = useState(selected)
   const { mutate, isPending } = useUpdateBooking()
-  console.log(status)
   const onSubmit = () => {
     mutate({ id, status })
   }
@@ -61,7 +60,6 @@ const UpdateBooking = ({ id, selected }: defaultValueProps) => {
         <Button size={'icon-sm'}>
           <Edit />
         </Button>
-
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

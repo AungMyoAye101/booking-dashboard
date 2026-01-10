@@ -33,3 +33,4 @@ export const createRoom = async ({ hotelId, room }: createRoom) => {
 
     return data.result;
 }
+

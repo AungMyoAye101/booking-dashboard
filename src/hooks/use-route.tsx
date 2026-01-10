@@ -18,7 +18,7 @@ const HotelUpdatePage = lazy(() => import("@/pages/hotel/update-hotel"))
 const RoomPage = lazy(() => import("@/pages/room"))
 const CreateRoomPage = lazy(() => import("@/pages/room/create-room"))
 const UpdateRoomPage = lazy(() => import("@/pages/room/update-room"))
-const RoomDeatilsPage = lazy(() => import("@/pages/room/room-details"))
+const RoomDeatilsPage = lazy(() => import("@/pages/room/compnents/room-details"))
 //Bookings
 const BookingPage = lazy(() => import("@/pages/booking"))
 
