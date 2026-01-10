@@ -20,9 +20,7 @@ import { useForm } from "react-hook-form"
 import { BED_TYPES } from "../create-room"
 import { Spinner } from "@/components/ui/spinner"
 
-export type hotelIdProps = {
-    hotelId: string
-}
+
 
 const UpdateRoom: FC<hotelIdProps> = ({ hotelId }) => {
     const form = useForm<createRoomType>({

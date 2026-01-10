@@ -9,9 +9,20 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { Spinner } from "@/components/ui/spinner"
+import { useDeleteRoom } from "@/hooks/use-room"
 import { Eye, Trash2 } from "lucide-react"
+import type { FC } from "react"
+export type RoomIdProps = {
+    roomId: string
+}
+const DeleteRoom: FC<RoomIdProps> = ({ roomId }) => {
 
-const DeleteRoom = () => {
+    const { mutate, isPending } = useDeleteRoom()
+
+    const handleDelete = () => {
+        mutate(roomId)
+    }
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -23,26 +34,33 @@ const DeleteRoom = () => {
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle>
-                    RoomTiatle
-                </DialogTitle>
+                <DialogHeader>
 
+
+                    <DialogTitle>
+                        Are you sure to delete this Room?
+                    </DialogTitle>
+                    <DialogDescription>
+                        This action cannot be undone. This will permanently delete room and remove room data from our servers.
+                    </DialogDescription>
+                </DialogHeader>
                 <DialogFooter>
-                    <DialogClose>
+                    <DialogClose asChild>
                         <Button variant={'secondary'}>Cancel</Button>
                     </DialogClose>
                     <Button
-                    // disabled={isPending}
-                    // onClick={onSubmit}
-                    // form="booking-update">
-                    // {
-                    //     isPending && <Spinner />
-                    // }
+                        disabled={isPending}
+                        onClick={handleDelete}
+                        variant={'destructive'}
                     >
-                        Save changes</Button>
+                        {
+                            isPending && <Spinner />
+                        }
+                        Delete
+                    </Button>
                 </DialogFooter>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     )
 }
 

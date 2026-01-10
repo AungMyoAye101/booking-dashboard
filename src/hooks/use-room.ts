@@ -1,4 +1,5 @@
-import { createRoom, getAllRooms } from "@/services/room-service"
+
+import { createRoom, deleteRoom, getAllRooms, getRoomById, updateRoom } from "@/services/room-service"
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
 
@@ -8,6 +9,12 @@ export const useGetALlRoom = (query: any) => {
         queryFn: () => getAllRooms(query),
         placeholderData: keepPreviousData,
         staleTime: 30_000,
+    })
+}
+export const useGetRoomById = (roomId: string) => {
+    return useQuery({
+        queryKey: ['room', roomId],
+        queryFn: () => getRoomById(roomId),
     })
 }
 
@@ -33,9 +40,9 @@ export const useUpdateRoom = () => {
     const queryClinet = useQueryClient();
 
     return useMutation({
-        mutationFn: createRoom,
+        mutationFn: updateRoom,
         onSuccess: () => {
-            toast.success("Room created successful.")
+            toast.success("Room updated successful.")
             queryClinet.invalidateQueries({
                 queryKey: ['room'],
                 exact: false
@@ -43,7 +50,25 @@ export const useUpdateRoom = () => {
         },
         onError: (err) => {
             console.warn(err)
-            toast.error("Failed to create room.")
+            toast.error("Failed to updat room.")
+        }
+    })
+}
+export const useDeleteRoom = () => {
+    const queryClinet = useQueryClient();
+
+    return useMutation({
+        mutationFn: deleteRoom,
+        onSuccess: () => {
+            toast.success("Room deleted successful.")
+            queryClinet.invalidateQueries({
+                queryKey: ['room'],
+                exact: false
+            })
+        },
+        onError: (err) => {
+            console.warn(err)
+            toast.error("Failed to delete room.")
         }
     })
 }

@@ -57,9 +57,9 @@ export const RoomColumn: ColumnDef<RoomType>[] = [
             const id = row.original._id
 
             return <div className="flex gap-1" >
-                <UpdateRoom hotelId={id} />
-                <RoomDetails hotelId={id} />
-                <DeleteRoom hotelId={id} />
+                {/* <UpdateRoom roomId={id} />
+                <RoomDetails roomId={id} /> */}
+                <DeleteRoom roomId={id} />
             </div>
         }
     }
