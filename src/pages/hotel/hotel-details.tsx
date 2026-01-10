@@ -6,6 +6,7 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Image } from "lucide-react";
 import HotelInfo from "./components/hotel-info";
 import HotelDetailsSkeleton from "./components/hotel-seketon";
+import { ChartPieDonut } from "@/chart/pie-chart";
 
 
 
@@ -20,11 +21,11 @@ const HotelDetails = () => {
     return (
         <section className="space-y-6">
             <HotelAction hotelId={hotelId!} />
-            <div className="min-w-80 sm:max-w-lg ">
-                <AspectRatio ratio={16 / 9} className=" rounded-lg">
+            <div className="grid grid-cols-2 gap-4">
+                <AspectRatio ratio={16 / 9} className=" rounded-lg overflow-hidden ">
                     {
                         data?.photo?.secure_url ?
-                            <img src={data?.photo?.secure_url || hotelImage} alt="Hotel image" className="w-full h-full object-cover rounded-md" />
+                            <img src={data?.photo?.secure_url || hotelImage} alt="Hotel image" className=" object-cover rounded-md" />
                             :
                             <div className="w-full h-full text-gray-400 text-lg rounded-md bg-muted flex flex-col gap-2 justify-center items-center">
 
@@ -36,8 +37,8 @@ const HotelDetails = () => {
                     }
                 </AspectRatio>
 
+                <ChartPieDonut />
 
-                {/* <ChartPieDonut /> */}
             </div>
             <HotelInfo hotel={data!} />
         </section>
