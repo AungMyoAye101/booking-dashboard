@@ -3,21 +3,25 @@ import RevenueCard from "./components/revenue-card"
 import { ChartBarDefault } from "@/chart/bar-chart"
 import { ChartRadialShape } from "@/chart/radial.chart"
 import { ChartLine } from "@/chart/line-chart"
-import { DonutChart } from "@/chart/pie-chart"
 import RevenueDonutChart from "./components/revenue-chart"
+import TotalCard from "./components/total"
 
 
 const Home = () => {
 
 
-    const { data: revenue, isLoading } = useTotalRevenue()
-    if (isLoading) {
+    const { data: revenue, isLoading: cardLoading } = useTotalRevenue()
+    if (cardLoading) {
         return <p>Loading...</p>
     }
 
     return (
         <div className="h-screen">
-            <RevenueCard current={revenue?.current!} previous={revenue?.previous!} />
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <RevenueCard current={revenue?.current!} previous={revenue?.previous!} />
+                <TotalCard />
+            </div>
+
             <div className="grid grid-cols-2 gap-4 mt-4">
                 <ChartLine
                     title="Total Revenue"
@@ -28,8 +32,6 @@ const Home = () => {
 
                 />
                 <RevenueDonutChart payments={revenue?.payments!} />
-
-
                 <ChartBarDefault />
                 <ChartRadialShape />
             </div>
