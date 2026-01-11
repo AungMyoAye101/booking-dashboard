@@ -1,9 +1,21 @@
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { useGetTotals } from '@/hooks/use-analytic'
+import { Skeleton } from '@/components/ui/skeleton'
+import type { totals } from '@/types/analytic-types'
 import { BookMarked, Hotel } from 'lucide-react'
+import type { FC } from 'react'
 
-const TotalCard = () => {
-    const { data: totals, isLoading } = useGetTotals()
+type TotalCardProps = {
+    totals: totals
+    isLoading: boolean
+}
+
+const TotalCard: FC<TotalCardProps> = ({ totals, isLoading }) => {
+    if (isLoading) {
+        return <>
+            <Skeleton className='h-28 w-full' />
+            <Skeleton className='h-28 w-full' />
+        </>
+    }
     return (
         <>
             <Card className="@container/card">

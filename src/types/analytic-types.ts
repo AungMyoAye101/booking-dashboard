@@ -3,12 +3,12 @@ export type revenueChangeType = {
     previous: number
 }
 
-export type revenueChartType = {
+export type monthlyChartType = {
     month: string,
     total: number
 }
 export interface RevenueType extends revenueChangeType {
-    chart: revenueChartType[],
+    chart: monthlyChartType[],
     payments: { method: "MOBILE_BANKING" | "CARD" | "BANK", total: number }[]
 }
 

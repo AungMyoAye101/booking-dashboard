@@ -1,6 +1,4 @@
-"use client"
 
-import { TrendingUp } from "lucide-react"
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 
 import {
@@ -17,35 +15,37 @@ import {
     ChartTooltipContent,
     type ChartConfig,
 } from "@/components/ui/chart"
+import { useGetTotalBooking } from "@/hooks/use-analytic"
+import { Skeleton } from "@/components/ui/skeleton"
 
-export const description = "A bar chart"
 
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-]
+
+
 
 const chartConfig = {
     desktop: {
-        label: "Desktop",
+        label: "total",
         color: "var(--chart-1)",
     },
 } satisfies ChartConfig
 
 export function ChartBarDefault() {
+
+    const { data: booking, isLoading } = useGetTotalBooking();
+
+    if (isLoading) {
+        return <Skeleton className="h-60 w-full rounded-lg" />
+    }
+
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Bar Chart</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Total Booking</CardTitle>
+                <CardDescription>Revenue amount from six months to current.</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
-                    <BarChart accessibilityLayer data={chartData}>
+                    <BarChart accessibilityLayer data={booking}>
                         <CartesianGrid vertical={false} />
                         <XAxis
                             dataKey="month"
@@ -58,14 +58,12 @@ export function ChartBarDefault() {
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
-                        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+                        <Bar dataKey="total" fill="var(--color-desktop)" radius={8} />
                     </BarChart>
                 </ChartContainer>
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
+
                 <div className="text-muted-foreground leading-none">
                     Showing total visitors for the last 6 months
                 </div>

@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge'
 import { Card, CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
 import { priceFormater } from '@/lib/helper'
 import { TrendingDown, TrendingUp } from 'lucide-react'
 import type { FC } from 'react'
@@ -7,6 +8,7 @@ import type { FC } from 'react'
 type RevenueCardProps = {
     current: number,
     previous: number
+    isLoading: boolean
 }
 
 const percentageChange = (current: number, previous: number) => {
@@ -17,12 +19,15 @@ const percentageChange = (current: number, previous: number) => {
         (((current - previous) / previous) * 100).toFixed(2)
     );
 }
-const RevenueCard: FC<RevenueCardProps> = ({ current, previous }) => {
+const RevenueCard: FC<RevenueCardProps> = ({ current, previous, isLoading }) => {
 
     const revenuePercentage = percentageChange(current, previous);
 
     const trendIcon = revenuePercentage > 0 ? <TrendingUp className='text-green-500' /> : <TrendingDown className='text-destructive' />
 
+    if (isLoading) {
+        return <Skeleton className='h-28 w-full' />
+    }
     return (
         <Card className="@container/card">
             <CardHeader>

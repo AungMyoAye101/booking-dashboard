@@ -1,4 +1,3 @@
-"use client"
 
 import { TrendingUp } from "lucide-react"
 import {
@@ -22,11 +21,8 @@ import {
     type ChartConfig,
 } from "@/components/ui/chart"
 
-export const description = "A radial chart with a custom shape"
 
-const chartData = [
-    { browser: "safari", visitors: 1260, fill: "var(--color-safari)" },
-]
+
 
 const chartConfig = {
     visitors: {
@@ -38,17 +34,20 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export function ChartRadialShape() {
+export function ChartRadialShape({ users }: { users: number }) {
+    const chartData = [
+        { browser: "safari", visitors: users, fill: "var(--color-safari)" },
+    ]
     return (
         <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">
-                <CardTitle>Radial Chart - Shape</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Total Users</CardTitle>
+                <CardDescription>From six month to current</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer
                     config={chartConfig}
-                    className="mx-auto aspect-square max-h-[250px]"
+                    className="mx-auto aspect-square max-h-60"
                 >
                     <RadialBarChart
                         data={chartData}

@@ -1,4 +1,4 @@
-import { getTotal, getTotalRevenue } from "@/services/analytic-service"
+import { getTotal, getTotalBooking, getTotalRevenue } from "@/services/analytic-service"
 import { keepPreviousData, useQuery } from "@tanstack/react-query"
 
 export const useTotalRevenue = () => {
@@ -12,6 +12,13 @@ export const useGetTotals = () => {
     return useQuery({
         queryKey: ['total'],
         queryFn: getTotal,
+        placeholderData: keepPreviousData
+    })
+}
+export const useGetTotalBooking = () => {
+    return useQuery({
+        queryKey: ['total_Booking'],
+        queryFn: getTotalBooking,
         placeholderData: keepPreviousData
     })
 }
