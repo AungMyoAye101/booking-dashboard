@@ -1,7 +1,8 @@
 "use client"
 
+import * as React from "react"
 import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import { CartesianGrid, Line, Line as RechartsLine, LineChart as RechartsLineChart, XAxis, YAxis } from "recharts"
 
 import {
     Card,
@@ -18,80 +19,65 @@ import {
     type ChartConfig,
 } from "@/components/ui/chart"
 
-export const description = "A line chart with dots"
 
-const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-]
+export interface LineChartProps<T extends Record<string, string | number>> {
 
+    title: string,
+    description?: string
+    data: T[]
+    xKey: string,
+    dataKey: string
+
+}
 const chartConfig = {
     desktop: {
-        label: "Desktop",
+        label: "month",
         color: "var(--chart-1)",
-    },
-    mobile: {
-        label: "Mobile",
-        color: "var(--chart-2)",
     },
 } satisfies ChartConfig
 
-export function ChartLineDots() {
+export function ChartLine<T extends Record<string, string | number>>({
+    title,
+    description,
+    data = [],
+    xKey,
+    dataKey
+}: LineChartProps<T>) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Line Chart - Dots</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>{title}</CardTitle>
+                <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig}>
-                    <LineChart
-                        accessibilityLayer
-                        data={chartData}
-                        margin={{
-                            left: 12,
-                            right: 12,
-                        }}
-                    >
+                    <RechartsLineChart accessibilityLayer data={data} margin={{ left: 12, right: 12 }}>
                         <CartesianGrid vertical={false} />
                         <XAxis
-                            dataKey="month"
+                            dataKey={String(xKey)}
                             tickLine={false}
                             axisLine={false}
                             tickMargin={8}
                             tickFormatter={(value) => value.slice(0, 3)}
                         />
+                        <YAxis tickMargin={8} />
+
                         <ChartTooltip
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
+
                         <Line
-                            dataKey="desktop"
+                            dataKey={dataKey}
                             type="natural"
                             stroke="var(--color-desktop)"
                             strokeWidth={2}
-                            dot={{
-                                fill: "var(--color-desktop)",
-                            }}
-                            activeDot={{
-                                r: 6,
-                            }}
+                            dot={false}
                         />
-                    </LineChart>
+                    </RechartsLineChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 leading-none font-medium">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="text-muted-foreground leading-none">
-                    Showing total visitors for the last 6 months
-                </div>
-            </CardFooter>
         </Card>
     )
 }
+
