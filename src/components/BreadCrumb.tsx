@@ -5,8 +5,7 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { routes } from "@/hooks/use-route";
-import { Link, matchRoutes, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 const breadcrumbMap: Record<string, string> = {
     home: "Home",
     hotel: "Hotel",

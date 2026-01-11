@@ -1,5 +1,4 @@
 import React, { type ErrorInfo, type ReactNode } from "react";
-import { Button } from "@/components/ui/button";
 import ErrorPage from "./error-page";
 
 

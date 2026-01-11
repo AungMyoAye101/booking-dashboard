@@ -1,7 +1,5 @@
 
 import type { ColumnDef } from "@tanstack/react-table"
-import { EyeIcon } from "lucide-react";
-import { Link } from "react-router-dom";
 import Profile from "./user-profile";
 
 export type User = {

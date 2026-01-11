@@ -5,10 +5,9 @@ import { ChartRadialShape } from "@/chart/radial.chart"
 import { ChartLine } from "@/chart/line-chart"
 import RevenueDonutChart from "./components/revenue-chart"
 import TotalCard from "./components/total"
-import { Skeleton } from "@/components/ui/skeleton"
+
 
 const Home = () => {
-
 
     const { data: revenue, isLoading } = useTotalRevenue()
     const { data: totals, isLoading: cardLoading } = useGetTotals()
