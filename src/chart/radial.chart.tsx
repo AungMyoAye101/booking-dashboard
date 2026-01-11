@@ -20,6 +20,7 @@ import {
     ChartContainer,
     type ChartConfig,
 } from "@/components/ui/chart"
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 
@@ -34,10 +35,13 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export function ChartRadialShape({ users }: { users: number }) {
+export function ChartRadialShape({ users, isLoading }: { users: number, isLoading: boolean }) {
     const chartData = [
         { browser: "safari", visitors: users, fill: "var(--color-safari)" },
     ]
+    if (isLoading) {
+        return <Skeleton className="h-60 w-full rounded-lg" />
+    }
     return (
         <Card className="flex flex-col">
             <CardHeader className="items-center pb-0">

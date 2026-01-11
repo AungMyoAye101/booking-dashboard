@@ -56,13 +56,6 @@ const User = () => {
                     className="bg-accent  focus:ring-violet-2"
                     name="search"
                 />
-                <Button
-                    type="submit"
-                    className="bg-primary-violet text-white hover:bg-violet"
-                >
-                    Search
-                </Button>
-
 
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -81,6 +74,12 @@ const User = () => {
 
                     </DropdownMenuContent>
                 </DropdownMenu>
+                <Button
+                    type="submit"
+                    className="bg-primary-violet text-white hover:bg-violet"
+                >
+                    Search
+                </Button>
             </form>
             {
                 isLoading ?

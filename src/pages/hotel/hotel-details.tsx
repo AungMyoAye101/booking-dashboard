@@ -6,7 +6,8 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Image } from "lucide-react";
 import HotelInfo from "./components/hotel-info";
 import HotelDetailsSkeleton from "./components/hotel-seketon";
-import { ChartPieDonut } from "@/chart/pie-chart";
+import { ChartHotelType } from "./components/hotel-type";
+
 
 
 
@@ -36,8 +37,7 @@ const HotelDetails = () => {
                             </div>
                     }
                 </AspectRatio>
-
-                <ChartPieDonut />
+                <ChartHotelType />
 
             </div>
             <HotelInfo hotel={data!} />

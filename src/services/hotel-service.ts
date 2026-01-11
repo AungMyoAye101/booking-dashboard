@@ -1,6 +1,6 @@
 import { api } from "@/config/axios-config"
 import type { ApiResponse, ParamsType } from "@/types";
-import type { hotelCountByTypes, hotelType } from "@/types/hotel-type";
+import type { hotelCountByTypes, hotelType, hotelTypes } from "@/types/hotel-type";
 import type { meta } from "@/types";
 import type { hotelCreateType } from "@/validations/hotel-schmea";
 
@@ -53,6 +53,21 @@ export const getHotelById = async (id: string) => {
 
     return data.result.hotel;
 }
+
+type typesOfHotel = {
+    type: hotelTypes,
+    count: number
+}
+export const getHotelTypes = async () => {
+    const { data } = await
+        api.get<ApiResponse<{ hotel: typesOfHotel[] }>>(`/hotel/types`);
+    if (!data.success) {
+        throw new Error("Failed to fetch hotel type.")
+    }
+
+    return data.result.hotel;
+}
+
 
 export const getHotelTypeCount = async () => {
     const { data } = await

@@ -1,14 +1,9 @@
-"use client"
-
-import * as React from "react"
-import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, Line as RechartsLine, LineChart as RechartsLineChart, XAxis, YAxis } from "recharts"
+import { CartesianGrid, Line, LineChart as RechartsLineChart, XAxis, YAxis } from "recharts"
 
 import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
@@ -18,6 +13,7 @@ import {
     ChartTooltipContent,
     type ChartConfig,
 } from "@/components/ui/chart"
+import { Skeleton } from "@/components/ui/skeleton"
 
 
 export interface LineChartProps<T extends Record<string, string | number>> {
@@ -27,7 +23,7 @@ export interface LineChartProps<T extends Record<string, string | number>> {
     data: T[]
     xKey: string,
     dataKey: string
-
+    isLoading: boolean
 }
 const chartConfig = {
     desktop: {
@@ -41,8 +37,12 @@ export function ChartLine<T extends Record<string, string | number>>({
     description,
     data = [],
     xKey,
-    dataKey
+    dataKey,
+    isLoading
 }: LineChartProps<T>) {
+    if (isLoading) {
+        return <Skeleton className="h-60 w-full rounded-lg" />
+    }
     return (
         <Card>
             <CardHeader>

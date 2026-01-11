@@ -4,6 +4,7 @@ import {
     getAllHotels,
     getHotelById,
     getHotelTypeCount,
+    getHotelTypes,
     updateHotel
 } from "@/services/hotel-service";
 import type { hotelParamsTypes } from "@/types/hotel-type";
@@ -28,6 +29,12 @@ export const useGetHotelById = (id: string) => {
     return useQuery({
         queryKey: ['hotel_by_id', id],
         queryFn: () => getHotelById(id)
+    })
+}
+export const useGetHoteTypes = () => {
+    return useQuery({
+        queryKey: ['room_types'],
+        queryFn: getHotelTypes
     })
 }
 

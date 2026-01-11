@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import type { hotelTypes } from "@/types/hotel-type"
 import { type ColumnDef } from "@tanstack/react-table"
-import { Edit, Eye, Star } from "lucide-react"
+import { Edit, Eye, PlusCircle, Star } from "lucide-react"
 import { Link } from "react-router-dom"
 type hotel = {
     _id: string
@@ -87,6 +87,11 @@ export const hotelColumn: ColumnDef<hotel>[] = [
                 <Link to={`/hotel/${id}`}>
                     <Button variant={'outline'} size={'icon-sm'}>
                         <Eye className="w-5 cursor-pointer hover:text-active" />
+                    </Button>
+                </Link>
+                <Link to={`/room/create/${id}`}>
+                    <Button variant={'outline'} size={'icon-sm'}>
+                        <PlusCircle className="w-5 cursor-pointer hover:text-active" />
                     </Button>
                 </Link>
 

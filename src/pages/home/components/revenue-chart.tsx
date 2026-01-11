@@ -1,12 +1,17 @@
 import { DonutChart } from '@/chart/pie-chart'
 import type { ChartConfig } from '@/components/ui/chart'
+import { Skeleton } from '@/components/ui/skeleton';
 
 type RevenueDonutChartProps = {
     method: "MOBILE_BANKING" | "CARD" | "BANK",
-    total: number
+    total: number,
+
 }
 
-const RevenueDonutChart = ({ payments }: { payments: RevenueDonutChartProps[] }) => {
+const RevenueDonutChart = ({ payments, isLoading }: { payments: RevenueDonutChartProps[], isLoading: boolean }) => {
+    if (isLoading) {
+        return <Skeleton className="h-60 w-full rounded-lg" />
+    }
     const paymentData = [
         { name: "CARD", value: 0, fill: "var(--color-card)" },
         { name: "MOBILE_BANKING", value: 0, fill: "var(--color-mobile_banking)" },

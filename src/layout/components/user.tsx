@@ -3,7 +3,7 @@ import { useAuthStore } from "@/store/auth-store"
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react"
-
+import img from "@/assets/man.png"
 
 const User = () => {
     const { isMobile } = useSidebar();
@@ -21,7 +21,7 @@ const User = () => {
                             >
                                 <Avatar className="h-10 w-10 rounded-lg">
                                     <AvatarImage
-                                        src={"https://ui.shadcn.com/avatars/shadcn.jpg"}
+                                        src={img}
                                         alt={user?.name} />
                                 </Avatar>
                                 <div className="grid flex-1 text-left text-sm leading-tight">

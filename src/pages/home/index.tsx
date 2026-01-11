@@ -24,31 +24,21 @@ const Home = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                {
-                    isLoading ?
-                        <>
-                            <Skeleton className="h-60 w-full rounded-lg" />
-                            <Skeleton className="h-60 w-full rounded-lg" />
-                            <Skeleton className="h-60 w-full rounded-lg" />
-                            <Skeleton className="h-60 w-full rounded-lg" />
-                        </>
-                        :
-                        <>
 
-                            <ChartLine
-                                title="Total Revenue"
-                                description="Revenue amount from six months to current."
-                                data={revenue?.chart ?? []}
-                                xKey="month"
-                                dataKey="total"
 
-                            />
-                            <RevenueDonutChart payments={revenue?.payments!} />
-                            <ChartBarDefault />
-                            <ChartRadialShape users={totals?.users!} />
+                <ChartLine
+                    title="Total Revenue"
+                    description="Revenue amount from six months to current."
+                    data={revenue?.chart ?? []}
+                    xKey="month"
+                    dataKey="total"
+                    isLoading={isLoading}
+                />
+                <RevenueDonutChart payments={revenue?.payments!} isLoading={isLoading} />
+                <ChartBarDefault />
+                <ChartRadialShape users={totals?.users!} isLoading={cardLoading} />
 
-                        </>
-                }
+
             </div>
 
         </div>

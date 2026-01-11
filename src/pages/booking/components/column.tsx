@@ -1,8 +1,6 @@
 import { priceFormater } from "@/lib/helper";
 import type { BookingType } from "@/types/booking-type"
 import type { ColumnDef } from "@tanstack/react-table"
-import { Edit, Eye } from "lucide-react"
-import { Link } from "react-router-dom";
 import UpdateBooking from "./update-booking";
 
 
@@ -45,7 +43,7 @@ export const bookingColumn: ColumnDef<BookingType>[] = [
             const statusClass: Record<string, string> = {
                 PENDING: "bg-blue-500  dark:bg-blue-700",
                 CONFIRMED: "bg-green-500  dark:bg-green-700",
-                SATYED: "bg-primary ",
+                STAYED: "bg-primary ",
                 CANCELLED: "bg-destructive",
                 COMPLETED: "bg-mute",
             };
