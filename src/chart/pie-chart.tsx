@@ -74,7 +74,7 @@ export function DonutChart<T extends string>({
                             content={<ChartTooltipContent hideLabel />}
 
                         />
-                        <ChartLegend content={<ChartLegendContent className="flex-col" />} />
+                        <ChartLegend content={<ChartLegendContent />} />
                         <Pie
                             data={data}
                             dataKey={dataKey}
