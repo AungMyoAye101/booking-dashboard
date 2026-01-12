@@ -13,9 +13,9 @@ const RevenueDonutChart = ({ payments, isLoading }: { payments: RevenueDonutChar
         return <Skeleton className="h-60 w-full rounded-lg" />
     }
     const paymentData = [
-        { name: "CARD", value: 0, fill: "var(--color-card)" },
-        { name: "MOBILE_BANKING", value: 0, fill: "var(--color-mobile_banking)" },
-        { name: "BANK", value: 0, fill: "var(--color-bank)" },
+        { name: "CARD", value: 0, fill: "var(--color-CARD)" },
+        { name: "MOBILE_BANKING", value: 0, fill: "var(--color-MOBILE_BANKING)" },
+        { name: "BANK", value: 0, fill: "var(--color-BANK)" },
     ];
 
     const chartData = paymentData.map(payment => {
@@ -27,9 +27,9 @@ const RevenueDonutChart = ({ payments, isLoading }: { payments: RevenueDonutChar
         }
     })
     const paymentChartConfig = {
-        card: { label: "CARD", color: "var(--chart-1)" },
-        mobile_banking: { label: "MOBILE BANKING", color: "var(--chart-2)" },
-        bank: { label: "BANK", color: "var(--chart-4)" },
+        CARD: { label: "Card", color: "var(--chart-1)" },
+        MOBILE_BANKING: { label: "Mobile Banking", color: "var(--chart-2)" },
+        BANK: { label: "Bank", color: "var(--chart-4)" },
     } satisfies ChartConfig
 
 

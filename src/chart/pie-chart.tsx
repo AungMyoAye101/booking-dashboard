@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/card"
 import {
     ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
     type ChartConfig,
@@ -62,13 +64,17 @@ export function DonutChart<T extends string>({
             <CardContent className="flex-1 pb-0">
                 <ChartContainer
                     config={chartConfig}
-                    className="mx-auto aspect-square max-h-[250px]"
+                    className="mx-auto aspect-square max-h-60"
                 >
+
                     <PieChart>
+
                         <ChartTooltip
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
+
                         />
+                        <ChartLegend content={<ChartLegendContent className="flex-col" />} />
                         <Pie
                             data={data}
                             dataKey={dataKey}
