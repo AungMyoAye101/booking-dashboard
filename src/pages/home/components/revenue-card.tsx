@@ -29,7 +29,7 @@ const RevenueCard: FC<RevenueCardProps> = ({ current, previous, isLoading }) => 
         return <Skeleton className='h-28 w-full' />
     }
     return (
-        <Card className="@container/card">
+        <Card className="@container/card sm:col-span-2 md:col-span-1">
             <CardHeader>
                 <CardDescription className='text-foreground/80'>Total Revenue</CardDescription>
                 <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
