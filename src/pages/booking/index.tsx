@@ -100,17 +100,19 @@ const Booking = () => {
 
     return (
         <div className="space-y-6">
-            <form onSubmit={onSubmit} className="flex items-center gap-4">
+            <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
                 <DateRangePicker date={date} setDate={setDate} />
                 <SelectBoxForm
                     name="status"
                     placeholder="Select status"
                     items={statusItems}
+                    className="w-full"
                 />
                 <SelectBoxForm
                     name="sort"
                     placeholder="Sort"
                     items={sortingValues}
+                    className="w-full"
                 />
                 <Button >Apply</Button>
             </form>
@@ -122,6 +124,7 @@ const Booking = () => {
                         <DataTable
                             columns={bookingColumn}
                             data={data?.bookings!}
+                            meta={data?.meta!}
                         />
                         <TablePagination
                             meta={data?.meta!}

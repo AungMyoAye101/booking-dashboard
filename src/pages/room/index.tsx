@@ -36,7 +36,7 @@ const Room = () => {
     }
     return (
         <div className="space-y-6">
-            <form onSubmit={handleSubmit} className="flex gap-4">
+            <form onSubmit={handleSubmit} className="flex gap-4 ">
                 <Input
                     type="text"
                     placeholder="Search user by name."
@@ -76,7 +76,7 @@ const Room = () => {
                 isLoading ?
                     <TableLoading column={6} /> :
                     <>
-                        <DataTable columns={RoomColumn} data={data?.rooms!} />
+                        <DataTable columns={RoomColumn} data={data?.rooms!} meta={data?.meta!} />
                         <TablePagination
                             meta={data?.meta!}
                             onPageChange={onPageChange}
@@ -85,7 +85,7 @@ const Room = () => {
             }
 
 
-        </div>
+        </div >
     )
 }
 

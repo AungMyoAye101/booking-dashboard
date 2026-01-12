@@ -24,8 +24,8 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
           <ErrorBoundary>
-            <App />
             <Auth />
+            <App />
             <Toaster />
           </ErrorBoundary>
         </ThemeProvider>

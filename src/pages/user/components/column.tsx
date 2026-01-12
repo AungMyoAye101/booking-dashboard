@@ -1,6 +1,7 @@
 
 import type { ColumnDef } from "@tanstack/react-table"
 import Profile from "./user-profile";
+import { createNoColumn } from "@/components/no-column";
 
 export type User = {
     _id: string,
@@ -13,6 +14,7 @@ export type User = {
 }
 
 export const column: ColumnDef<User>[] = [
+    createNoColumn(),
     {
         accessorKey: "name",
         header: "Name"

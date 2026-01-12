@@ -28,21 +28,25 @@ export const useSignUpForm = () => {
 }
 export const useLoginForm = () => {
     const setAuth = useAuthStore(s => s.setAuth)
+    const user = useAuthStore(s => s.user)
     const navigate = useNavigate();
     return useMutation({
         mutationFn: loginFormService,
         onSuccess: (data) => {
             setAuth(data.user);
             setAccessToken(data.token!)
-            toast.success("Login successfull.");
+            console.log(user)
+            toast.success("Login successful.");
             navigate('/');
         },
-        onError: (error) => {
-            console.warn(error);
-            if (error instanceof Error) {
-                toast.error(error.message || "Something went wrong.")
-            }
-
+        onError: (error: unknown) => {
+            const message =
+                typeof error === "object" && error !== null && "response" in error && (error as any).response?.data?.message
+                    ? (error as any).response.data.message
+                    : error instanceof Error
+                        ? error.message
+                        : "Something went wrong.";
+            toast.error(message);
         }
     })
 }
@@ -88,9 +92,9 @@ export const useRefresh = () => {
         queryKey: ['refresh'],
         queryFn: async () => {
             const { data } = await apiRefresh.post<ApiResponse<authType>>('/admin/refresh');
-            console.log(data)
             return data.result;
         },
         retry: false,
+        refetchOnWindowFocus: false,
     })
 }

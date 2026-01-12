@@ -50,7 +50,7 @@ const Hotel = () => {
 
     return (
         <div className="space-y-4 mx-auto">
-            <form onSubmit={handleSubmit} className="flex gap-4">
+            <form onSubmit={handleSubmit} className="flex gap-4 ">
                 <Input
                     type="text"
                     placeholder="Search user by name."
@@ -77,7 +77,7 @@ const Hotel = () => {
             </form>
             {
                 isLoading ? <TableLoading column={8} /> : <>
-                    <DataTable columns={hotelColumn} data={data?.hotels!} />
+                    <DataTable columns={hotelColumn} data={data?.hotels!} meta={data?.meta!} />
                     <TablePagination meta={data?.meta!} onPageChange={onPageChange} />
                 </>
             }

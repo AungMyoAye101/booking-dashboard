@@ -2,21 +2,14 @@ import { priceFormater } from "@/lib/helper";
 import type { BookingType } from "@/types/booking-type"
 import type { ColumnDef } from "@tanstack/react-table"
 import UpdateBooking from "./update-booking";
+import { createNoColumn } from "@/components/no-column";
 
 
 
 
 
 export const bookingColumn: ColumnDef<BookingType>[] = [
-    {
-        id: 'no',
-        header: "No.",
-        cell: ({ row, table }) => {
-
-            const { pageIndex, pageSize } = table.getState().pagination;
-            return pageIndex * pageSize + row.index + 1
-        }
-    },
+    createNoColumn(),
     {
         accessorKey: 'roomId',
         header: "Room",

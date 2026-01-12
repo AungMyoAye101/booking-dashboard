@@ -1,3 +1,4 @@
+import { createNoColumn } from "@/components/no-column"
 import { Button } from "@/components/ui/button"
 import type { hotelTypes } from "@/types/hotel-type"
 import { type ColumnDef } from "@tanstack/react-table"
@@ -18,15 +19,7 @@ type hotel = {
 }
 
 export const hotelColumn: ColumnDef<hotel>[] = [
-    {
-        id: 'no',
-        header: "No.",
-        cell: ({ row, table }) => {
-
-            const { pageIndex, pageSize } = table.getState().pagination;
-            return pageIndex * pageSize + row.index + 1
-        }
-    },
+    createNoColumn(),
     {
         accessorKey: 'name',
         header: "Name"

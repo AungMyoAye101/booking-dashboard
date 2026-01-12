@@ -4,17 +4,10 @@ import type { PaymentType } from "@/types/payment-type";
 import type { ColumnDef } from "@tanstack/react-table";
 import userImage from '@/assets/man.png';
 import PaymentDetail from "./payment-detail";
+import { createNoColumn } from "@/components/no-column";
 
 export const paymentColumn: ColumnDef<PaymentType>[] = [
-    {
-        id: 'no',
-        header: "No.",
-        cell: ({ row, table }) => {
-
-            const { pageIndex, pageSize } = table.getState().pagination;
-            return pageIndex * pageSize + row.index + 1
-        }
-    },
+    createNoColumn(),
     {
         header: "User",
         accessorKey: 'userId',

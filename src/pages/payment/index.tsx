@@ -86,6 +86,7 @@ const Payment = () => {
                         <DataTable
                             data={data?.payments!}
                             columns={paymentColumn}
+                            meta={data?.meta!}
                         />
                         <TablePagination
                             meta={data?.meta}

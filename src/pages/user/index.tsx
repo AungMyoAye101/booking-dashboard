@@ -49,7 +49,7 @@ const User = () => {
     return (
         <div className=" mx-auto  space-y-6">
 
-            <form onSubmit={handleSubmit} className="flex gap-4">
+            <form onSubmit={handleSubmit} className="flex gap-4 ">
                 <Input
                     type="text"
                     placeholder="Search user by name."
@@ -88,6 +88,7 @@ const User = () => {
                         <DataTable
                             columns={column}
                             data={data?.users ?? []}
+                            meta={data?.meta!}
                         />
                         <TablePagination
                             meta={data?.meta!}

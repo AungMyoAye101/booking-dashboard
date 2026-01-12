@@ -3,19 +3,12 @@ import type { ColumnDef } from "@tanstack/react-table"
 import UpdateRoom from "./update-room"
 import RoomDetails from "./room-details"
 import DeleteRoom from "./delete-room"
+import { createNoColumn } from "@/components/no-column"
 
 
 
 export const RoomColumn: ColumnDef<RoomType>[] = [
-    {
-        id: 'no',
-        header: "No.",
-        cell: ({ row, table }) => {
-
-            const { pageIndex, pageSize } = table.getState().pagination;
-            return pageIndex * pageSize + row.index + 1
-        }
-    },
+    createNoColumn(),
     {
         accessorKey: 'name',
         header: "Name"

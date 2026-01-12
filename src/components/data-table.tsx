@@ -1,25 +1,33 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import type { meta } from "@/types";
 import { flexRender, getCoreRowModel, getPaginationRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
 
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
     data: TData[],
+    meta: meta
 }
 
 export function DataTable<TData, TValue>(
     {
         columns,
         data,
+        meta
     }: DataTableProps<TData, TValue>) {
 
     const table = useReactTable({
         data,
         columns,
+        pageCount: meta.totalPages,
         state: {
-
+            pagination: {
+                pageIndex: meta.page - 1,
+                pageSize: meta.limit
+            }
         },
         getCoreRowModel: getCoreRowModel(),
+        manualPagination: true,
         getPaginationRowModel: getPaginationRowModel()
     })
 
@@ -84,6 +92,7 @@ export function DataTable<TData, TValue>(
                     }
                 </TableBody>
             </Table>
+
         </div>
 
 
