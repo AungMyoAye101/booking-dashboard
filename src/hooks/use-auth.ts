@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 
 
-const setAccessToken = useAuthStore.getState().setAccessToken;
+
 
 
 export const useSignUpForm = () => {
@@ -16,8 +16,7 @@ export const useSignUpForm = () => {
     return useMutation({
         mutationFn: sigupFormService,
         onSuccess: (data) => {
-            setAuth(data.user);
-            setAccessToken(data.token!)
+            setAuth(data.user, data.token!);
             toast.success("Signup successfull.")
         },
         onError: (error) => {
@@ -28,14 +27,12 @@ export const useSignUpForm = () => {
 }
 export const useLoginForm = () => {
     const setAuth = useAuthStore(s => s.setAuth)
-    const user = useAuthStore(s => s.user)
     const navigate = useNavigate();
     return useMutation({
         mutationFn: loginFormService,
         onSuccess: (data) => {
-            setAuth(data.user);
-            setAccessToken(data.token!)
-            console.log(user)
+            setAuth(data.user, data.token!);
+
             toast.success("Login successful.");
             navigate('/');
         },
@@ -56,8 +53,6 @@ export const useFetchMe = () => {
         queryKey: ["me"],
         queryFn: async () => {
             const { data } = await api.get("/admin/me");
-            console.log(data);
-            // setAccessToken(data.result.token);
             return data.result;
         },
         retry: false,
@@ -72,9 +67,7 @@ export const useLogout = () => {
     return useMutation({
         mutationFn: async () => {
             const { data } = await api.post<ApiResponse<any>>('/auth/logout');
-            if (!data.success) {
-                throw new Error("Failed to logout")
-            }
+
             return data.result;
         },
         onSuccess: () => {
