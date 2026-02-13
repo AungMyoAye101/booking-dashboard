@@ -11,24 +11,23 @@ const Auth = () => {
     const setUser = useAuthStore(s => s.setAuth)
     const clearAuth = useAuthStore(s => s.clearAuth)
 
-    const { data, isSuccess, isError, isLoading } = useRefresh();
+    const { data, isSuccess, isError, isLoading, error } = useRefresh();
 
 
     useEffect(() => {
         if (isSuccess && data) {
-            setAccessToken(data.token!)
-            setUser(data.user)
+            setUser(data.user, data.token!)
         }
-    }, [isSuccess, data, setAccessToken, setUser])
-
-    useEffect(() => {
         if (isError) {
+            console.warn(error?.message)
             clearAuth();
         }
-    }, [isError, clearAuth])
+    }, [isSuccess, data, setAccessToken, setUser, isError])
+
+
 
     if (isLoading) {
-        return <div className='h-screen w-full flex justify-center items-center '>
+        return <div className='h-screen w-full flex justify-center items-center absolute z-10 inset-0 bg-white'>
             <Spinner className='size-10 text-primary' />
         </div>
     }

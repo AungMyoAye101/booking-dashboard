@@ -13,8 +13,8 @@ type props = {
   children: ReactNode
 }
 const ProtectedRoute = ({ children }: props) => {
-  const { isAuthenticated } = useAuthStore();
-  if (!isAuthenticated) {
+  const { status } = useAuthStore(s => s);
+  if (status !== "loading" && status !== "authenticated") {
     return <Navigate to={'/login'} replace />
   }
 

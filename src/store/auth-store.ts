@@ -12,7 +12,7 @@ type authStore = {
     user: User | null,
     token: string | null,
     status: AuthStatus,
-    setAuth: (user: User) => void,
+    setAuth: (user: User, token: string) => void,
     clearAuth: () => void,
     setAccessToken: (token: string) => void
 }
@@ -22,11 +22,11 @@ export const useAuthStore = create<authStore>((set) => ({
     isAuthenticated: false,
     token: null,
     status: 'loading',
-    setAuth: (user) => {
-        set({ user, isAuthenticated: true })
+    setAuth: (user, token) => {
+        set({ user, isAuthenticated: true, status: 'authenticated', token })
     },
     clearAuth: () => {
-        set({ user: null, isAuthenticated: false, token: null })
+        set({ user: null, isAuthenticated: false, token: null, status: "unauthenticated" })
     },
     setAccessToken: (token: string) => {
         set({ token })

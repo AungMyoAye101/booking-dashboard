@@ -38,7 +38,7 @@ export const bookingColumn: ColumnDef<BookingType>[] = [
                 CONFIRMED: "bg-green-500  dark:bg-green-700",
                 STAYED: "bg-primary ",
                 CANCELLED: "bg-destructive",
-                COMPLETED: "bg-mute",
+                EXPIRED: "bg-accent"
             };
             const color = statusClass[status] ?? "text-mute";
             return <span className={`${color} text-xs px-2 py-1 rounded-md text-white `}>{status}</span>
