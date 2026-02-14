@@ -29,7 +29,7 @@ const HotelDetails = () => {
                     data?.photo?.secure_url ?
                         <img src={data?.photo?.secure_url || hotelImage} alt="Hotel image" className=" object-cover rounded-md w-xs max-w-sm aspect-video" />
                         :
-                        <div className="w-full h-fit max-w-sm text-gray-400 text-lg rounded-md bg-muted flex flex-col gap-2 justify-center items-center">
+                        <div className="w-full  max-w-sm aspect-video text-gray-400 text-lg rounded-md bg-muted flex flex-col gap-2 justify-center items-center">
 
 
                             <Image className="w-12 h-12" />

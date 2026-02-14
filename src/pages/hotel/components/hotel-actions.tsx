@@ -14,7 +14,7 @@ const HotelAction = ({ hotelId }: { hotelId: string }) => {
     mutate(hotelId)
   }
   return (
-    <ButtonGroup>
+    <ButtonGroup className="flex-wrap">
       {/* 
       Hotel update link */}
       <Button

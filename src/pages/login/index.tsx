@@ -40,8 +40,8 @@ const Login = () => {
 
     return (
         <div className="flex justify-end items-center h-screen px-4 sm:px-12">
-            <img src={hotelBG} alt="Background photo" className="aspect-video absolute -z-10 inset-0  h-screen w-screen" />
-            <Card className="w-full sm:max-w-md bg-card-bg/95 border-primary-violet">
+            <img src={hotelBG} alt="Background photo" className="aspect-video object-cover absolute -z-10 inset-0  h-screen w-screen" />
+            <Card className="w-full max-w-md bg-card-bg/95 border-primary-violet">
                 <CardHeader>
                     <CardTitle>Login</CardTitle>
                     <CardDescription>
