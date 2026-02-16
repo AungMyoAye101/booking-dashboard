@@ -44,9 +44,10 @@ export const paymentColumn: ColumnDef<PaymentType>[] = [
                 PENDING: "bg-blue-500  dark:bg-blue-700",
                 PAID: "bg-green-500  dark:bg-green-700",
                 FAILED: "bg-destructive",
+                REFUNDED: "bg-gray-400"
 
             };
-            const color = statusClass[status] ?? "text-mute";
+            const color = statusClass[status] ?? "bg-mute";
             return <span className={`${color} text-xs px-2 py-1 rounded-md text-white `}>{status}</span>
         }
 

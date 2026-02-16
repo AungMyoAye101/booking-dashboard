@@ -13,7 +13,8 @@ export const useImageUpload = () => {
                 queryKey: ['hotel', variable.id]
             })
         },
-        onError: () => {
+        onError: (e) => {
+            console.log(e)
             toast.error("Failed to upload image.")
         }
     })

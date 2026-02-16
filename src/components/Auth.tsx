@@ -27,7 +27,7 @@ const Auth = () => {
 
 
     if (isLoading) {
-        return <div className='h-screen w-full flex justify-center items-center absolute z-10 inset-0 bg-white'>
+        return <div className=' flex justify-center items-center absolute z-10 inset-0 bg-white'>
             <Spinner className='size-10 text-primary' />
         </div>
     }
