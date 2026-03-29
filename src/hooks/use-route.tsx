@@ -1,27 +1,4 @@
-
-import { lazy } from "react"
-
-//dashboard
-const Dashboard = lazy(() => import("@/pages/home"))
-
-//users
-const UserPage = lazy(() => import("@/pages/user"))
-
-
-//hotels
-const HotelPage = lazy(() => import("@/pages/hotel"))
-const HotelDetailsPage = lazy(() => import("@/pages/hotel/hotel-details"))
-const HotelCreatePage = lazy(() => import("@/pages/hotel/create-hotel"))
-const HotelUpdatePage = lazy(() => import("@/pages/hotel/update-hotel"))
-//rooms
-const RoomPage = lazy(() => import("@/pages/room"))
-const CreateRoomPage = lazy(() => import("@/pages/room/create-room"))
-//Bookings
-const BookingPage = lazy(() => import("@/pages/booking"))
-
-//payment
-const PaymentPage = lazy(() => import("@/pages/payment"));
-
+import { BookingPage, CreateRoomPage, Dashboard, HotelCreatePage, HotelDetailsPage, HotelPage, HotelUpdatePage, PaymentPage, RoomPage, UserPage } from "@/common/constant"
 
 export const routes = [
 

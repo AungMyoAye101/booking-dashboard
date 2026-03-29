@@ -3,12 +3,11 @@ import { useAuthStore } from "@/store/auth-store"
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu"
 import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react"
-import img from "@/assets/man.png"
+import img from "@/assets/man.webp"
 
 const User = () => {
     const { isMobile } = useSidebar();
     const user = useAuthStore(s => s.user)
-
     return (
         <SidebarFooter>
             <SidebarMenu>
@@ -50,15 +49,12 @@ const User = () => {
                                 </div>
                             </DropdownMenuLabel>
                             <DropdownMenuSeparator />
-
                             <DropdownMenuGroup className="space-y-2">
                                 <DropdownMenuItem className="flex gap-2 p-2">
                                     <BadgeCheck />
                                     Account
                                 </DropdownMenuItem>
-
                             </DropdownMenuGroup>
-
                             <DropdownMenuSeparator />
                             <DropdownMenuGroup >
                                 <DropdownMenuItem className="flex gap-2 text-red-500 p-2 rounded-md">

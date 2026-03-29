@@ -2,7 +2,7 @@ import { useLoginForm } from "@/hooks/use-auth"
 import { loginSchema, type loginType } from "@/validations/auth-schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
-import hotelBG from "@/assets/hotel-hero.png"
+import hotelBG from "@/assets/hotel-bg.webp"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -25,7 +25,11 @@ import { Spinner } from "@/components/ui/spinner";
 const Login = () => {
 
     const form = useForm<loginType>({
-        resolver: zodResolver(loginSchema)
+        resolver: zodResolver(loginSchema),
+        defaultValues: {
+            email: "admin@gmail.com",
+            password: "admin123"
+        }
     })
 
     const mutation = useLoginForm();

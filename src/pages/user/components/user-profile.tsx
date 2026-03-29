@@ -9,7 +9,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Eye } from "lucide-react";
-import img from "@/assets/man.png"
+import img from "@/assets/man.webp"
 import type { userType } from "@/types/user-types";
 import type { FC } from "react";
 

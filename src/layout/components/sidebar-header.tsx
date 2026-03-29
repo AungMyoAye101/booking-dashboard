@@ -1,6 +1,6 @@
 import { SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-import logo from "@/assets/booking-logo.svg";
+import logo from "@/assets/booking-logo.webp";
 export function SideBarHeader() {
 
     return (

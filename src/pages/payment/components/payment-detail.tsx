@@ -21,13 +21,8 @@ type paymentIdProp = {
 }
 
 const PaymentDetail: FC<paymentIdProp> = ({ id }) => {
-
-
     const { data, isLoading } = useGetPaymentById(id);
-
-
     const name = typeof data?.userId === 'string' ? data.userId : data?.userId.name ?? '';
-
     const loadingElems = <div className='grid grid-cols-2 gap-4'>
         <Skeleton className='h-6 w-full' />
         <Skeleton className='h-6 w-full' />

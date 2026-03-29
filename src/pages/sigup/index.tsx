@@ -1,8 +1,5 @@
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
-
-
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -22,24 +19,15 @@ import { Input } from "@/components/ui/input"
 import { signupSchema, type signupType } from "@/validations/auth-schema"
 import { useSignUpForm } from "@/hooks/use-auth"
 
-
-
-
-
 const Signup = () => {
-
-
     const form = useForm<signupType>({
         resolver: zodResolver(signupSchema),
     })
 
     const mutation = useSignUpForm();
     function onSubmit(data: signupType) {
-        console.log(data)
         mutation.mutate(data)
     }
-
-    console.log(mutation.data)
     return (
         <Card className="w-full sm:max-w-md mx-auto mt-20">
             <CardHeader>

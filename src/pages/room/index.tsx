@@ -29,7 +29,6 @@ const Room = () => {
 
         if (typeof value === 'string' && value.trim()) {
             setSearch(value)
-
         }
 
         setPage(1)
@@ -83,7 +82,6 @@ const Room = () => {
                         />
                     </>
             }
-
 
         </div >
     )

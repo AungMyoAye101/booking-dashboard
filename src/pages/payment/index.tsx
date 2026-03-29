@@ -48,7 +48,6 @@ const Payment = () => {
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-
         const sorting = form.get("sort") as sortDirection;
         const status = form.get("status") as paymentStatus;
         if (sorting) {
@@ -58,10 +57,7 @@ const Payment = () => {
         if (status) {
             setQuery(pre => ({ ...pre, status, page: 1 }))
         }
-
     }
-
-
     return (
         <div className="space-y-4">
             <form onSubmit={onSubmit} className="flex items-center gap-4 flex-wrap">

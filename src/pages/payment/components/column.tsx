@@ -2,7 +2,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { priceFormater } from "@/lib/helper";
 import type { PaymentType } from "@/types/payment-type";
 import type { ColumnDef } from "@tanstack/react-table";
-import userImage from '@/assets/man.png';
+import userImage from '@/assets/man.webp';
 import PaymentDetail from "./payment-detail";
 import { createNoColumn } from "@/components/no-column";
 

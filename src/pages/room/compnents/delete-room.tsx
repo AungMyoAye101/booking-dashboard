@@ -17,9 +17,7 @@ export type RoomIdProps = {
     roomId: string
 }
 const DeleteRoom: FC<RoomIdProps> = ({ roomId }) => {
-
     const { mutate, isPending } = useDeleteRoom()
-
     const handleDelete = () => {
         mutate(roomId)
     }

@@ -3,11 +3,11 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import Login from "./pages/login";
 import PageLayout from "./layout";
 import { routes } from "./hooks/use-route";
 import type { ReactNode } from "react";
 import { useAuthStore } from "./store/auth-store";
+import { LoginPage } from "./common/constant";
 
 type props = {
   children: ReactNode
@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }: props) => {
 const App = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<LoginPage />} />
 
       <Route element={
         <ProtectedRoute>

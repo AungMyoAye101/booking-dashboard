@@ -56,8 +56,6 @@ const createRoom = () => {
 
             <h1 className="text-lg font-semibold" >Create rooms </h1>
             <Form {...form}>
-
-
                 <form onSubmit={form.handleSubmit(onSubmit)}
                     className="grid grid-cols-1 sm:grid-cols-2  gap-4"
                 >

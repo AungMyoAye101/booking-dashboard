@@ -1,6 +1,6 @@
 import { useGetHotelById } from "@/hooks/use-hotel"
 import { useParams } from "react-router-dom"
-import hotelImage from "@/assets/booking-logo.svg"
+import hotelImage from "@/assets/booking-logo.webp"
 import HotelAction from "./components/hotel-actions";
 import { Image } from "lucide-react";
 import HotelInfo from "./components/hotel-info";

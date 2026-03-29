@@ -1,0 +1,15 @@
+import { lazy } from "react";
+
+export const HeroPage = lazy(() => import("@/pages/home"))
+export const BookingPage = lazy(() => import("@/pages/booking"))
+export const HotelPage = lazy(() => import("@/pages/hotel"))
+export const PaymentPage = lazy(() => import("@/pages/payment"))
+export const RoomPage = lazy(() => import("@/pages/room"))
+export const UserPage = lazy(() => import("@/pages/user"))
+export const LoginPage = lazy(() => import("@/pages/login"))
+export const SignupPage = lazy(() => import("@/pages/sigup"))
+export const Dashboard = lazy(() => import("@/pages/home"))
+export const HotelDetailsPage = lazy(() => import("@/pages/hotel/hotel-details"))
+export const HotelCreatePage = lazy(() => import("@/pages/hotel/create-hotel"))
+export const HotelUpdatePage = lazy(() => import("@/pages/hotel/update-hotel"))
+export const CreateRoomPage = lazy(() => import("@/pages/room/create-room"))
